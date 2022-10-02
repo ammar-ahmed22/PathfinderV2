@@ -1,0 +1,16 @@
+<svg width="227" height="250" viewBox="0 0 227 250" fill="none" xmlns="http://www.w3.org/2000/svg">
+<circle cx="115" cy="15" r="15" fill="white"/>
+<line x1="112.099" y1="18.5355" x2="15.5355" y2="115.099" stroke="white" stroke-width="10"/>
+<line x1="118.536" y1="17.4645" x2="215.099" y2="114.028" stroke="white" stroke-width="10"/>
+<circle cx="15" cy="116" r="15" transform="rotate(-180 15 116)" fill="white"/>
+<circle cx="212" cy="116" r="15" transform="rotate(-180 212 116)" fill="white"/>
+<line x1="114" y1="21" x2="114" y2="222" stroke="white" stroke-width="10"/>
+<line x1="8" y1="117" x2="209" y2="117" stroke="white" stroke-width="10"/>
+<circle cx="114" cy="116" r="30" fill="white"/>
+<line x1="18.5355" y1="122.464" x2="142.279" y2="246.208" stroke="white" stroke-width="10"/>
+<line x1="212.045" y1="121.536" x2="88.301" y2="245.279" stroke="white" stroke-width="10"/>
+<rect x="52" y="50" width="25" height="25" rx="5" fill="white"/>
+<rect x="150" y="50" width="25" height="25" rx="5" fill="white"/>
+<rect x="52" y="155" width="25" height="25" rx="5" fill="white"/>
+<rect x="150" y="155" width="25" height="25" rx="5" fill="white"/>
+</svg>
