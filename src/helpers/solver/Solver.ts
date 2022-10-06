@@ -1,7 +1,7 @@
 import Node from "../Node";
 import Vec2 from "../Vec2";
 import MinPriorityQueue from "../queue/MinPriorityQueue";
-import { AlgorithmParams, AStar, Generic } from "../../@types/helpers/Node";
+import { AlgorithmParams, Generic } from "../../@types/helpers/Node";
 
 export interface SolverParams{
   nodes: Node<Generic>[][],

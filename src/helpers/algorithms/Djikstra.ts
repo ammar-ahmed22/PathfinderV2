@@ -1,10 +1,9 @@
 import { Solver, SolverParams } from "../solver/Solver";
 import { Djikstra } from "../../@types/helpers/Node";
 import Node from "../Node";
-import Vec2 from "../Vec2";
 
 
-export class DjiktraSolver extends Solver<Djikstra>{
+export class DjikstraSolver extends Solver<Djikstra>{
   public initialize = ({ nodes, start, target, delay } : SolverParams) : void => {
     for (let row = 0; row < nodes.length; row++){
       const tempRow : Node<Djikstra>[] = [];

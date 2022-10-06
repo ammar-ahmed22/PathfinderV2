@@ -13,8 +13,8 @@ import { StoreContextType } from "../@types/Store";
 import Vec2 from "../helpers/Vec2";
 import Node from "../helpers/Node";
 import { AStarSolver } from "../helpers/algorithms/AStar";
-import { DjiktraSolver } from "../helpers/algorithms/Djikstra";
-import { AlgorithmParams, AStar, Djikstra } from "../@types/helpers/Node";
+import { DjikstraSolver } from "../helpers/algorithms/Djikstra";
+import { AlgorithmParams } from "../@types/helpers/Node";
 
 const Grid: React.FC = () => {
     const gridRef = useRef<HTMLDivElement>();
@@ -97,7 +97,7 @@ const Grid: React.FC = () => {
             store.targetIdx &&
             store.isStarted
         ) {
-            const solver = new DjiktraSolver();
+            const solver = new DjikstraSolver();
             solver.initialize({
                 nodes: store.nodes,
                 start: store.startIdx,
@@ -107,7 +107,7 @@ const Grid: React.FC = () => {
             const path = solver.solve();
 
             console.log({ path, searched: solver.searched });
-            if (path) animate<Djikstra>(path, solver.searched, 10);
+            if (path) animate(path, solver.searched, 10);
         }
     }, [store.isStarted]);
 
