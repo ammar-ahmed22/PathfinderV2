@@ -89,5 +89,7 @@ export class AStarSolver extends Solver<AStar>{
       }
 
     }
+
+    return undefined;
   }
 }
