@@ -58,7 +58,7 @@ export class AStarSolver extends Solver<AStar>{
     this.searching.insert(startNode, startNode.params.func);
   }
 
-  private heuristic = (start: Vec2, end: Vec2) : number => Vec2.Distance(start, end)
+  private heuristic = (start: Vec2, end: Vec2) : number => Vec2.DistanceSquared(start, end)
 
   public getOptimalPath = (current: Node<AStar>): Node<AStar>[] => {
     const res : Node<AStar>[] = [];

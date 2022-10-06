@@ -8,6 +8,8 @@ export default class Vec2{
 
   public equals = (v: Vec2) : boolean => (this.x === v.x) && (this.y === v.y);
 
-  static Distance = (a: Vec2, b: Vec2) : number => Math.sqrt(Math.pow(a.x - b.x, 2) + Math.pow(a.y - b.y, 2));
+  static Distance = (a: Vec2, b: Vec2) : number => Math.sqrt(Math.pow(b.x - a.x, 2) + Math.pow(b.y - a.y, 2));
+
+  static DistanceSquared = (a: Vec2, b: Vec2) : number => Math.pow(b.x - a.x, 2) + Math.pow(b.y - a.y, 2);
 
 }
