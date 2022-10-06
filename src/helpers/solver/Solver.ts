@@ -2,7 +2,6 @@ import Node from "../Node";
 import Vec2 from "../Vec2";
 import MinPriorityQueue from "../queue/MinPriorityQueue";
 import { AlgorithmParams, AStar, Generic } from "../../@types/helpers/Node";
-import { sleep } from "../../utils/async";
 
 export interface SolverParams{
   nodes: Node<Generic>[][],
@@ -21,7 +20,6 @@ export abstract class Solver<A extends AlgorithmParams>{
   public searched : Node<A>[] = [];
 
   abstract initialize(params: SolverParams) : void;
-  // abstract solveAsync( cb?: (searched: Node<A>[], current: Node<A>) => void) : Promise< Node<A>[] | undefined>;
   abstract solve() : Node<A>[] | undefined;
   abstract getOptimalPath(current: Node<A>) : Node<A>[];
 }
@@ -73,51 +71,6 @@ export class AStarSolver extends Solver<AStar>{
     return res;
   }
 
-  public solveAsync = async ( cb? : (searched: Node<AStar>[], current: Node<AStar>) => void ) : Promise<Node<AStar>[] | undefined> => {
-    if (this.nodes.length === 0 || this.searching.isEmpty()){
-      throw new Error("the initialize() method must be called prior to using solve()");
-    }
-
-    let current : Node<AStar>;
-    while(!this.searching.isEmpty()){
-      current = this.searching.pop() as Node<AStar>;
-
-      if (current.index.equals(this.target)){
-        console.log("A STAR DONE");
-        return this.getOptimalPath(current);
-      }
-
-      this.searched.push(current);
-
-      if (cb) cb(this.searched, current);
-
-      await sleep(this.delay);
-
-      const neighbours = current.getNeighbours(this.nodes);
-      for (let i = 0; i < neighbours.length; i++){
-        const n = neighbours[i];
-
-        if (this.searched.includes(n)){
-          continue;
-        }
-
-        const tentativeCost : number = current.params.cost + 1;
-        if (this.searching.includes(n) && tentativeCost < n.params.cost){
-          continue;
-        }
-
-        n.prev = current;
-        n.params.cost = tentativeCost;
-        n.params.heuristic = this.heuristic(n.index, this.target);
-
-        n.params.func = n.params.cost + n.params.heuristic;
-
-        if (!this.searching.includes(n)) this.searching.insert(n, n.params.func);
-      }
-
-    }
-  }
-
   public solve = ( ) : Node<AStar>[] | undefined => {
     if (this.nodes.length === 0 || this.searching.isEmpty()){
       throw new Error("the initialize() method must be called prior to using solve()");
@@ -133,10 +86,6 @@ export class AStarSolver extends Solver<AStar>{
       }
 
       this.searched.push(current);
-
-      //if (cb) cb(this.searched, current);
-
-      //await sleep(this.delay);
 
       const neighbours = current.getNeighbours(this.nodes);
       for (let i = 0; i < neighbours.length; i++){
