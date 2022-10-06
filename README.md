@@ -1,59 +1,67 @@
-This project was bootstrapped with
-[Create React App](https://github.com/facebook/create-react-app).
+# Pathfinder
 
-## Available Scripts
+This is a pathfinding algorithm visualizer I created as a learning exercise. The project and design is inspired by a similar [project](https://github.com/clementmihailescu/Pathfinding-Visualizer) created by Clement Mihailescu, founder of AlgoExpert.io; however, I did not look at his code to create my own variation. It was merely
+used as design inspiration as I wanted to implement the algorithms and UI on my own to further my understanding of these concepts.
 
-In the project directory, you can run:
+As I am quite well-versed in React, I decided to use this in conjunction with [ChakraUI](https://chakra-ui.com/) to make a standardized and robust UI. [Framer Motion](https://www.framer.com/motion/) was used for the animations. As this project is data structure and algorithm heavy, I decided to use TypeScript instead of JavaScript as statically typed languages help to mitigate errors.
 
-### `yarn start`
+I have created this project in the past, however, I was not happy with the design as well as the way the solving was done. So, this is the 
+second iteration of the project with design updates as well as optimizations.
 
-Runs the app in the development mode.<br /> Open
-[http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Run Locally
 
-The page will reload if you make edits.<br /> You will also see any lint errors
-in the console.
+#### Clone the project
 
-### `yarn test`
+```bash
+  git clone https://github.com/ammar-ahmed22/PathfinderV2.git
+```
 
-Launches the test runner in the interactive watch mode.<br /> See the section
-about
-[running tests](https://facebook.github.io/create-react-app/docs/running-tests)
-for more information.
+#### Go to the project directory
 
-### `yarn build`
+```bash
+  cd PathfinderV2
+```
 
-Builds the app for production to the `build` folder.<br /> It correctly bundles
-React in production mode and optimizes the build for the best performance.
+#### Install dependencies
 
-The build is minified and the filenames include the hashes.<br /> Your app is
-ready to be deployed!
+```bash
+  npm install
+```
+> with yarn: `yarn install`
 
-See the section about
-[deployment](https://facebook.github.io/create-react-app/docs/deployment) for
-more information.
+#### Start the server
 
-### `yarn eject`
+```bash
+  npm start
+```
+> with yarn: `yarn start`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Features
 
-If you aren’t satisfied with the build tool and configuration choices, you can
-`eject` at any time. This command will remove the single build dependency from
-your project.
+- Light/dark mode toggle
+- Drag/drop/draw nodes (start, end, obstacles)
+- Visualize and find paths using various pathfinding algorithms
+- Generate maze (maybe?)
+- Change visualization speed (fast, medium, slow + explicitly define delay between iterations)
 
-Instead, it will copy all the configuration files and the transitive
-dependencies (webpack, Babel, ESLint, etc) right into your project so you have
-full control over them. All of the commands except `eject` will still work, but
-they will point to the copied scripts so you can tweak them. At this point
-you’re on your own.
+### Algorithms
+| Algorithm     | Description | Shortest Path Guaranteed? |
+| ------------- | ----------- | -------------------------
+| Djikstra's    | Uses distance from root (start) node to find shortest path. | Yes
+| Greedy        | Uses heuristic (euclidean distance) to find path.           | No
+| A*            | See Djikstra and Greedy above, follows same basic principle. Uses distance + plus heuristic (euclidean distance) to find shortest path.| Yes
 
-You don’t have to ever use `eject`. The curated feature set is suitable for
-small and middle deployments, and you shouldn’t feel obligated to use this
-feature. However we understand that this tool wouldn’t be useful if you couldn’t
-customize it when you are ready for it.
+### Abstractions 
 
-## Learn More
+| Abstraction     | Description | 
+| ------------- | ----------- | 
+| Node   | Used to store grid node data such as index in the grid, size, UI styles, node type (start, end, obstacle etc.). Also used as a base class to be extended for use in algorithms. i.e. distances and heuristic storing for A* etc. |
+| Vec2            | 2D vector class used to simplify grid indices (stores column and row) as well as other miscellaneous 2D values such as grid dimensions, height and width of grid etc. Also implements useful methods such as euclidean distances between nodes etc. |
+| Solver | Abstract base class for pathfinding algorithms. Implements solve method as well as searching queue, searched array and optimal path array. All algorithms extend this class. |
+| Min Priority Queue | As described, heap based min priority queue for pathfinding algorithm optimization. Most algorithms require pulling the minimum value from a queue, min priority queue allows this in ~ O(logn) time instead of O(n) time if done with an array based queue.|
 
-You can learn more in the
-[Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Tech Stack
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- React (TypeScript)
+- [ChakraUI](https://chakra-ui.com/)
+- [Framer Motion](https://www.framer.com/motion/)
