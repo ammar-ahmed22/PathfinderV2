@@ -5,5 +5,6 @@ export interface PanelProps{
   width?: string,
   bg?: string,
   height?: string,
-  styles?: Record<string, string | number | object>
+  styles?: Record<string, string | number | object>,
+  customRef?: React.MutableRefObject
 }
