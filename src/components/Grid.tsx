@@ -13,16 +13,11 @@ import { StoreContextType } from "../@types/Store";
 import Vec2 from "../helpers/Vec2";
 import Node from "../helpers/Node";
 import { AStarSolver } from "../helpers/solver/Solver";
-import { AlgorithmParams, NodeType, AStar } from "../@types/helpers/Node";
+import { AStar } from "../@types/helpers/Node";
 
 const Grid: React.FC = () => {
     const gridRef = useRef<HTMLDivElement>();
     const store = useContext(StoreContext) as StoreContextType;
-
-    const [searchedNodes, setSearchedNodes] = useState<Node<AlgorithmParams>[]>(
-        []
-    );
-    const [path, setPath] = useState<Node<AlgorithmParams>[] | undefined>([]);
 
     // setting Target
     useEffect(() => {
