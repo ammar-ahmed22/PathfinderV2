@@ -13,7 +13,7 @@ import { StoreContextType } from "../@types/Store";
 import Vec2 from "../helpers/Vec2";
 import Node from "../helpers/Node";
 import { AStarSolver } from "../helpers/solver/Solver";
-import { AStar } from "../@types/helpers/Node";
+import { AlgorithmParams, AStar } from "../@types/helpers/Node";
 
 const Grid: React.FC = () => {
     const gridRef = useRef<HTMLDivElement>();
@@ -58,9 +58,9 @@ const Grid: React.FC = () => {
     }, []);
 
     useEffect(() => {
-        const animate = async (
-            path: Node<AStar>[],
-            searched: Node<AStar>[],
+        const animate = async <A extends AlgorithmParams> (
+            path: Node<A>[],
+            searched: Node<A>[],
             delay: number
         ) => {
             while (!!searched.length) {
@@ -106,7 +106,7 @@ const Grid: React.FC = () => {
             const path = solver.solve();
 
             console.log({ path, searched: solver.searched });
-            if (path) animate(path, solver.searched, 10);
+            if (path) animate<AStar>(path, solver.searched, 10);
         }
     }, [store.isStarted]);
 
