@@ -56,6 +56,16 @@ const components = {
         fontWeight: "black"
       }
     }
+  },
+  Link: {
+    variants: {
+      icon: {
+        _hover: {
+          borderBottomStyle: "solid",
+          borderBottomWidth: "1px",
+        }
+      }
+    }
   }
 }
 
