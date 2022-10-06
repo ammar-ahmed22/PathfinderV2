@@ -12,7 +12,7 @@ import { StoreContextType } from "../@types/Store";
 
 import Vec2 from "../helpers/Vec2";
 import Node from "../helpers/Node";
-import { AStarSolver } from "../helpers/solver/Solver";
+import { AStarSolver } from "../helpers/algorithms/AStar";
 import { AlgorithmParams, AStar } from "../@types/helpers/Node";
 
 const Grid: React.FC = () => {
