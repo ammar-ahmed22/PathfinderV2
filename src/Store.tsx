@@ -2,6 +2,7 @@ import React, { createContext, useState, useEffect } from "react";
 import { StoreContextType, StoreProviderProps } from "./@types/Store";
 import Vec2 from "./helpers/Vec2";
 import Node from "./helpers/Node";
+import type { NodeType } from "./@types/helpers/Node";
 import { AlgorithmParams, Generic } from "./@types/helpers/Node";
 
 export const StoreContext = createContext<StoreContextType | null>(null);
@@ -13,6 +14,7 @@ const StoreProvider : React.FC<StoreProviderProps> = ({ children }) => {
   const [nodes, setNodes] = useState<Node<AlgorithmParams>[][]>([]);
   const [startIdx, setStartIdx] = useState<Vec2 | undefined>()
   const [targetIdx, setTargetIdx] = useState<Vec2 | undefined>();
+  const [isStarted, setIsStarted] = useState<boolean>(false);
   // const [state, setState] = useState<StoreContextType>({ 
   //   cellSize: undefined
   // })
@@ -59,21 +61,24 @@ const StoreProvider : React.FC<StoreProviderProps> = ({ children }) => {
     })
   }
 
-  const updateStartTargetNodes = (idx: Vec2, type: "start" | "target") => {
+  const updateNodeTypeByIndex = (index: Vec2, type: NodeType) => {
     if (nodes && !!nodes.length){
-      updateNodeByIndex(idx, (prevNode) => {
-        prevNode.type = type;
-        return prevNode
+      setNodes(prevNodes => {
+        const copy = [...prevNodes];
+        copy[index.y][index.x].type = type;
+        return copy;
       })
     }
   }
 
+  
+
   useEffect(() => {
-    if (startIdx) updateStartTargetNodes(startIdx, "start")
+    if (startIdx) updateNodeTypeByIndex(startIdx, "start")
   }, [startIdx])
 
   useEffect(() => {
-    if (targetIdx) updateStartTargetNodes(targetIdx, "target")
+    if (targetIdx) updateNodeTypeByIndex(targetIdx, "target")
   }, [targetIdx])
 
   const state : StoreContextType = {
@@ -97,16 +102,19 @@ const StoreProvider : React.FC<StoreProviderProps> = ({ children }) => {
     setNodes: (nodes: Node<AlgorithmParams>[][]) => setNodes(nodes),
     createNodes,
     updateNodeByIndex,
+    updateNodeTypeByIndex,
     startIdx,
     targetIdx,
     setStartIdx: (idx: Vec2) => {
       setStartIdx(idx)
-      updateStartTargetNodes(idx, "start");
+      updateNodeTypeByIndex(idx, "start")
     },
     setTargetIdx: (idx: Vec2) => {
       setTargetIdx(idx)
-      updateStartTargetNodes(idx, "target")
-    }
+      updateNodeTypeByIndex(idx, "target")
+    },
+    isStarted,
+    setIsStarted: (val: boolean) => setIsStarted(val)
   }
 
   return (

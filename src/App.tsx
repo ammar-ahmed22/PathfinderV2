@@ -123,7 +123,16 @@ export const App: React.FC = () => {
                             <Icon as={FaTerminal} color="brand.blue.500" />
                         </HStack>
                         <ColorModeSwitcher />
-                        <Button colorScheme="brand.blue">Start</Button>
+                        <Button
+                            colorScheme="brand.blue"
+                            onClick={() =>
+                                store.setIsStarted(
+                                    store.isStarted ? false : true
+                                )
+                            }
+                        >
+                            Start
+                        </Button>
                     </Panel>
                 </SideBar>
 

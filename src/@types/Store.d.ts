@@ -1,6 +1,7 @@
 import * as React from "react";
 import Vec2 from "../helpers/Vec2";
 import Node from "../helpers/Node";
+import type { NodeType } from  "./helpers/Node"
 import { AlgorithmParams } from "./helpers/Node";
 
 export type StoreContextType = {
@@ -13,10 +14,13 @@ export type StoreContextType = {
   setNodes: (nodes: Node<AlgorithmParams>[][]) => void,
   createNodes: () => void,
   updateNodeByIndex: (index: Vec2, cb: (node: Node<AlgorithmParams>) => Node<AlgorithmParams>) => void,
+  updateNodeTypeByIndex: (index: Vec2, type: NodeType) => void,
   startIdx: Vec2 | undefined,
   setStartIdx: (idx: Vec2) => void,
   targetIdx: Vec2 | undefined,
-  setTargetIdx: (idx: Vec2) => void
+  setTargetIdx: (idx: Vec2) => void,
+  isStarted: boolean,
+  setIsStarted: (val: boolean) => void
 }
 
 export interface StoreProviderProps{

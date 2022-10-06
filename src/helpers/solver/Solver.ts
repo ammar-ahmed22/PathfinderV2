@@ -147,7 +147,7 @@ export class AStarSolver extends Solver<AStar>{
         }
 
         const tentativeCost : number = current.params.cost + 1;
-        if (this.searching.includes(n) && tentativeCost < n.params.cost){
+        if (this.searching.includes(n) && tentativeCost > n.params.cost){
           continue;
         }
 
