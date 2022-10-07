@@ -12,10 +12,8 @@ import { StoreContextType } from "../@types/Store";
 
 import Vec2 from "../helpers/Vec2";
 import Node from "../helpers/Node";
-import { AStarSolver } from "../helpers/algorithms/AStar";
-import { DjikstraSolver } from "../helpers/algorithms/Djikstra";
+import { AStar, Djikstra } from "../@types/helpers/Node";
 import { solvers } from "../helpers/algorithms";
-import { AlgorithmParams } from "../@types/helpers/Node";
 
 const Grid: React.FC = () => {
     const gridRef = useRef<HTMLDivElement>();
@@ -60,9 +58,10 @@ const Grid: React.FC = () => {
     }, []);
 
     useEffect(() => {
-        const animate = async <A extends AlgorithmParams> (
-            path: Node<A>[],
-            searched: Node<A>[],
+        type NodeAlgorithmArray = Node<AStar>[] | Node<Djikstra>[];
+        const animate = async (
+            path: NodeAlgorithmArray,
+            searched: NodeAlgorithmArray,
             delay: number
         ) => {
             while (!!searched.length) {
