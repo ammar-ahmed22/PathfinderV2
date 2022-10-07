@@ -36,6 +36,12 @@ second iteration of the project with design updates as well as optimizations.
 ```
 > with yarn: `yarn start`
 
+## Tech Stack
+
+- React (TypeScript)
+- [ChakraUI](https://chakra-ui.com/)
+- [Framer Motion](https://www.framer.com/motion/)
+
 ## Features
 
 - Light/dark mode toggle
@@ -60,8 +66,9 @@ second iteration of the project with design updates as well as optimizations.
 | Solver | Abstract base class for pathfinding algorithms. Implements solve method as well as searching queue, searched array and optimal path array. All algorithms extend this class. |
 | Min Priority Queue | As described, heap based min priority queue for pathfinding algorithm optimization. Most algorithms require pulling the minimum value from a queue, min priority queue allows this in ~ O(logn) time instead of O(n) time if done with an array based queue.|
 
-## Tech Stack
+### References
+- [A* Search](https://en.wikipedia.org/wiki/A*_search_algorithm)
+- [Djikstra's Algorithm](https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm)
+- [Common Pathfinding Algorithms (helped with Greedy)](https://www.redblobgames.com/pathfinding/a-star/introduction.html)
+- [BFS for pathfinding](https://www.youtube.com/watch?v=KiCBXu4P-2Y)
 
-- React (TypeScript)
-- [ChakraUI](https://chakra-ui.com/)
-- [Framer Motion](https://www.framer.com/motion/)
