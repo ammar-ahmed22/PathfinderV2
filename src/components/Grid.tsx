@@ -4,7 +4,7 @@ import { HStack } from "@chakra-ui/react";
 import Panel from "./Panel";
 import Cell from "./Cell";
 
-import { isCorner } from "../utils/board";
+import { isCorner, animate } from "../utils/grid";
 import { sleep } from "../utils/async";
 
 import { StoreContext } from "../Store";
@@ -12,9 +12,8 @@ import { StoreContextType } from "../@types/Store";
 
 import Vec2 from "../helpers/Vec2";
 import Node from "../helpers/Node";
-import { AStarSolver } from "../helpers/algorithms/AStar";
-import { DjikstraSolver } from "../helpers/algorithms/Djikstra";
-import { AlgorithmParams } from "../@types/helpers/Node";
+import { AStar, Djikstra } from "../@types/helpers/Node";
+import { solvers } from "../helpers/algorithms";
 
 const Grid: React.FC = () => {
     const gridRef = useRef<HTMLDivElement>();
@@ -59,45 +58,13 @@ const Grid: React.FC = () => {
     }, []);
 
     useEffect(() => {
-        const animate = async <A extends AlgorithmParams> (
-            path: Node<A>[],
-            searched: Node<A>[],
-            delay: number
-        ) => {
-            while (!!searched.length) {
-                const nodeToAnimate = searched.shift();
-                if (
-                    nodeToAnimate &&
-                    store.startIdx &&
-                    store.targetIdx &&
-                    !nodeToAnimate.index.equals(store.startIdx) &&
-                    !nodeToAnimate.index.equals(store.targetIdx)
-                )
-                    store.updateNodeTypeByIndex(nodeToAnimate.index, "visited");
-                await sleep(delay);
-            }
-
-            while(!!path.length){
-              const nodeToAnimate = path.pop();
-                if (
-                    nodeToAnimate &&
-                    store.startIdx &&
-                    store.targetIdx &&
-                    !nodeToAnimate.index.equals(store.startIdx) &&
-                    !nodeToAnimate.index.equals(store.targetIdx)
-                )
-                    store.updateNodeTypeByIndex(nodeToAnimate.index, "path");
-                await sleep(delay);
-            }
-        };
-
         if (
             store.nodes &&
             store.startIdx &&
             store.targetIdx &&
             store.isStarted
         ) {
-            const solver = new DjikstraSolver();
+            const solver = solvers[store.selectedAlgorithm];
             solver.initialize({
                 nodes: store.nodes,
                 start: store.startIdx,
@@ -107,7 +74,7 @@ const Grid: React.FC = () => {
             const path = solver.solve();
 
             console.log({ path, searched: solver.searched });
-            if (path) animate(path, solver.searched, 10);
+            if (path) animate(store, path, solver.searched, 10);
         }
     }, [store.isStarted]);
 
