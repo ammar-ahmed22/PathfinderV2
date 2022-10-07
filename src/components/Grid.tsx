@@ -14,6 +14,7 @@ import Vec2 from "../helpers/Vec2";
 import Node from "../helpers/Node";
 import { AStarSolver } from "../helpers/algorithms/AStar";
 import { DjikstraSolver } from "../helpers/algorithms/Djikstra";
+import { solvers } from "../helpers/algorithms";
 import { AlgorithmParams } from "../@types/helpers/Node";
 
 const Grid: React.FC = () => {
@@ -97,7 +98,7 @@ const Grid: React.FC = () => {
             store.targetIdx &&
             store.isStarted
         ) {
-            const solver = new DjikstraSolver();
+            const solver = solvers[store.selectedAlgorithm];
             solver.initialize({
                 nodes: store.nodes,
                 start: store.startIdx,

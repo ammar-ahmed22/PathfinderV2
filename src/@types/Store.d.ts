@@ -22,7 +22,7 @@ export type StoreContextType = {
   setTargetIdx: (idx: Vec2) => void,
   isStarted: boolean,
   setIsStarted: (val: boolean) => void,
-  selectedAlgorithm: Algorithm | undefined,
+  selectedAlgorithm: Algorithm,
   setSelectedAlgorithm: (algo: Algorithm) => void
 }
 

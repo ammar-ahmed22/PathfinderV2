@@ -1,1 +1,0 @@
-export type Algorithm = "astar" | "djikstra";
