@@ -66,6 +66,11 @@ second iteration of the project with design updates as well as optimizations.
 | Solver | Abstract base class for pathfinding algorithms. Implements solve method as well as searching queue, searched array and optimal path array. All algorithms extend this class. |
 | Min Priority Queue | As described, heap based min priority queue for pathfinding algorithm optimization. Most algorithms require pulling the minimum value from a queue, min priority queue allows this in ~ O(logn) time instead of O(n) time if done with an array based queue.|
 
+### CI/CD
+| Name | Description |
+| ---- | ------------|
+| Format | GitHub action which formats all code with Prettier and then commits the changes on pushes to the main branch |
+
 ### References
 - [A* Search](https://en.wikipedia.org/wiki/A*_search_algorithm)
 - [Djikstra's Algorithm](https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm)
