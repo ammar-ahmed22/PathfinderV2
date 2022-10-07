@@ -1,6 +1,6 @@
-import * as React from "react"
+import * as React from "react";
 
-export interface SideBarProps{
-  children: React.ReactNode
-  width?: string | number
+export interface SideBarProps {
+    children: React.ReactNode;
+    width?: string | number;
 }

@@ -3,11 +3,8 @@ import { DjikstraSolver } from "../../../helpers/algorithms/Djikstra";
 import { Node } from "../../../helpers/Node";
 
 export type Solvers = {
-  astar: AStarSolver,
-  djikstra: DjikstraSolver
-}
+    astar: AStarSolver;
+    djikstra: DjikstraSolver;
+};
 
 export type Algorithm = keyof Solvers;
-
-
-
