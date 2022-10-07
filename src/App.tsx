@@ -24,6 +24,7 @@ import SideBar from "./components/SideBar";
 import Panel from "./components/Panel";
 import Grid from "./components/Grid";
 import Logo from "./components/Logo";
+import AlgorithmMenu from "./components/AlgorithmMenu";
 
 import { StoreContext } from "./Store";
 import { StoreContextType } from "./@types/Store";
@@ -133,6 +134,7 @@ export const App: React.FC = () => {
                         >
                             Start
                         </Button>
+                        <AlgorithmMenu />
                     </Panel>
                 </SideBar>
 

@@ -4,6 +4,7 @@ import Vec2 from "./helpers/Vec2";
 import Node from "./helpers/Node";
 import type { NodeType } from "./@types/helpers/Node";
 import { AlgorithmParams, Generic } from "./@types/helpers/Node";
+import type { Algorithm } from "./@types/components/AlgorithmMenu";
 
 export const StoreContext = createContext<StoreContextType | null>(null);
 
@@ -15,6 +16,7 @@ const StoreProvider : React.FC<StoreProviderProps> = ({ children }) => {
   const [startIdx, setStartIdx] = useState<Vec2 | undefined>()
   const [targetIdx, setTargetIdx] = useState<Vec2 | undefined>();
   const [isStarted, setIsStarted] = useState<boolean>(false);
+  const [selectedAlgorithm, setSelectedAlgorithm] = useState<Algorithm | undefined>();
   // const [state, setState] = useState<StoreContextType>({ 
   //   cellSize: undefined
   // })
@@ -114,7 +116,9 @@ const StoreProvider : React.FC<StoreProviderProps> = ({ children }) => {
       updateNodeTypeByIndex(idx, "target")
     },
     isStarted,
-    setIsStarted: (val: boolean) => setIsStarted(val)
+    setIsStarted: (val: boolean) => setIsStarted(val),
+    selectedAlgorithm,
+    setSelectedAlgorithm: (algo: Algorithm) => setSelectedAlgorithm(algo)
   }
 
   return (

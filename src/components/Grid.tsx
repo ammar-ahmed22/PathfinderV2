@@ -4,7 +4,7 @@ import { HStack } from "@chakra-ui/react";
 import Panel from "./Panel";
 import Cell from "./Cell";
 
-import { isCorner } from "../utils/board";
+import { isCorner } from "../utils/grid";
 import { sleep } from "../utils/async";
 
 import { StoreContext } from "../Store";

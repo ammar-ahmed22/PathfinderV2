@@ -3,6 +3,7 @@ import Vec2 from "../helpers/Vec2";
 import Node from "../helpers/Node";
 import type { NodeType } from  "./helpers/Node"
 import { AlgorithmParams } from "./helpers/Node";
+import type { Algorithm } from "./helpers/algorithms";
 
 export type StoreContextType = {
   cellSize: number | undefined,
@@ -20,7 +21,9 @@ export type StoreContextType = {
   targetIdx: Vec2 | undefined,
   setTargetIdx: (idx: Vec2) => void,
   isStarted: boolean,
-  setIsStarted: (val: boolean) => void
+  setIsStarted: (val: boolean) => void,
+  selectedAlgorithm: Algorithm | undefined,
+  setSelectedAlgorithm: (algo: Algorithm) => void
 }
 
 export interface StoreProviderProps{
