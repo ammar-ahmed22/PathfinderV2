@@ -4,7 +4,7 @@ import { HStack } from "@chakra-ui/react";
 import Panel from "./Panel";
 import Cell from "./Cell";
 
-import { isCorner } from "../utils/grid";
+import { isCorner, animate } from "../utils/grid";
 import { sleep } from "../utils/async";
 
 import { StoreContext } from "../Store";
@@ -58,39 +58,6 @@ const Grid: React.FC = () => {
     }, []);
 
     useEffect(() => {
-        type NodeAlgorithmArray = Node<AStar>[] | Node<Djikstra>[];
-        const animate = async (
-            path: NodeAlgorithmArray,
-            searched: NodeAlgorithmArray,
-            delay: number
-        ) => {
-            while (!!searched.length) {
-                const nodeToAnimate = searched.shift();
-                if (
-                    nodeToAnimate &&
-                    store.startIdx &&
-                    store.targetIdx &&
-                    !nodeToAnimate.index.equals(store.startIdx) &&
-                    !nodeToAnimate.index.equals(store.targetIdx)
-                )
-                    store.updateNodeTypeByIndex(nodeToAnimate.index, "visited");
-                await sleep(delay);
-            }
-
-            while(!!path.length){
-              const nodeToAnimate = path.pop();
-                if (
-                    nodeToAnimate &&
-                    store.startIdx &&
-                    store.targetIdx &&
-                    !nodeToAnimate.index.equals(store.startIdx) &&
-                    !nodeToAnimate.index.equals(store.targetIdx)
-                )
-                    store.updateNodeTypeByIndex(nodeToAnimate.index, "path");
-                await sleep(delay);
-            }
-        };
-
         if (
             store.nodes &&
             store.startIdx &&
@@ -107,7 +74,7 @@ const Grid: React.FC = () => {
             const path = solver.solve();
 
             console.log({ path, searched: solver.searched });
-            if (path) animate(path, solver.searched, 10);
+            if (path) animate(store, path, solver.searched, 10);
         }
     }, [store.isStarted]);
 
