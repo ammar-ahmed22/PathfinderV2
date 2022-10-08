@@ -18,7 +18,7 @@ export interface Djikstra {
 }
 
 export interface Greedy {
-    greedy: number;
+    heuristic: number;
 }
 
 export interface Generic {}
