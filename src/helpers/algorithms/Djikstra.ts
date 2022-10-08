@@ -13,7 +13,7 @@ export class DjikstraSolver extends Solver<Djikstra> {
             const tempRow: Node<Djikstra>[] = [];
             for (let col = 0; col < nodes[row].length; col++) {
                 const node = nodes[row][col];
-                const aStarNode = new Node<Djikstra>(
+                const djikstraNode = new Node<Djikstra>(
                     node.index,
                     node.size,
                     node.type,
@@ -23,7 +23,7 @@ export class DjikstraSolver extends Solver<Djikstra> {
                     }
                 );
 
-                tempRow.push(aStarNode);
+                tempRow.push(djikstraNode);
             }
 
             this.nodes.push(tempRow);
