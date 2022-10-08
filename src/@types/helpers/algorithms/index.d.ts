@@ -6,7 +6,7 @@ import { Node } from "../../../helpers/Node";
 export type Solvers = {
     astar: AStarSolver;
     djikstra: DjikstraSolver;
-    greedy: GreedySolver
+    greedy: GreedySolver;
 };
 
 export type Algorithm = keyof Solvers;

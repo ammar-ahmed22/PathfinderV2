@@ -24,7 +24,7 @@ const AlgorithmMenu: React.FC = () => {
     const algorithmMenuNames: Record<string, string> = {
         astar: "A* Search",
         djikstra: "Djikstra's Algorithm",
-        greedy: "Greedy Best First Search"
+        greedy: "Greedy Best First Search",
     };
 
     const handleChange = (val: string | string[]) => {
