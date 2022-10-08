@@ -1,6 +1,6 @@
 import Vec2 from "../helpers/Vec2";
 import Node from "../helpers/Node";
-import type { AStar, Djikstra } from "../@types/helpers/Node";
+import type { AStar, Djikstra, Greedy } from "../@types/helpers/Node";
 import type { StoreContextType } from "../@types/Store";
 import { sleep } from "./async";
 
@@ -26,7 +26,7 @@ export const isCorner = (
     return undefined;
 };
 
-type NodeAlgorithmArray = Node<AStar>[] | Node<Djikstra>[];
+type NodeAlgorithmArray = Node<AStar>[] | Node<Djikstra>[] | Node<Greedy>[];
 export const animate = async (
     store: StoreContextType,
     path: NodeAlgorithmArray,
