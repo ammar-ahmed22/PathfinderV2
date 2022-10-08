@@ -67,7 +67,7 @@ export class GreedySolver extends Solver<Greedy> {
 
                 const tentativeHeuristic = this.heuristic(n.index, this.target);
 
-                if (this.searching.includes(n) && tentativeHeuristic > n.params.heuristic){
+                if (this.searching.includes(n)){
                     continue;
                 }
 
