@@ -69,12 +69,11 @@ const Grid: React.FC = () => {
                 nodes: store.nodes,
                 start: store.startIdx,
                 target: store.targetIdx,
-                delay: 10,
             });
             const path = solver.solve();
 
             console.log({ path, searched: solver.searched });
-            if (path) animate(store, path, solver.searched, 10);
+            if (path) animate(store, path, solver.searched, store.visualDelay);
             if (path === undefined) window.alert("No path found!");
         }
     }, [store.isStarted]);

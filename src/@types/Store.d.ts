@@ -31,6 +31,8 @@ export type StoreContextType = {
     setShiftPressed: (val: boolean) => void;
     resetNodes: () => void;
     resetObstacles: () => void;
+    visualDelay: number;
+    setVisualDelay: (val: number) => void;
 };
 
 export interface StoreProviderProps {

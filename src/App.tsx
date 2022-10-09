@@ -25,6 +25,7 @@ import Panel from "./components/Panel";
 import Grid from "./components/Grid";
 import Logo from "./components/Logo";
 import AlgorithmMenu from "./components/AlgorithmMenu";
+import SpeedMenu from "./components/SpeedMenu";
 
 import { StoreContext } from "./Store";
 import { StoreContextType } from "./@types/Store";
@@ -180,6 +181,7 @@ export const App: React.FC = () => {
                             Start
                         </Button>
                         <AlgorithmMenu />
+                        <SpeedMenu />
                         <Button onClick={() => setAddRandObs(true)}>
                             Add Random Obstacles
                         </Button>
