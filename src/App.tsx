@@ -38,22 +38,29 @@ export const App: React.FC = () => {
     }, []);
 
     useEffect(() => {
-        if (addRandObs){
-            for (let row = 0; row < store.nodes.length; row++){
-                for (let col = 0; col < store.nodes[row].length; col++){
+        if (addRandObs) {
+            for (let row = 0; row < store.nodes.length; row++) {
+                for (let col = 0; col < store.nodes[row].length; col++) {
                     const { index } = store.nodes[row][col];
-                    if (store.startIdx && store.targetIdx && !(store.startIdx.equals(index) || store.targetIdx.equals(index))){
+                    if (
+                        store.startIdx &&
+                        store.targetIdx &&
+                        !(
+                            store.startIdx.equals(index) ||
+                            store.targetIdx.equals(index)
+                        )
+                    ) {
                         store.updateNodeByIndex(index, (prevNode) => {
-                            const obs : boolean = Math.random() < 0.25;
+                            const obs: boolean = Math.random() < 0.25;
                             prevNode.obstacle = obs;
                             prevNode.type = obs ? "obstacle" : "base";
                             return prevNode;
-                        })
-                    }   
+                        });
+                    }
                 }
             }
         }
-    }, [addRandObs])
+    }, [addRandObs]);
 
     return (
         <ChakraProvider theme={customTheme}>

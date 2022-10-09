@@ -141,11 +141,13 @@ const Cell: React.FC<CellProps> = ({ node, corner }) => {
                     bg="yellow.400"
                 />
             )}
-            {
-                node.type === "obstacle" && (
-                    <Box height={animBoxSize + "px"} width={animBoxSize + "px"} bg={styleProps.borderColor} />
-                )
-            }
+            {node.type === "obstacle" && (
+                <Box
+                    height={animBoxSize + "px"}
+                    width={animBoxSize + "px"}
+                    bg={styleProps.borderColor}
+                />
+            )}
         </Box>
     );
 };

@@ -39,6 +39,6 @@ export default class Node<A extends AlgorithmParams> {
             res.push(nodes[row][col + 1]);
         }
 
-        return res.filter( node => !node.obstacle );
+        return res.filter((node) => !node.obstacle);
     };
 }
