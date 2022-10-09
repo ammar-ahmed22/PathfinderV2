@@ -8,6 +8,11 @@ As I am quite well-versed in React, I decided to use this in conjunction with [C
 I have created this project in the past, however, I was not happy with the design as well as the way the solving was done. So, this is the 
 second iteration of the project with design updates as well as optimizations.
 
+Notable updates/optimizations in this design iteration include:
+- Use of a min-priority queue for algorithms instead of an array-based queue
+- Previously, animation was done through an asynchronous callback on each iteration of the algorithm, now, the algorithm runs synchronously with the animations done asynchronously (for visualization)
+- Significantly more appealing UI/UX (in my opinion)
+
 ## Run Locally
 
 #### Clone the project
