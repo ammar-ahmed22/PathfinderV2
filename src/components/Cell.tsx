@@ -119,7 +119,11 @@ const Cell: React.FC<CellProps> = ({ node, corner }) => {
             {isStartTarget && (
                 <Icon
                     as={node.type === "start" ? FaMapMarkerAlt : FaCrosshairs}
-                    color={node.type === "start" ? "brand.purple.300" : "brand.blue.300"}
+                    color={
+                        node.type === "start"
+                            ? "brand.purple.300"
+                            : "brand.blue.300"
+                    }
                 />
             )}
             {node.type === "visited" && (
