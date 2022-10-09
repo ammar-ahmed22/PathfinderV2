@@ -120,7 +120,7 @@ const StoreProvider: React.FC<StoreProviderProps> = ({ children }) => {
         selectedAlgorithm,
         setSelectedAlgorithm: (algo: Algorithm) => setSelectedAlgorithm(algo),
         shiftPressed,
-        setShiftPressed: (val: boolean) => setShiftPressed(val)
+        setShiftPressed: (val: boolean) => setShiftPressed(val),
     };
 
     return (
