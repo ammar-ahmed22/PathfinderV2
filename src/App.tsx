@@ -39,7 +39,6 @@ export const App: React.FC = () => {
 
     useEffect(() => {
         if (addRandObs){
-            console.log("this being called");
             for (let row = 0; row < store.nodes.length; row++){
                 for (let col = 0; col < store.nodes[row].length; col++){
                     const { index } = store.nodes[row][col];
