@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
     ChakraProvider,
     Text,
@@ -31,10 +31,29 @@ import { StoreContextType } from "./@types/Store";
 
 export const App: React.FC = () => {
     const store = useContext(StoreContext) as StoreContextType;
+    const [addRandObs, setAddRandObs] = useState<boolean>(false);
 
     useEffect(() => {
         store.setCellSize(40);
     }, []);
+
+    useEffect(() => {
+        if (addRandObs){
+            for (let row = 0; row < store.nodes.length; row++){
+                for (let col = 0; col < store.nodes[row].length; col++){
+                    const { index } = store.nodes[row][col];
+                    if (store.startIdx && store.targetIdx && !(store.startIdx.equals(index) || store.targetIdx.equals(index))){
+                        store.updateNodeByIndex(index, (prevNode) => {
+                            const obs : boolean = Math.random() < 0.25;
+                            prevNode.obstacle = obs;
+                            prevNode.type = obs ? "obstacle" : "base";
+                            return prevNode;
+                        })
+                    }   
+                }
+            }
+        }
+    }, [addRandObs])
 
     return (
         <ChakraProvider theme={customTheme}>
@@ -135,6 +154,9 @@ export const App: React.FC = () => {
                             Start
                         </Button>
                         <AlgorithmMenu />
+                        <Button onClick={() => setAddRandObs(true)}>
+                            Add Random Obstacles
+                        </Button>
                     </Panel>
                 </SideBar>
 

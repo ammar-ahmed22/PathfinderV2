@@ -75,6 +75,7 @@ const Grid: React.FC = () => {
 
             console.log({ path, searched: solver.searched });
             if (path) animate(store, path, solver.searched, 10);
+            if (path === undefined) window.alert('No path found!')
         }
     }, [store.isStarted]);
 
