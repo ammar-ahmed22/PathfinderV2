@@ -2,6 +2,7 @@ import { Solver, SolverParams } from "../solver/Solver";
 import { AStar } from "../../@types/helpers/Node";
 import Node from "../Node";
 import Vec2 from "../Vec2";
+import MinPriorityQueue from "../queue/MinPriorityQueue";
 
 export class AStarSolver extends Solver<AStar> {
     public initialize = ({
@@ -36,6 +37,9 @@ export class AStarSolver extends Solver<AStar> {
         this.target = target;
         this.delay = delay;
 
+        this.searching = new MinPriorityQueue<Node<AStar>>();
+        this.searched = [];
+
         const startNode: Node<AStar> = this.nodes[start.y][start.x];
         this.searching.insert(startNode, startNode.params.func);
     };
@@ -45,9 +49,10 @@ export class AStarSolver extends Solver<AStar> {
 
     public getOptimalPath = (current: Node<AStar>): Node<AStar>[] => {
         const res: Node<AStar>[] = [];
-
+  
         let temp = current;
         while (temp.prev) {
+
             res.push(temp.prev);
 
             temp = temp.prev;

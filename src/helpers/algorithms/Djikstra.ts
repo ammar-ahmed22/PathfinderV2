@@ -1,6 +1,7 @@
 import { Solver, SolverParams } from "../solver/Solver";
 import { Djikstra } from "../../@types/helpers/Node";
 import Node from "../Node";
+import MinPriorityQueue from "../queue/MinPriorityQueue";
 
 export class DjikstraSolver extends Solver<Djikstra> {
     public initialize = ({
@@ -32,6 +33,9 @@ export class DjikstraSolver extends Solver<Djikstra> {
         this.start = start;
         this.target = target;
         this.delay = delay;
+
+        this.searching = new MinPriorityQueue<Node<Djikstra>>();
+        this.searched = [];
 
         const startNode: Node<Djikstra> = this.nodes[start.y][start.x];
         startNode.params.cost = 0;
