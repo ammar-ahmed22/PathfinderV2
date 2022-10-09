@@ -1,3 +1,11 @@
+export const getChakraCSSVar = (chakraColor: string) => {
+  const splitted = chakraColor.split(".");
+  return `--pf-colors-${splitted.join("-")}`;
+};
+
+export const getCSSVarValue = (cssVar: string) : string => {
+  return window.getComputedStyle(document.body).getPropertyValue(cssVar)
+}
 
 export interface RGB {
   r: number,

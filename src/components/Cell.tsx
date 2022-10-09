@@ -9,7 +9,8 @@ import { FaMapMarkerAlt, FaCrosshairs } from "react-icons/fa";
 
 import Vec2 from "../helpers/Vec2";
 
-import { getCSSVarColor, borderRadii, createAnimation } from "../utils/cell";
+import { borderRadii, createAnimation } from "../utils/cell";
+import { getChakraCSSVar } from "../utils/colors";
 
 import { CellProps } from "../@types/components/Cell";
 
@@ -20,12 +21,12 @@ const Cell: React.FC<CellProps> = ({ node, corner }) => {
 
     const animations = {
         visited: keyframes`
-      0% { background-color: ${getCSSVarColor("brand.purple.400")}; height: ${
+      0% { background-color: var(${getChakraCSSVar("brand.purple.400")}); height: ${
             animBoxSize / 4
         }px; width: ${animBoxSize / 4}px; border-radius: 100%; }
-      100% { background-color: ${getCSSVarColor(
+      100% { background-color: var(${getChakraCSSVar(
           "brand.blue.500"
-      )}; height: ${animBoxSize}px; width: ${animBoxSize}px; border-radius: 0; }
+      )}); height: ${animBoxSize}px; width: ${animBoxSize}px; border-radius: 0; }
     `,
         path: keyframes`
       0% { height: ${
@@ -33,11 +34,7 @@ const Cell: React.FC<CellProps> = ({ node, corner }) => {
         }px; width: ${animBoxSize / 4}px; border-radius: 100%; }
       100% { height: ${animBoxSize}px; width: ${animBoxSize}px; border-radius: 0; }
     `,
-    };
-
-    
-    const invertedBorderColor = useColorModeValue("gray.400", "gray.600");
-    
+    };    
 
     const styleProps = {
         height: node.size + "px",
@@ -124,7 +121,7 @@ const Cell: React.FC<CellProps> = ({ node, corner }) => {
                     display="flex"
                     justifyContent='center'
                     alignItems="center"
-                    bg={store.isStarted ? node.type === "start" ? "#D38312" : "#A83279" : "none"}
+                    bg={store.isStarted ? node.type === "start" ? "path.start" : "path.end" : "none"}
                 >
                     <Icon
                     as={node.type === "start" ? FaMapMarkerAlt : FaCrosshairs}
