@@ -10,26 +10,14 @@ import { FaMapMarkerAlt, FaCrosshairs } from "react-icons/fa";
 
 import Vec2 from "../helpers/Vec2";
 
-import { CellProps, CornerType } from "../@types/components/Cell";
+import { getCSSVarColor, borderRadii, createAnimation } from "../utils/cell";
+
+import { CellProps } from "../@types/components/Cell";
 
 const Cell: React.FC<CellProps> = ({ node, corner }) => {
     const borderSize = 1;
 
     const animBoxSize = node.size - 2 * borderSize;
-
-    const borderRadii = (corner: CornerType | undefined): object => {
-        return {
-            borderTopLeftRadius: corner === "tl" ? "xl" : "none",
-            borderTopRightRadius: corner === "tr" ? "xl" : "none",
-            borderBottomLeftRadius: corner === "bl" ? "xl" : "none",
-            borderBottomRightRadius: corner === "br" ? "xl" : "none",
-        };
-    };
-
-    const getCSSVarColor = (chakraColor: string) => {
-        const splitted = chakraColor.split(".");
-        return `var(--pf-colors-${splitted.join("-")})`;
-    };
 
     const animations = {
         visited: keyframes`
@@ -50,14 +38,6 @@ const Cell: React.FC<CellProps> = ({ node, corner }) => {
     `,
     };
 
-    const createAnimation = (
-        keyframes: Keyframes,
-        duration: number,
-        easing: string
-    ) => {
-        return `${keyframes} ${duration}s ${easing}`;
-    };
-
     const styleProps = {
         height: node.size + "px",
         width: node.size + "px",
@@ -67,7 +47,6 @@ const Cell: React.FC<CellProps> = ({ node, corner }) => {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        //backgroundColor: node.type === "start" ? "green" : node.type === "target" ? "red" : "none"
     };
 
     const store = useContext(StoreContext) as StoreContextType;
