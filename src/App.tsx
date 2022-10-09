@@ -62,6 +62,28 @@ export const App: React.FC = () => {
         }
     }, [addRandObs]);
 
+    useEffect(() => {
+        const handleKeyDown = (e: KeyboardEvent) => {
+            if (e.key === "Shift"){
+                store.setShiftPressed(true);
+            }
+        }
+
+        const handleKeyUp = (e: KeyboardEvent) => {
+            if (e.key === "Shift"){
+                store.setShiftPressed(false);
+            }
+        }
+
+        window.addEventListener("keydown", handleKeyDown);
+        window.addEventListener("keyup", handleKeyUp);
+
+        return () => {
+            window.removeEventListener("keydown", handleKeyDown);
+            window.removeEventListener("keyup", handleKeyUp)
+        }
+    }, [])
+
     return (
         <ChakraProvider theme={customTheme}>
             <HStack spacing="5" padding="5">

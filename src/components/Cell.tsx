@@ -113,6 +113,25 @@ const Cell: React.FC<CellProps> = ({ node, corner }) => {
             onDragStart={handleDragStart}
             onDragOver={handleDragOver}
             onDrop={handleDragDrop}
+            onMouseOver={(e) => {
+                if (e.buttons === 1 && !isStartTarget){
+                    store.updateNodeByIndex(node.index, (prevNode) => {
+                        prevNode.obstacle = store.shiftPressed ? false : true;
+                        prevNode.type = store.shiftPressed ? "base" : "obstacle";
+                        return prevNode
+                    })
+                }
+            }}
+            onMouseDown={() => {
+                if (!isStartTarget){
+                    store.updateNodeByIndex(node.index, (prevNode) => {
+                        prevNode.obstacle = store.shiftPressed ? false : true;
+                        prevNode.type = store.shiftPressed ? "base" : "obstacle";
+                        return prevNode
+                    })
+                }
+            }}
+            cursor={isStartTarget ? "grab" : "pointer"}
         >
             {isStartTarget && (
                 <Icon
