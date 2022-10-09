@@ -8,11 +8,7 @@ export class GreedySolver extends Solver<Greedy> {
     private heuristic = (start: Vec2, end: Vec2): number =>
         Vec2.Distance(start, end);
 
-    public initialize = ({
-        nodes,
-        start,
-        target,
-    }: SolverParams): void => {
+    public initialize = ({ nodes, start, target }: SolverParams): void => {
         for (let row = 0; row < nodes.length; row++) {
             const tempRow: Node<Greedy>[] = [];
             for (let col = 0; col < nodes[row].length; col++) {

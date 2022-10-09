@@ -171,7 +171,7 @@ const StoreProvider: React.FC<StoreProviderProps> = ({ children }) => {
         resetNodes,
         resetObstacles,
         visualDelay,
-        setVisualDelay: (val: number) => setVisualDelay(val)
+        setVisualDelay: (val: number) => setVisualDelay(val),
     };
 
     return (

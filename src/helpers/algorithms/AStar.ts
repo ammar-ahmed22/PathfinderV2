@@ -5,11 +5,7 @@ import Vec2 from "../Vec2";
 import MinPriorityQueue from "../queue/MinPriorityQueue";
 
 export class AStarSolver extends Solver<AStar> {
-    public initialize = ({
-        nodes,
-        start,
-        target,
-    }: SolverParams): void => {
+    public initialize = ({ nodes, start, target }: SolverParams): void => {
         for (let row = 0; row < nodes.length; row++) {
             const tempRow: Node<AStar>[] = [];
             for (let col = 0; col < nodes[row].length; col++) {
