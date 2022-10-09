@@ -36,7 +36,7 @@ export class GreedySolver extends Solver<Greedy> {
         this.target = target;
         this.delay = delay;
 
-        this.searching = new MinPriorityQueue<Node<Greedy>>()
+        this.searching = new MinPriorityQueue<Node<Greedy>>();
 
         const startNode: Node<Greedy> = this.nodes[start.y][start.x];
         startNode.params.heuristic = this.heuristic(start, target);

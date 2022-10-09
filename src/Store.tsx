@@ -77,36 +77,48 @@ const StoreProvider: React.FC<StoreProviderProps> = ({ children }) => {
     const resetNodes = () => {
         setNodes((prevNodes) => {
             const copy = [...prevNodes];
-            for (let row = 0; row < copy.length; row++){
-                for (let col = 0; col < copy[row].length; col++){
+            for (let row = 0; row < copy.length; row++) {
+                for (let col = 0; col < copy[row].length; col++) {
                     const node = copy[row][col];
                     const { index } = node;
                     copy[row][col].prev = undefined;
-                    if (startIdx && targetIdx && !index.equals(startIdx) && !index.equals(targetIdx) && !node.obstacle){
+                    if (
+                        startIdx &&
+                        targetIdx &&
+                        !index.equals(startIdx) &&
+                        !index.equals(targetIdx) &&
+                        !node.obstacle
+                    ) {
                         copy[row][col].type = "base";
                     }
                 }
             }
             return copy;
-        })
-    }
+        });
+    };
 
     const resetObstacles = () => {
         setNodes((prevNodes) => {
             const copy = [...prevNodes];
-            for (let row = 0; row < copy.length; row++){
-                for (let col = 0; col < copy[row].length; col++){
+            for (let row = 0; row < copy.length; row++) {
+                for (let col = 0; col < copy[row].length; col++) {
                     const node = copy[row][col];
                     const { index } = node;
-                    if (startIdx && targetIdx && !index.equals(startIdx) && !index.equals(targetIdx) && node.obstacle){
+                    if (
+                        startIdx &&
+                        targetIdx &&
+                        !index.equals(startIdx) &&
+                        !index.equals(targetIdx) &&
+                        node.obstacle
+                    ) {
                         copy[row][col].type = "base";
                         copy[row][col].obstacle = false;
                     }
                 }
             }
             return copy;
-        })
-    }
+        });
+    };
 
     useEffect(() => {
         if (startIdx) updateNodeTypeByIndex(startIdx, "start");

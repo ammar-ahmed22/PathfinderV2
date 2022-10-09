@@ -175,11 +175,7 @@ export const App: React.FC = () => {
                         <ColorModeSwitcher />
                         <Button
                             colorScheme="brand.blue"
-                            onClick={() =>
-                                store.setIsStarted(
-                                    true
-                                )
-                            }
+                            onClick={() => store.setIsStarted(true)}
                         >
                             Start
                         </Button>
@@ -187,15 +183,19 @@ export const App: React.FC = () => {
                         <Button onClick={() => setAddRandObs(true)}>
                             Add Random Obstacles
                         </Button>
-                        <Button onClick={() => {
-                            store.resetNodes();
-                            store.setIsStarted(false);
-                        }}>
+                        <Button
+                            onClick={() => {
+                                store.resetNodes();
+                                store.setIsStarted(false);
+                            }}
+                        >
                             Reset
                         </Button>
-                        <Button onClick={() => {
-                            store.resetObstacles();
-                        }}>
+                        <Button
+                            onClick={() => {
+                                store.resetObstacles();
+                            }}
+                        >
                             Erase Obstacles
                         </Button>
                     </Panel>

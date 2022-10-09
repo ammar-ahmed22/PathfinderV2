@@ -49,10 +49,9 @@ export class AStarSolver extends Solver<AStar> {
 
     public getOptimalPath = (current: Node<AStar>): Node<AStar>[] => {
         const res: Node<AStar>[] = [];
-  
+
         let temp = current;
         while (temp.prev) {
-
             res.push(temp.prev);
 
             temp = temp.prev;
