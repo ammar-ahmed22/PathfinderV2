@@ -17,9 +17,7 @@ const StoreProvider: React.FC<StoreProviderProps> = ({ children }) => {
     const [isStarted, setIsStarted] = useState<boolean>(false);
     const [selectedAlgorithm, setSelectedAlgorithm] =
         useState<Algorithm>("astar");
-    // const [state, setState] = useState<StoreContextType>({
-    //   cellSize: undefined
-    // })
+    const [shiftPressed, setShiftPressed] = useState<boolean>(false);
 
     const createNodes = () => {
         if (!gridDim) {
@@ -121,6 +119,8 @@ const StoreProvider: React.FC<StoreProviderProps> = ({ children }) => {
         setIsStarted: (val: boolean) => setIsStarted(val),
         selectedAlgorithm,
         setSelectedAlgorithm: (algo: Algorithm) => setSelectedAlgorithm(algo),
+        shiftPressed,
+        setShiftPressed: (val: boolean) => setShiftPressed(val)
     };
 
     return (

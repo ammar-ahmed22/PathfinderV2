@@ -27,6 +27,8 @@ export type StoreContextType = {
     setIsStarted: (val: boolean) => void;
     selectedAlgorithm: Algorithm;
     setSelectedAlgorithm: (algo: Algorithm) => void;
+    shiftPressed: boolean,
+    setShiftPressed: (val: boolean) => void
 };
 
 export interface StoreProviderProps {
