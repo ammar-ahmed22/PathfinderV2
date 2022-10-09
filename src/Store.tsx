@@ -18,6 +18,7 @@ const StoreProvider: React.FC<StoreProviderProps> = ({ children }) => {
     const [selectedAlgorithm, setSelectedAlgorithm] =
         useState<Algorithm>("astar");
     const [shiftPressed, setShiftPressed] = useState<boolean>(false);
+    const [visualDelay, setVisualDelay] = useState<number>(10);
 
     const createNodes = () => {
         if (!gridDim) {
@@ -169,6 +170,8 @@ const StoreProvider: React.FC<StoreProviderProps> = ({ children }) => {
         setShiftPressed: (val: boolean) => setShiftPressed(val),
         resetNodes,
         resetObstacles,
+        visualDelay,
+        setVisualDelay: (val: number) => setVisualDelay(val)
     };
 
     return (
