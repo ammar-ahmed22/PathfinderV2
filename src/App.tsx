@@ -59,6 +59,7 @@ export const App: React.FC = () => {
                     }
                 }
             }
+            setAddRandObs(false);
         }
     }, [addRandObs]);
 
