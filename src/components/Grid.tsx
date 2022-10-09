@@ -64,7 +64,6 @@ const Grid: React.FC = () => {
             store.targetIdx &&
             store.isStarted
         ) {
-            console.log("solver effect");
             const solver = solvers[store.selectedAlgorithm];
             solver.initialize({
                 nodes: store.nodes,
