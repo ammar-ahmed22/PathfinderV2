@@ -189,11 +189,12 @@ export const App: React.FC = () => {
                         <Button onClick={() => {
                             store.resetNodes();
                             store.setIsStarted(false);
-                            
                         }}>
                             Reset
                         </Button>
-                        <Button>
+                        <Button onClick={() => {
+                            store.resetObstacles();
+                        }}>
                             Erase Obstacles
                         </Button>
                     </Panel>
