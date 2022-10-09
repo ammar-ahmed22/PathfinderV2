@@ -3,7 +3,13 @@ import Node from "../helpers/Node";
 import type { AStar, Djikstra, Greedy } from "../@types/helpers/Node";
 import type { StoreContextType } from "../@types/Store";
 import { sleep } from "./async";
-import { createGradient, hexToRGB, RGB, getChakraCSSVar, getCSSVarValue } from "./colors";
+import {
+    createGradient,
+    hexToRGB,
+    RGB,
+    getChakraCSSVar,
+    getCSSVarValue,
+} from "./colors";
 
 import type { CornerType } from "../@types/components/Cell";
 
@@ -49,11 +55,16 @@ export const animate = async (
 
     const startHex = getCSSVarValue(getChakraCSSVar("path.start"));
     const endHex = getCSSVarValue(getChakraCSSVar("path.end"));
-    
+
     const startColor = hexToRGB(startHex) as RGB;
     const endColor = hexToRGB(endHex) as RGB;
 
-    const gradient = createGradient({ values: path.length, startColor, endColor, output: "hex" })
+    const gradient = createGradient({
+        values: path.length,
+        startColor,
+        endColor,
+        output: "hex",
+    });
     console.log({ gradient });
     let i = 0;
     while (!!path.length) {
@@ -71,7 +82,7 @@ export const animate = async (
                 return prevNode;
             });
 
-            i++
+        i++;
         await sleep(delay);
     }
 };

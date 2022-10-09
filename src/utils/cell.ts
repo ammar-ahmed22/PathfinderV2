@@ -10,8 +10,6 @@ export const borderRadii = (corner: CornerType | undefined): object => {
     };
 };
 
-
-
 export const createAnimation = (
     keyframes: Keyframes,
     duration: number,

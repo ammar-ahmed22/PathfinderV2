@@ -29,8 +29,8 @@ const colors = {
     },
     path: {
         start: "#D38312",
-        end: "#A83279"
-    }
+        end: "#A83279",
+    },
 };
 
 const config = {

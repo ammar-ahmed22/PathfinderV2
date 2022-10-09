@@ -21,20 +21,22 @@ const Cell: React.FC<CellProps> = ({ node, corner }) => {
 
     const animations = {
         visited: keyframes`
-      0% { background-color: var(${getChakraCSSVar("brand.purple.400")}); height: ${
+      0% { background-color: var(${getChakraCSSVar(
+          "brand.purple.400"
+      )}); height: ${animBoxSize / 4}px; width: ${
             animBoxSize / 4
-        }px; width: ${animBoxSize / 4}px; border-radius: 100%; }
+        }px; border-radius: 100%; }
       100% { background-color: var(${getChakraCSSVar(
           "brand.blue.500"
       )}); height: ${animBoxSize}px; width: ${animBoxSize}px; border-radius: 0; }
     `,
         path: keyframes`
-      0% { height: ${
+      0% { height: ${animBoxSize / 4}px; width: ${
             animBoxSize / 4
-        }px; width: ${animBoxSize / 4}px; border-radius: 100%; }
+        }px; border-radius: 100%; }
       100% { height: ${animBoxSize}px; width: ${animBoxSize}px; border-radius: 0; }
     `,
-    };    
+    };
 
     const styleProps = {
         height: node.size + "px",
@@ -115,20 +117,30 @@ const Cell: React.FC<CellProps> = ({ node, corner }) => {
             cursor={isStartTarget ? "grab" : "pointer"}
         >
             {isStartTarget && (
-                <Box 
+                <Box
                     height={animBoxSize + "px"}
                     width={animBoxSize + "px"}
                     display="flex"
-                    justifyContent='center'
+                    justifyContent="center"
                     alignItems="center"
-                    bg={store.isStarted ? node.type === "start" ? "path.start" : "path.end" : "none"}
+                    bg={
+                        store.isStarted
+                            ? node.type === "start"
+                                ? "path.start"
+                                : "path.end"
+                            : "none"
+                    }
                 >
                     <Icon
-                    as={node.type === "start" ? FaMapMarkerAlt : FaCrosshairs}
-                    color={
-                        store.isStarted ? "white": styleProps.borderColor
-                    }
-                />
+                        as={
+                            node.type === "start"
+                                ? FaMapMarkerAlt
+                                : FaCrosshairs
+                        }
+                        color={
+                            store.isStarted ? "white" : styleProps.borderColor
+                        }
+                    />
                 </Box>
             )}
             {node.type === "visited" && (
