@@ -119,6 +119,7 @@ const Cell: React.FC<CellProps> = ({ node, corner }) => {
             {isStartTarget && (
                 <Icon
                     as={node.type === "start" ? FaMapMarkerAlt : FaCrosshairs}
+                    color={node.type === "start" ? "brand.purple.300" : "brand.blue.300"}
                 />
             )}
             {node.type === "visited" && (
@@ -132,6 +133,7 @@ const Cell: React.FC<CellProps> = ({ node, corner }) => {
                     height={animBoxSize + "px"}
                     width={animBoxSize + "px"}
                     bg="brand.purple.500"
+                    {...borderRadii(corner)}
                 />
             )}
             {node.type === "path" && (
@@ -141,6 +143,7 @@ const Cell: React.FC<CellProps> = ({ node, corner }) => {
                     height={animBoxSize + "px"}
                     width={animBoxSize + "px"}
                     bg="yellow.400"
+                    {...borderRadii(corner)}
                 />
             )}
             {node.type === "obstacle" && (
@@ -148,6 +151,7 @@ const Cell: React.FC<CellProps> = ({ node, corner }) => {
                     height={animBoxSize + "px"}
                     width={animBoxSize + "px"}
                     bg={styleProps.borderColor}
+                    {...borderRadii(corner)}
                 />
             )}
         </Box>
