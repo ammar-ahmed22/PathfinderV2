@@ -12,7 +12,6 @@ export class GreedySolver extends Solver<Greedy> {
         nodes,
         start,
         target,
-        delay,
     }: SolverParams): void => {
         for (let row = 0; row < nodes.length; row++) {
             const tempRow: Node<Greedy>[] = [];
@@ -34,7 +33,6 @@ export class GreedySolver extends Solver<Greedy> {
 
         this.start = start;
         this.target = target;
-        this.delay = delay;
 
         this.searching = new MinPriorityQueue<Node<Greedy>>();
 

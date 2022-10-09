@@ -8,7 +8,6 @@ export class DjikstraSolver extends Solver<Djikstra> {
         nodes,
         start,
         target,
-        delay,
     }: SolverParams): void => {
         for (let row = 0; row < nodes.length; row++) {
             const tempRow: Node<Djikstra>[] = [];
@@ -32,7 +31,6 @@ export class DjikstraSolver extends Solver<Djikstra> {
 
         this.start = start;
         this.target = target;
-        this.delay = delay;
 
         this.searching = new MinPriorityQueue<Node<Djikstra>>();
         this.searched = [];

@@ -69,7 +69,6 @@ const Grid: React.FC = () => {
                 nodes: store.nodes,
                 start: store.startIdx,
                 target: store.targetIdx,
-                delay: 10,
             });
             const path = solver.solve();
 

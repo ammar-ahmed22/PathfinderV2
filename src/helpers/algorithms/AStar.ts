@@ -9,7 +9,6 @@ export class AStarSolver extends Solver<AStar> {
         nodes,
         start,
         target,
-        delay,
     }: SolverParams): void => {
         for (let row = 0; row < nodes.length; row++) {
             const tempRow: Node<AStar>[] = [];
@@ -35,7 +34,6 @@ export class AStarSolver extends Solver<AStar> {
 
         this.start = start;
         this.target = target;
-        this.delay = delay;
 
         this.searching = new MinPriorityQueue<Node<AStar>>();
         this.searched = [];

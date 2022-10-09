@@ -7,14 +7,12 @@ export interface SolverParams {
     nodes: Node<Generic>[][];
     start: Vec2;
     target: Vec2;
-    delay: number;
 }
 
 export abstract class Solver<A extends AlgorithmParams> {
     public nodes: Node<A>[][] = [];
     public start: Vec2 = new Vec2();
     public target: Vec2 = new Vec2();
-    public delay: number = -1;
 
     public searching: MinPriorityQueue<Node<A>> = new MinPriorityQueue<
         Node<A>
