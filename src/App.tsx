@@ -35,7 +35,7 @@ export const App: React.FC = () => {
     const [addRandObs, setAddRandObs] = useState<boolean>(false);
 
     useEffect(() => {
-        store.setCellSize(40);
+        store.setCellSize(30);
     }, []);
 
     useEffect(() => {

@@ -3,6 +3,7 @@ import Node from "../helpers/Node";
 import type { AStar, Djikstra, Greedy } from "../@types/helpers/Node";
 import type { StoreContextType } from "../@types/Store";
 import { sleep } from "./async";
+import { createGradient, hexToRGB, RGB } from "./colors";
 
 import type { CornerType } from "../@types/components/Cell";
 
@@ -46,6 +47,12 @@ export const animate = async (
         await sleep(delay);
     }
 
+    const startColor = hexToRGB("#D38312") as RGB;
+    const endColor = hexToRGB("#A83279") as RGB;
+
+    const gradient = createGradient({ values: path.length, startColor, endColor, output: "hex" })
+    console.log({ gradient });
+    let i = 0;
     while (!!path.length) {
         const nodeToAnimate = path.pop();
         if (
@@ -55,7 +62,13 @@ export const animate = async (
             !nodeToAnimate.index.equals(store.startIdx) &&
             !nodeToAnimate.index.equals(store.targetIdx)
         )
-            store.updateNodeTypeByIndex(nodeToAnimate.index, "path");
+            store.updateNodeByIndex(nodeToAnimate.index, (prevNode) => {
+                prevNode.type = "path";
+                prevNode.bg = gradient[i] as string;
+                return prevNode;
+            });
+
+            i++
         await sleep(delay);
     }
 };
