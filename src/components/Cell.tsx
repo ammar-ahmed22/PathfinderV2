@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
-import { Box, Icon, keyframes } from "@chakra-ui/react";
-import type { Keyframes } from "@emotion/react";
+import { Box, Icon, keyframes, useColorModeValue } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 
 import { StoreContext } from "../Store";
@@ -10,7 +9,8 @@ import { FaMapMarkerAlt, FaCrosshairs } from "react-icons/fa";
 
 import Vec2 from "../helpers/Vec2";
 
-import { getCSSVarColor, borderRadii, createAnimation } from "../utils/cell";
+import { borderRadii, createAnimation } from "../utils/cell";
+import { getChakraCSSVar } from "../utils/colors";
 
 import { CellProps } from "../@types/components/Cell";
 
@@ -21,29 +21,27 @@ const Cell: React.FC<CellProps> = ({ node, corner }) => {
 
     const animations = {
         visited: keyframes`
-      0% { background-color: ${getCSSVarColor("brand.blue.200")}; height: ${
+      0% { background-color: var(${getChakraCSSVar("brand.purple.400")}); height: ${
             animBoxSize / 4
         }px; width: ${animBoxSize / 4}px; border-radius: 100%; }
-      100% { background-color: ${getCSSVarColor(
-          "brand.purple.500"
-      )}; height: ${animBoxSize}px; width: ${animBoxSize}px; border-radius: 0; }
+      100% { background-color: var(${getChakraCSSVar(
+          "brand.blue.500"
+      )}); height: ${animBoxSize}px; width: ${animBoxSize}px; border-radius: 0; }
     `,
         path: keyframes`
-      0% { background-color: ${getCSSVarColor("yellow.200")}; height: ${
+      0% { height: ${
             animBoxSize / 4
         }px; width: ${animBoxSize / 4}px; border-radius: 100%; }
-      100% { background-color: ${getCSSVarColor(
-          "yellow.400"
-      )}; height: ${animBoxSize}px; width: ${animBoxSize}px; border-radius: 0; }
+      100% { height: ${animBoxSize}px; width: ${animBoxSize}px; border-radius: 0; }
     `,
-    };
+    };    
 
     const styleProps = {
         height: node.size + "px",
         width: node.size + "px",
         borderStyle: "solid",
         borderWidth: `${borderSize}px`,
-        borderColor: "gray.500",
+        borderColor: useColorModeValue("gray.600", "gray.400"),
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
@@ -117,14 +115,21 @@ const Cell: React.FC<CellProps> = ({ node, corner }) => {
             cursor={isStartTarget ? "grab" : "pointer"}
         >
             {isStartTarget && (
-                <Icon
+                <Box 
+                    height={animBoxSize + "px"}
+                    width={animBoxSize + "px"}
+                    display="flex"
+                    justifyContent='center'
+                    alignItems="center"
+                    bg={store.isStarted ? node.type === "start" ? "path.start" : "path.end" : "none"}
+                >
+                    <Icon
                     as={node.type === "start" ? FaMapMarkerAlt : FaCrosshairs}
                     color={
-                        node.type === "start"
-                            ? "brand.purple.300"
-                            : "brand.blue.300"
+                        store.isStarted ? "white": styleProps.borderColor
                     }
                 />
+                </Box>
             )}
             {node.type === "visited" && (
                 <Box
@@ -136,7 +141,7 @@ const Cell: React.FC<CellProps> = ({ node, corner }) => {
                     )}
                     height={animBoxSize + "px"}
                     width={animBoxSize + "px"}
-                    bg="brand.purple.500"
+                    bg="brand.blue.500"
                     {...borderRadii(corner)}
                 />
             )}
@@ -146,7 +151,7 @@ const Cell: React.FC<CellProps> = ({ node, corner }) => {
                     animation={createAnimation(animations.path, 1, "ease-in")}
                     height={animBoxSize + "px"}
                     width={animBoxSize + "px"}
-                    bg="yellow.400"
+                    bg={node.bg ? node.bg : "yellow.400"}
                     {...borderRadii(corner)}
                 />
             )}

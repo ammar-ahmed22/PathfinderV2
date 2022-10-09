@@ -27,6 +27,10 @@ const colors = {
             900: "#210E4D",
         },
     },
+    path: {
+        start: "#D38312",
+        end: "#A83279"
+    }
 };
 
 const config = {

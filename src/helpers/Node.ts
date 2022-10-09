@@ -3,6 +3,7 @@ import { NodeType, AlgorithmParams } from "../@types/helpers/Node";
 
 export default class Node<A extends AlgorithmParams> {
     public prev: Node<A> | undefined;
+    public bg: string | undefined;
     constructor(
         public index: Vec2,
         public size: number,

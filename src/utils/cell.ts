@@ -10,10 +10,7 @@ export const borderRadii = (corner: CornerType | undefined): object => {
     };
 };
 
-export const getCSSVarColor = (chakraColor: string) => {
-    const splitted = chakraColor.split(".");
-    return `var(--pf-colors-${splitted.join("-")})`;
-};
+
 
 export const createAnimation = (
     keyframes: Keyframes,
