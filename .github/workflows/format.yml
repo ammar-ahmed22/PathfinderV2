@@ -1,6 +1,6 @@
-name: Format
+name: Format on PR
 on:
-  push:
+  pull_request:
     branches: [main]
 jobs:
   format:
