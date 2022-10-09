@@ -2,6 +2,7 @@ import { Solver, SolverParams } from "../solver/Solver";
 import { Greedy } from "../../@types/helpers/Node";
 import Node from "../Node";
 import Vec2 from "../Vec2";
+import MinPriorityQueue from "../queue/MinPriorityQueue";
 
 export class GreedySolver extends Solver<Greedy> {
     private heuristic = (start: Vec2, end: Vec2): number =>
@@ -34,6 +35,8 @@ export class GreedySolver extends Solver<Greedy> {
         this.start = start;
         this.target = target;
         this.delay = delay;
+
+        this.searching = new MinPriorityQueue<Node<Greedy>>()
 
         const startNode: Node<Greedy> = this.nodes[start.y][start.x];
         startNode.params.heuristic = this.heuristic(start, target);

@@ -176,7 +176,7 @@ export const App: React.FC = () => {
                             colorScheme="brand.blue"
                             onClick={() =>
                                 store.setIsStarted(
-                                    store.isStarted ? false : true
+                                    true
                                 )
                             }
                         >
@@ -185,6 +185,16 @@ export const App: React.FC = () => {
                         <AlgorithmMenu />
                         <Button onClick={() => setAddRandObs(true)}>
                             Add Random Obstacles
+                        </Button>
+                        <Button onClick={() => {
+                            store.resetNodes();
+                            store.setIsStarted(false);
+                            
+                        }}>
+                            Reset
+                        </Button>
+                        <Button>
+                            Erase Obstacles
                         </Button>
                     </Panel>
                 </SideBar>
