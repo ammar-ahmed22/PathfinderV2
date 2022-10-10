@@ -4,9 +4,6 @@
 <h1 align="center">
   Pathfinder
 </h1>
-<p align="center">
-  Pathfinding algorithm visualizer
-</p>
 
 ## What is this ❓
 
