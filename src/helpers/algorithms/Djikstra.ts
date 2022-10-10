@@ -5,6 +5,7 @@ import MinPriorityQueue from "../queue/MinPriorityQueue";
 
 export class DjikstraSolver extends Solver<Djikstra> {
     public initialize = ({ nodes, start, target }: SolverParams): void => {
+        this.nodes = [];
         for (let row = 0; row < nodes.length; row++) {
             const tempRow: Node<Djikstra>[] = [];
             for (let col = 0; col < nodes[row].length; col++) {

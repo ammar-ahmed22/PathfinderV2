@@ -9,6 +9,7 @@ export class GreedySolver extends Solver<Greedy> {
         Vec2.Distance(start, end);
 
     public initialize = ({ nodes, start, target }: SolverParams): void => {
+        this.nodes = [];
         for (let row = 0; row < nodes.length; row++) {
             const tempRow: Node<Greedy>[] = [];
             for (let col = 0; col < nodes[row].length; col++) {
