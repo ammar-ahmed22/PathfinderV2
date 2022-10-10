@@ -6,14 +6,14 @@
 </h1>
 
 ## Table of Contents
-- [What is this ❓](#what-is-this)
-- [Run Locally 💻](#run-locally)
-- [Tech Stack 👨‍💻](#tech-stack)
-- [Features ✨](#features)
-- [Algorithms 🧮](#algorithms)
-- [Abstractions ⚒️](#abstractions)
-- [CI/CD 🚗](#ci-cd)
-- [References 📝](#references)
+- [What is this ❓](#what-is-this-❓)
+- [Run Locally 💻](#run-locally-💻)
+- [Tech Stack 👨‍💻](#tech-stack-👨‍💻)
+- [Features ✨](#features-✨)
+- [Algorithms 🧮](#algorithms-🧮)
+- [Abstractions ⚒️](#abstractions-⚒️)
+- [CI/CD 🚗](#ci-cd-🚗)
+- [References 📝](#references-📝)
 
 ## What is this ❓
 
