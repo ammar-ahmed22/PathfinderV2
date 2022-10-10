@@ -1,4 +1,14 @@
-# Pathfinder
+<p align="center">
+    <img width="30"  alt="Pathfinder Website Logo" src="./public/favicons/apple-touch-icon.png?raw=true">
+</p>
+<h1 align="center">
+  Pathfinder
+</h1>
+<p align="center">
+  Pathfinding algorithm visualizer
+</p>
+
+## What is this ❓
 
 This is a pathfinding algorithm visualizer I created as a learning exercise. The project and design is inspired by a similar [project](https://github.com/clementmihailescu/Pathfinding-Visualizer) created by Clement Mihailescu, founder of AlgoExpert.io; however, I did not look at his code to create my own variation. It was merely
 used as design inspiration as I wanted to implement the algorithms and UI on my own to further my understanding of these concepts.
@@ -13,7 +23,7 @@ Notable updates/optimizations in this design iteration include:
 - Previously, animation was done through an asynchronous callback on each iteration of the algorithm, now, the algorithm runs synchronously with the animations done asynchronously (for visualization)
 - Significantly more appealing UI/UX (in my opinion)
 
-## Run Locally
+## Run Locally 💻
 
 #### Clone the project
 
@@ -41,13 +51,13 @@ Notable updates/optimizations in this design iteration include:
 ```
 > with yarn: `yarn start`
 
-## Tech Stack
+## Tech Stack 👨‍💻
 
 - React (TypeScript)
 - [ChakraUI](https://chakra-ui.com/)
 - [Framer Motion](https://www.framer.com/motion/)
 
-## Features
+## Features ✨
 
 - Light/dark mode toggle
 - Drag/drop/draw nodes (start, end, obstacles)
@@ -55,14 +65,14 @@ Notable updates/optimizations in this design iteration include:
 - Generate maze (maybe?)
 - Change visualization speed (fast, medium, slow + explicitly define delay between iterations)
 
-### Algorithms
+### Algorithms 🧮
 | Algorithm     | Description | Shortest Path Guaranteed? |
 | ------------- | ----------- | -------------------------
 | Djikstra's    | Uses distance from root (start) node to find shortest path. | Yes
 | Greedy        | Uses heuristic (euclidean distance) to find path.           | No
 | A*            | See Djikstra and Greedy above, follows same basic principle. Uses distance + plus heuristic (euclidean distance) to find shortest path.| Yes
 
-### Abstractions 
+### Abstractions ⚒️
 
 | Abstraction     | Description | 
 | ------------- | ----------- | 
@@ -71,12 +81,12 @@ Notable updates/optimizations in this design iteration include:
 | Solver | Abstract base class for pathfinding algorithms. Implements solve method as well as searching queue, searched array and optimal path array. All algorithms extend this class. |
 | Min Priority Queue | As described, heap based min priority queue for pathfinding algorithm optimization. Most algorithms require pulling the minimum value from a queue, min priority queue allows this in ~ O(logn) time instead of O(n) time if done with an array based queue.|
 
-### CI/CD
+### CI/CD 🚗
 | Name | Description |
 | ---- | ------------|
 | Format | GitHub action which formats all code with Prettier and then commits the changes on pushes to the main branch |
 
-### References
+### References 📝
 - [A* Search](https://en.wikipedia.org/wiki/A*_search_algorithm)
 - [Djikstra's Algorithm](https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm)
 - [Common Pathfinding Algorithms (helped with Greedy)](https://www.redblobgames.com/pathfinding/a-star/introduction.html)
