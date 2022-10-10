@@ -5,6 +5,16 @@
   Pathfinder
 </h1>
 
+## Table of Contents
+- [What is this ❓](#what-is-this--)
+- [Run Locally 💻](#run-locally---)
+- [Tech Stack 👨‍💻](#tech-stack------)
+- [Features ✨](#features--)
+- [Algorithms 🧮](#algorithms---)
+- [Abstractions ⚒️](#abstractions---)
+- [CI/CD 🚗](#ci-cd---)
+- [References 📝](#references---)
+
 ## What is this ❓
 
 This is a pathfinding algorithm visualizer I created as a learning exercise. The project and design is inspired by a similar [project](https://github.com/clementmihailescu/Pathfinding-Visualizer) created by Clement Mihailescu, founder of AlgoExpert.io; however, I did not look at his code to create my own variation. It was merely
