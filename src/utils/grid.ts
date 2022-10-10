@@ -60,7 +60,7 @@ export const animate = async (
     const endColor = hexToRGB(endHex) as RGB;
 
     const gradient = createGradient({
-        values: path.length,
+        values: path.length + 1,
         startColor,
         endColor,
         output: "hex",

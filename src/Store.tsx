@@ -87,10 +87,11 @@ const StoreProvider: React.FC<StoreProviderProps> = ({ children }) => {
                         startIdx &&
                         targetIdx &&
                         !index.equals(startIdx) &&
-                        !index.equals(targetIdx) &&
-                        !node.obstacle
+                        !index.equals(targetIdx)
                     ) {
                         copy[row][col].type = "base";
+                        copy[row][col].obstacle = false;
+                        copy[row][col].bg = undefined;
                     }
                 }
             }
