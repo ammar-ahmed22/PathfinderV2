@@ -22,26 +22,26 @@ Notable updates/optimizations in this design iteration include:
 
 ## Run Locally 💻
 
-#### Clone the project
+**Clone the project**
 
 ```bash
   git clone https://github.com/ammar-ahmed22/PathfinderV2.git
 ```
 
-#### Go to the project directory
+**Go to the project directory**
 
 ```bash
   cd PathfinderV2
 ```
 
-#### Install dependencies
+**Install dependencies**
 
 ```bash
   npm install
 ```
 > with yarn: `yarn install`
 
-#### Start the server
+**Start the server**
 
 ```bash
   npm start
