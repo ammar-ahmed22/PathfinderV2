@@ -6,6 +6,7 @@ import {
     HStack,
     UnorderedList,
     ListItem,
+    Divider,
     Icon,
     Button,
     Link,
@@ -16,7 +17,9 @@ import customTheme from "./theme";
 
 // Icons
 import { SiTypescript, SiReact, SiChakraui } from "react-icons/si";
-import { FaInfoCircle, FaTerminal } from "react-icons/fa";
+import { FaInfoCircle, FaTerminal, FaPlay } from "react-icons/fa";
+import { BsPlayFill } from "react-icons/bs"
+import { RepeatIcon } from "@chakra-ui/icons"
 
 // Components
 import ColorModeSwitcher from "./components/ColorModeSwitcher";
@@ -139,7 +142,7 @@ export const App: React.FC = () => {
                         </Text>
                     </Panel>
 
-                    <Panel>
+                    {/* <Panel>
                         <HStack>
                             <Heading as="h2" size="md" variant="gradient">
                                 What is this?
@@ -164,7 +167,7 @@ export const App: React.FC = () => {
                             <ListItem>Djikstra's</ListItem>
                             <ListItem>Greedy Best First Search</ListItem>
                         </UnorderedList>
-                    </Panel>
+                    </Panel> */}
 
                     <Panel>
                         <HStack>
@@ -174,32 +177,65 @@ export const App: React.FC = () => {
                             <Icon as={FaTerminal} color="brand.blue.500" />
                         </HStack>
                         <ColorModeSwitcher />
-                        <Button
-                            colorScheme="brand.blue"
-                            onClick={() => store.setIsStarted(true)}
-                        >
-                            Start
-                        </Button>
+                        {/* <HStack mt="2">
+                            
+                            
+                        </HStack> */}
+                        
+                        <Text my="1" >Select Algorithm:</Text>
                         <AlgorithmMenu />
+                        <Text my="1" >Select visualization speed:</Text>
                         <SpeedMenu />
-                        <Button onClick={() => setAddRandObs(true)}>
-                            Add Random Obstacles
-                        </Button>
+                        {/* <Text my="1" >Obstacles:</Text> */}
+                        
+                        
+                        {/* <Divider bg="gray.800"/> */}
+                        <HStack mt="2">
+                            <Button
+                                onClick={() => {
+                                    store.resetObstacles();
+                                }}
+                                
+                                variant="brandPurple"
+                                size="sm"
+                            >
+                                Erase Walls
+                            </Button>
+                            <Button 
+                                onClick={() => setAddRandObs(true)}
+                                
+                                variant="brandPurple"
+                                size="sm"
+                            >
+                                Random Walls
+                            </Button>
+                            <Button
+                                onClick={() => {
+                                    store.resetNodes();
+                                    store.setIsStarted(false);
+                                }}
+                                
+                                variant="brandPurple"
+                                // rightIcon={<RepeatIcon />}
+                                size="sm"
+                                // w="100%"
+                            >
+                                Reset
+                            </Button>
+                        </HStack>
+
                         <Button
-                            onClick={() => {
-                                store.resetNodes();
-                                store.setIsStarted(false);
-                            }}
+                            bgGradient="linear(to-l, brand.blue.500, brand.purple.500)"
+                            onClick={() => store.setIsStarted(true)}
+                            rightIcon={<BsPlayFill />}
+                            mt="2"
+                            width="100%"
+                            color="white"
                         >
-                            Reset
+                            Visualize
                         </Button>
-                        <Button
-                            onClick={() => {
-                                store.resetObstacles();
-                            }}
-                        >
-                            Erase Obstacles
-                        </Button>
+                        
+                        
                     </Panel>
                 </SideBar>
 

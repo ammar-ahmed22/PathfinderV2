@@ -70,6 +70,17 @@ const components = {
             },
         },
     },
+    Button: {
+        variants: {
+            brandPurple: {
+                bg: "brand.purple.500",
+                color: "white",
+                _hover: {
+                    bg: "brand.purple.600"
+                }
+            }
+        }
+    }
 };
 
 export default extendTheme({ colors, styles, config, shadows, components });

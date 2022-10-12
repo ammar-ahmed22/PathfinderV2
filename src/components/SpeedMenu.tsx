@@ -28,8 +28,8 @@ const SpeedMenu: React.FC = () => {
     };
 
     return (
-        <Menu>
-            <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
+        <Menu matchWidth >
+            <MenuButton as={Button} rightIcon={<ChevronDownIcon />} variant="brandPurple" width='100%' >
                 {speedMenuNames[store.visualDelay]}
             </MenuButton>
             <MenuList>

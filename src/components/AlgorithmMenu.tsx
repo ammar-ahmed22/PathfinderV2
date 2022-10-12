@@ -38,8 +38,8 @@ const AlgorithmMenu: React.FC = () => {
     };
 
     return (
-        <Menu>
-            <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
+        <Menu matchWidth >
+            <MenuButton as={Button} rightIcon={<ChevronDownIcon />} variant="brandPurple" width="100%">
                 {store.selectedAlgorithm &&
                     algorithmMenuNames[store.selectedAlgorithm]}
             </MenuButton>
