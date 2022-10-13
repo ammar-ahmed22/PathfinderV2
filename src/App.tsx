@@ -14,7 +14,7 @@ import customTheme from "./theme";
 
 // Icons
 import { SiTypescript, SiReact, SiChakraui } from "react-icons/si";
-import { FaTerminal, FaClipboardList } from "react-icons/fa";
+import { FaTerminal, FaClipboardList, FaMapMarkerAlt, FaCrosshairs } from "react-icons/fa";
 import { BsPlayFill } from "react-icons/bs";
 import { RepeatIcon } from "@chakra-ui/icons";
 
@@ -76,7 +76,12 @@ export const App: React.FC = () => {
 
     const legendCellMapping: Omit<LegendCellProps, "size">[] = [
         {
-            cellName: "Unvisited",
+            cellName: "Start",
+            icon: FaMapMarkerAlt
+        },
+        {
+            cellName: "Target",
+            icon: FaCrosshairs
         },
         {
             cellName: "Visited",
@@ -257,6 +262,7 @@ export const App: React.FC = () => {
                                 return (
                                     <LegendCell
                                         size="5vmin"
+                                        borderWidth="1px"
                                         {...legendCellProps}
                                     />
                                 );

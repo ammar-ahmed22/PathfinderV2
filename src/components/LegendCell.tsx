@@ -1,5 +1,5 @@
 import React from "react";
-import { VStack, Box, Text, useColorModeValue } from "@chakra-ui/react";
+import { VStack, Box, Text, useColorModeValue, Icon } from "@chakra-ui/react";
 
 import type { LegendCellProps } from "../@types/components/LegendCell";
 
@@ -9,6 +9,7 @@ const LegendCell: React.FC<LegendCellProps> = ({
     borderWidth,
     cellName,
     bgGradient,
+    icon
 }) => {
     const borderColor = useColorModeValue("gray.600", "gray.400");
 
@@ -22,8 +23,15 @@ const LegendCell: React.FC<LegendCellProps> = ({
                 borderStyle="solid"
                 bg={bg === "borderColor" ? borderColor : bg}
                 bgGradient={bgGradient}
-            />
-            <Text fontSize="sm">{cellName}</Text>
+                display="flex"
+                justifyContent="center"
+                alignItems="center"
+            >
+                {
+                    icon && <Icon as={icon} color={borderColor} />
+                }
+            </Box>
+            <Text fontSize="sm" fontWeight="semibold" >{cellName}</Text>
         </VStack>
     );
 };
