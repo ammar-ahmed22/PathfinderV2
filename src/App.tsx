@@ -4,9 +4,11 @@ import {
     Text,
     Heading,
     HStack,
+    VStack,
     Icon,
     Button,
     Link,
+    Box
 } from "@chakra-ui/react";
 
 // Theme
@@ -14,7 +16,7 @@ import customTheme from "./theme";
 
 // Icons
 import { SiTypescript, SiReact, SiChakraui } from "react-icons/si";
-import { FaTerminal } from "react-icons/fa";
+import { FaTerminal, FaClipboardList } from "react-icons/fa";
 import { BsPlayFill } from "react-icons/bs";
 import { RepeatIcon } from "@chakra-ui/icons";
 
@@ -237,6 +239,37 @@ export const App: React.FC = () => {
                         >
                             Visualize
                         </Button>
+                    </Panel>
+
+                    <Panel>
+                        <HStack>
+                            <Heading as="h2" size="md" variant="gradient">
+                                Legend{" "}
+                            </Heading>
+                            <Icon as={FaClipboardList} color="brand.blue.500" />
+                        </HStack>
+
+                        <HStack my="2" width="100%" justify="space-between" >
+                            <VStack align="center" >
+                                <Box h="7vmin" w="7vmin" borderStyle="solid" borderWidth="2px" borderColor="gray.400"/>
+                                <Text fontSize="sm" >Unvisited</Text>
+                            </VStack>
+
+                            <VStack align="center" >
+                                <Box h="7vmin" w="7vmin" borderStyle="solid" borderWidth="2px" borderColor="gray.400" bg="gray.400"/>
+                                <Text fontSize="sm" >Wall</Text>
+                            </VStack>
+
+                            <VStack align="center" >
+                                <Box h="7vmin" w="7vmin" borderStyle="solid" borderWidth="2px" borderColor="gray.400" bg="brand.blue.500"/>
+                                <Text fontSize="sm" >Visited</Text>
+                            </VStack>
+
+                            <VStack align="center" >
+                                <Box h="7vmin" w="7vmin" borderStyle="solid" borderWidth="2px" borderColor="gray.400" bgGradient="linear(to-r, path.start, path.end)"/>
+                                <Text fontSize="sm" >Path</Text>
+                            </VStack>
+                        </HStack>
                     </Panel>
                 </SideBar>
 
