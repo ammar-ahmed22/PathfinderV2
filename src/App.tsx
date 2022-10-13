@@ -15,8 +15,8 @@ import customTheme from "./theme";
 // Icons
 import { SiTypescript, SiReact, SiChakraui } from "react-icons/si";
 import { FaTerminal } from "react-icons/fa";
-import { BsPlayFill } from "react-icons/bs"
-import { RepeatIcon } from "@chakra-ui/icons"
+import { BsPlayFill } from "react-icons/bs";
+import { RepeatIcon } from "@chakra-ui/icons";
 
 // Components
 import ColorModeSwitcher from "./components/ColorModeSwitcher";
@@ -30,7 +30,6 @@ import CustomDivider from "./components/CustomDivider";
 
 import { StoreContext } from "./Store";
 import { StoreContextType } from "./@types/Store";
-
 
 export const App: React.FC = () => {
     const store = useContext(StoreContext) as StoreContextType;
@@ -99,10 +98,10 @@ export const App: React.FC = () => {
                             bgGradient:
                                 "linear(to-tr, brand.blue.500, brand.purple.500)",
                             color: "white",
-                            position: "relative"
+                            position: "relative",
                         }}
                     >
-                        <HStack justify="center" align="center" mt="2" >
+                        <HStack justify="center" align="center" mt="2">
                             <Logo h="8" />
                             <Heading as="h1" size="lg">
                                 Pathfinder
@@ -139,7 +138,13 @@ export const App: React.FC = () => {
                             >
                                 <Icon as={SiChakraui} />
                             </Link>{" "}
-                            <ColorModeSwitcher position="absolute" top="0" left="0" mt="2" ml="2" />
+                            <ColorModeSwitcher
+                                position="absolute"
+                                top="0"
+                                left="0"
+                                mt="2"
+                                ml="2"
+                            />
                         </Text>
                     </Panel>
 
@@ -171,56 +176,56 @@ export const App: React.FC = () => {
                     </Panel> */}
 
                     <Panel styles={{ position: "relative" }}>
-                        <HStack >
+                        <HStack>
                             <Heading as="h2" size="md" variant="gradient">
                                 Controls{" "}
                             </Heading>
                             <Icon as={FaTerminal} color="brand.blue.500" />
                         </HStack>
-    
-                        <Heading my="1" as="h4" size="sm" variant="gradient"  >Visualization</Heading>
+
+                        <Heading my="1" as="h4" size="sm" variant="gradient">
+                            Visualization
+                        </Heading>
                         <HStack my="2">
                             <AlgorithmMenu />
                             <SpeedMenu />
                         </HStack>
 
-                        <Heading my="1" as="h4" size="sm" variant="gradient"  >Walls</Heading>
-                        <HStack my="2" >
+                        <Heading my="1" as="h4" size="sm" variant="gradient">
+                            Walls
+                        </Heading>
+                        <HStack my="2">
                             <Button
                                 onClick={() => {
                                     store.resetObstacles();
                                 }}
-                                
                                 variant="brandPurple"
                                 size="sm"
                             >
                                 Erase
                             </Button>
-                            <Button 
+                            <Button
                                 onClick={() => setAddRandObs(true)}
-                                
                                 variant="brandPurple"
                                 size="sm"
                             >
                                 Random
                             </Button>
-                            
                         </HStack>
 
                         <CustomDivider my="2" />
 
                         <Button
-                                onClick={() => {
-                                    store.resetNodes();
-                                    store.setIsStarted(false);
-                                }}
-                                
-                                variant="brandPurple"
-                                rightIcon={<RepeatIcon />}
-                                size="sm"
-                                w="100%"
+                            onClick={() => {
+                                store.resetNodes();
+                                store.setIsStarted(false);
+                            }}
+                            variant="brandPurple"
+                            rightIcon={<RepeatIcon />}
+                            size="sm"
+                            w="100%"
                         >
-                                Reset
+                            Reset
                         </Button>
                         <Button
                             onClick={() => store.setIsStarted(true)}
@@ -230,8 +235,8 @@ export const App: React.FC = () => {
                             width="100%"
                             variant="brandGradient"
                         >
-                                Visualize
-                        </Button> 
+                            Visualize
+                        </Button>
                     </Panel>
                 </SideBar>
 

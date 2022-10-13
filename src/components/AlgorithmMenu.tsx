@@ -34,9 +34,14 @@ const AlgorithmMenu: React.FC = () => {
     };
 
     return (
-        <Menu matchWidth >
-            <MenuButton as={Button} rightIcon={<ChevronDownIcon />} variant="brandPurple" size="sm" >
-                    Select Algorithm
+        <Menu matchWidth>
+            <MenuButton
+                as={Button}
+                rightIcon={<ChevronDownIcon />}
+                variant="brandPurple"
+                size="sm"
+            >
+                Select Algorithm
             </MenuButton>
             <MenuList>
                 <MenuOptionGroup

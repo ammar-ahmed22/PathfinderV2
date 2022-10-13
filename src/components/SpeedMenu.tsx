@@ -28,8 +28,13 @@ const SpeedMenu: React.FC = () => {
     };
 
     return (
-        <Menu matchWidth >
-            <MenuButton as={Button} rightIcon={<ChevronDownIcon />} variant="brandPurple" size="sm" >
+        <Menu matchWidth>
+            <MenuButton
+                as={Button}
+                rightIcon={<ChevronDownIcon />}
+                variant="brandPurple"
+                size="sm"
+            >
                 Select Speed
             </MenuButton>
             <MenuList>
@@ -39,14 +44,13 @@ const SpeedMenu: React.FC = () => {
                     type="radio"
                     onChange={handleChange}
                 >
-                    {Object.keys(speedMenuNames)
-                        .map((speed) => {
-                            return (
-                                <MenuItemOption value={speed}>
-                                    {speedMenuNames[speed]}
-                                </MenuItemOption>
-                            );
-                        })}
+                    {Object.keys(speedMenuNames).map((speed) => {
+                        return (
+                            <MenuItemOption value={speed}>
+                                {speedMenuNames[speed]}
+                            </MenuItemOption>
+                        );
+                    })}
                 </MenuOptionGroup>
             </MenuList>
         </Menu>
