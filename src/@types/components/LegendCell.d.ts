@@ -6,5 +6,5 @@ export type LegendCellProps = {
     bgGradient?: string;
     borderWidth?: string;
     cellName: string;
-    icon?: IconType
+    icon?: IconType;
 };

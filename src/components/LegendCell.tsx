@@ -9,7 +9,7 @@ const LegendCell: React.FC<LegendCellProps> = ({
     borderWidth,
     cellName,
     bgGradient,
-    icon
+    icon,
 }) => {
     const borderColor = useColorModeValue("gray.600", "gray.400");
 
@@ -27,11 +27,11 @@ const LegendCell: React.FC<LegendCellProps> = ({
                 justifyContent="center"
                 alignItems="center"
             >
-                {
-                    icon && <Icon as={icon} color={borderColor} />
-                }
+                {icon && <Icon as={icon} color={borderColor} />}
             </Box>
-            <Text fontSize="sm" fontWeight="semibold" >{cellName}</Text>
+            <Text fontSize="sm" fontWeight="semibold">
+                {cellName}
+            </Text>
         </VStack>
     );
 };
