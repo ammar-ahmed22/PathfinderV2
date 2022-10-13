@@ -4,11 +4,9 @@ import {
     Text,
     Heading,
     HStack,
-    VStack,
     Icon,
     Button,
     Link,
-    Box
 } from "@chakra-ui/react";
 
 // Theme
@@ -29,6 +27,8 @@ import Logo from "./components/Logo";
 import AlgorithmMenu from "./components/AlgorithmMenu";
 import SpeedMenu from "./components/SpeedMenu";
 import CustomDivider from "./components/CustomDivider";
+import LegendCell from "./components/LegendCell";
+import type { LegendCellProps } from "./@types/components/LegendCell";
 
 import { StoreContext } from "./Store";
 import { StoreContextType } from "./@types/Store";
@@ -88,6 +88,25 @@ export const App: React.FC = () => {
             window.removeEventListener("keyup", handleKeyUp);
         };
     }, []);
+
+
+    const legendCellMapping : Omit<LegendCellProps, "size">[] = [
+        {
+            cellName: "Unvisited"
+        },
+        {
+            cellName: "Visited",
+            bg: "brand.blue.500"
+        },
+        {
+            cellName: "Wall",
+            bg: "borderColor"
+        },
+        {
+            cellName: "Path",
+            bgGradient: "linear(to-r, path.start, path.end)"
+        }
+    ]
 
     return (
         <ChakraProvider theme={customTheme}>
@@ -250,25 +269,11 @@ export const App: React.FC = () => {
                         </HStack>
 
                         <HStack my="2" width="100%" justify="space-between" >
-                            <VStack align="center" >
-                                <Box h="7vmin" w="7vmin" borderStyle="solid" borderWidth="2px" borderColor="gray.400"/>
-                                <Text fontSize="sm" >Unvisited</Text>
-                            </VStack>
-
-                            <VStack align="center" >
-                                <Box h="7vmin" w="7vmin" borderStyle="solid" borderWidth="2px" borderColor="gray.400" bg="gray.400"/>
-                                <Text fontSize="sm" >Wall</Text>
-                            </VStack>
-
-                            <VStack align="center" >
-                                <Box h="7vmin" w="7vmin" borderStyle="solid" borderWidth="2px" borderColor="gray.400" bg="brand.blue.500"/>
-                                <Text fontSize="sm" >Visited</Text>
-                            </VStack>
-
-                            <VStack align="center" >
-                                <Box h="7vmin" w="7vmin" borderStyle="solid" borderWidth="2px" borderColor="gray.400" bgGradient="linear(to-r, path.start, path.end)"/>
-                                <Text fontSize="sm" >Path</Text>
-                            </VStack>
+                            {
+                                legendCellMapping.map( legendCellProps => {
+                                    return <LegendCell size="5vmin" {...legendCellProps} />
+                                })
+                            }
                         </HStack>
                     </Panel>
                 </SideBar>
