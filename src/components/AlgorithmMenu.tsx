@@ -33,10 +33,6 @@ const AlgorithmMenu: React.FC = () => {
         }
     };
 
-    const filterAlgorithms = (algoNames: string[], selectedAlgo: string) => {
-        return algoNames.filter((algoName) => algoName !== selectedAlgo);
-    };
-
     return (
         <Menu matchWidth >
             <MenuButton as={Button} rightIcon={<ChevronDownIcon />} variant="brandPurple" size="sm" >

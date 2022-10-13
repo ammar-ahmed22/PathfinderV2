@@ -30,7 +30,6 @@ const SpeedMenu: React.FC = () => {
     return (
         <Menu matchWidth >
             <MenuButton as={Button} rightIcon={<ChevronDownIcon />} variant="brandPurple" size="sm" >
-                {/* {speedMenuNames[store.visualDelay]} */}
                 Select Speed
             </MenuButton>
             <MenuList>
@@ -41,9 +40,6 @@ const SpeedMenu: React.FC = () => {
                     onChange={handleChange}
                 >
                     {Object.keys(speedMenuNames)
-                        // .filter(
-                        //     (speed) => speed !== store.visualDelay.toString()
-                        // )
                         .map((speed) => {
                             return (
                                 <MenuItemOption value={speed}>

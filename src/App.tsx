@@ -4,13 +4,9 @@ import {
     Text,
     Heading,
     HStack,
-    UnorderedList,
-    ListItem,
-    Divider,
     Icon,
     Button,
     Link,
-    Box,
 } from "@chakra-ui/react";
 
 // Theme
@@ -18,7 +14,7 @@ import customTheme from "./theme";
 
 // Icons
 import { SiTypescript, SiReact, SiChakraui } from "react-icons/si";
-import { FaInfoCircle, FaTerminal, FaPlay } from "react-icons/fa";
+import { FaTerminal } from "react-icons/fa";
 import { BsPlayFill } from "react-icons/bs"
 import { RepeatIcon } from "@chakra-ui/icons"
 
@@ -30,15 +26,11 @@ import Grid from "./components/Grid";
 import Logo from "./components/Logo";
 import AlgorithmMenu from "./components/AlgorithmMenu";
 import SpeedMenu from "./components/SpeedMenu";
+import CustomDivider from "./components/CustomDivider";
 
 import { StoreContext } from "./Store";
 import { StoreContextType } from "./@types/Store";
 
-const CustomDivider = () => {
-    return (
-        <Box width="100%" height="1px" bgGradient="linear(to-r, transparent 0%, brand.purple.500 20%, brand.blue.500 80%, transparent 100%)" my="2" />
-    )
-}
 
 export const App: React.FC = () => {
     const store = useContext(StoreContext) as StoreContextType;
@@ -185,40 +177,12 @@ export const App: React.FC = () => {
                             </Heading>
                             <Icon as={FaTerminal} color="brand.blue.500" />
                         </HStack>
-                        {/* <ColorModeSwitcher position="absolute" top="0" right="0" mt="5" mr="5" /> */}
-                        {/* <HStack mt="2">
-                            
-                            
-                        </HStack> */}
-                        
-                        
-                        {/* <Text my="1" >Obstacles:</Text> */}
-                        
-                        
-                        {/* <Divider bg="gray.800"/> */}
-                        
+    
                         <Heading my="1" as="h4" size="sm" variant="gradient"  >Visualization</Heading>
-                        {/* <CustomDivider /> */}
-                        
                         <HStack my="2">
-                            {/* <Box>
-                                
-                                <AlgorithmMenu />
-                            </Box>
-                            <Box>
-                                <SpeedMenu />
-                            </Box> */}
                             <AlgorithmMenu />
                             <SpeedMenu />
                         </HStack>
-
-                        
-                        
-
-                        {/* <HStack my="2"  >
-                            
-                            
-                        </HStack> */}
 
                         <Heading my="1" as="h4" size="sm" variant="gradient"  >Walls</Heading>
                         <HStack my="2" >
@@ -242,7 +206,9 @@ export const App: React.FC = () => {
                             </Button>
                             
                         </HStack>
-                        <CustomDivider />
+
+                        <CustomDivider my="2" />
+
                         <Button
                                 onClick={() => {
                                     store.resetNodes();
@@ -250,7 +216,6 @@ export const App: React.FC = () => {
                                 }}
                                 
                                 variant="brandPurple"
-                                //colorScheme="red"
                                 rightIcon={<RepeatIcon />}
                                 size="sm"
                                 w="100%"
@@ -258,20 +223,15 @@ export const App: React.FC = () => {
                                 Reset
                         </Button>
                         <Button
-                            //bgGradient="linear(to-l, brand.blue.500, brand.purple.500)"
                             onClick={() => store.setIsStarted(true)}
                             rightIcon={<BsPlayFill />}
                             mt="2"
                             size="sm"
                             width="100%"
-                            //color="white"
                             variant="brandGradient"
                         >
                                 Visualize
-                        </Button>
-                        
-                        
-                        
+                        </Button> 
                     </Panel>
                 </SideBar>
 
