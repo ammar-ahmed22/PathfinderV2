@@ -14,7 +14,7 @@ import customTheme from "./theme";
 
 // Icons
 import { SiTypescript, SiReact, SiChakraui } from "react-icons/si";
-import { FaTerminal } from "react-icons/fa";
+import { FaTerminal, FaClipboardList } from "react-icons/fa";
 import { BsPlayFill } from "react-icons/bs";
 import { RepeatIcon } from "@chakra-ui/icons";
 
@@ -27,6 +27,8 @@ import Logo from "./components/Logo";
 import AlgorithmMenu from "./components/AlgorithmMenu";
 import SpeedMenu from "./components/SpeedMenu";
 import CustomDivider from "./components/CustomDivider";
+import LegendCell from "./components/LegendCell";
+import type { LegendCellProps } from "./@types/components/LegendCell";
 
 import { StoreContext } from "./Store";
 import { StoreContextType } from "./@types/Store";
@@ -86,6 +88,25 @@ export const App: React.FC = () => {
             window.removeEventListener("keyup", handleKeyUp);
         };
     }, []);
+
+
+    const legendCellMapping : Omit<LegendCellProps, "size">[] = [
+        {
+            cellName: "Unvisited"
+        },
+        {
+            cellName: "Visited",
+            bg: "brand.blue.500"
+        },
+        {
+            cellName: "Wall",
+            bg: "borderColor"
+        },
+        {
+            cellName: "Path",
+            bgGradient: "linear(to-r, path.start, path.end)"
+        }
+    ]
 
     return (
         <ChakraProvider theme={customTheme}>
@@ -237,6 +258,23 @@ export const App: React.FC = () => {
                         >
                             Visualize
                         </Button>
+                    </Panel>
+
+                    <Panel>
+                        <HStack>
+                            <Heading as="h2" size="md" variant="gradient">
+                                Legend{" "}
+                            </Heading>
+                            <Icon as={FaClipboardList} color="brand.blue.500" />
+                        </HStack>
+
+                        <HStack my="2" width="100%" justify="space-between" >
+                            {
+                                legendCellMapping.map( legendCellProps => {
+                                    return <LegendCell size="5vmin" {...legendCellProps} />
+                                })
+                            }
+                        </HStack>
                     </Panel>
                 </SideBar>
 
