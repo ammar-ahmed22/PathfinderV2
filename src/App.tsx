@@ -89,24 +89,23 @@ export const App: React.FC = () => {
         };
     }, []);
 
-
-    const legendCellMapping : Omit<LegendCellProps, "size">[] = [
+    const legendCellMapping: Omit<LegendCellProps, "size">[] = [
         {
-            cellName: "Unvisited"
+            cellName: "Unvisited",
         },
         {
             cellName: "Visited",
-            bg: "brand.blue.500"
+            bg: "brand.blue.500",
         },
         {
             cellName: "Wall",
-            bg: "borderColor"
+            bg: "borderColor",
         },
         {
             cellName: "Path",
-            bgGradient: "linear(to-r, path.start, path.end)"
-        }
-    ]
+            bgGradient: "linear(to-r, path.start, path.end)",
+        },
+    ];
 
     return (
         <ChakraProvider theme={customTheme}>
@@ -268,12 +267,15 @@ export const App: React.FC = () => {
                             <Icon as={FaClipboardList} color="brand.blue.500" />
                         </HStack>
 
-                        <HStack my="2" width="100%" justify="space-between" >
-                            {
-                                legendCellMapping.map( legendCellProps => {
-                                    return <LegendCell size="5vmin" {...legendCellProps} />
-                                })
-                            }
+                        <HStack my="2" width="100%" justify="space-between">
+                            {legendCellMapping.map((legendCellProps) => {
+                                return (
+                                    <LegendCell
+                                        size="5vmin"
+                                        {...legendCellProps}
+                                    />
+                                );
+                            })}
                         </HStack>
                     </Panel>
                 </SideBar>
