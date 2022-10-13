@@ -10,6 +10,7 @@ import {
     Icon,
     Button,
     Link,
+    Box,
 } from "@chakra-ui/react";
 
 // Theme
@@ -32,6 +33,12 @@ import SpeedMenu from "./components/SpeedMenu";
 
 import { StoreContext } from "./Store";
 import { StoreContextType } from "./@types/Store";
+
+const CustomDivider = () => {
+    return (
+        <Box width="100%" height="1px" bgGradient="linear(to-r, transparent 0%, brand.purple.500 20%, brand.blue.500 80%, transparent 100%)" my="2" />
+    )
+}
 
 export const App: React.FC = () => {
     const store = useContext(StoreContext) as StoreContextType;
@@ -100,9 +107,10 @@ export const App: React.FC = () => {
                             bgGradient:
                                 "linear(to-tr, brand.blue.500, brand.purple.500)",
                             color: "white",
+                            position: "relative"
                         }}
                     >
-                        <HStack justify="center" align="center">
+                        <HStack justify="center" align="center" mt="2" >
                             <Logo h="8" />
                             <Heading as="h1" size="lg">
                                 Pathfinder
@@ -139,6 +147,7 @@ export const App: React.FC = () => {
                             >
                                 <Icon as={SiChakraui} />
                             </Link>{" "}
+                            <ColorModeSwitcher position="absolute" top="0" left="0" mt="2" ml="2" />
                         </Text>
                     </Panel>
 
@@ -169,28 +178,50 @@ export const App: React.FC = () => {
                         </UnorderedList>
                     </Panel> */}
 
-                    <Panel>
-                        <HStack>
+                    <Panel styles={{ position: "relative" }}>
+                        <HStack >
                             <Heading as="h2" size="md" variant="gradient">
                                 Controls{" "}
                             </Heading>
                             <Icon as={FaTerminal} color="brand.blue.500" />
                         </HStack>
-                        <ColorModeSwitcher />
+                        {/* <ColorModeSwitcher position="absolute" top="0" right="0" mt="5" mr="5" /> */}
                         {/* <HStack mt="2">
                             
                             
                         </HStack> */}
                         
-                        <Text my="1" >Select Algorithm:</Text>
-                        <AlgorithmMenu />
-                        <Text my="1" >Select visualization speed:</Text>
-                        <SpeedMenu />
+                        
                         {/* <Text my="1" >Obstacles:</Text> */}
                         
                         
                         {/* <Divider bg="gray.800"/> */}
-                        <HStack mt="2">
+                        
+                        <Heading my="1" as="h4" size="sm" variant="gradient"  >Visualization</Heading>
+                        {/* <CustomDivider /> */}
+                        
+                        <HStack my="2">
+                            {/* <Box>
+                                
+                                <AlgorithmMenu />
+                            </Box>
+                            <Box>
+                                <SpeedMenu />
+                            </Box> */}
+                            <AlgorithmMenu />
+                            <SpeedMenu />
+                        </HStack>
+
+                        
+                        
+
+                        {/* <HStack my="2"  >
+                            
+                            
+                        </HStack> */}
+
+                        <Heading my="1" as="h4" size="sm" variant="gradient"  >Walls</Heading>
+                        <HStack my="2" >
                             <Button
                                 onClick={() => {
                                     store.resetObstacles();
@@ -199,7 +230,7 @@ export const App: React.FC = () => {
                                 variant="brandPurple"
                                 size="sm"
                             >
-                                Erase Walls
+                                Erase
                             </Button>
                             <Button 
                                 onClick={() => setAddRandObs(true)}
@@ -207,33 +238,38 @@ export const App: React.FC = () => {
                                 variant="brandPurple"
                                 size="sm"
                             >
-                                Random Walls
+                                Random
                             </Button>
-                            <Button
+                            
+                        </HStack>
+                        <CustomDivider />
+                        <Button
                                 onClick={() => {
                                     store.resetNodes();
                                     store.setIsStarted(false);
                                 }}
                                 
                                 variant="brandPurple"
-                                // rightIcon={<RepeatIcon />}
+                                //colorScheme="red"
+                                rightIcon={<RepeatIcon />}
                                 size="sm"
-                                // w="100%"
-                            >
+                                w="100%"
+                        >
                                 Reset
-                            </Button>
-                        </HStack>
-
+                        </Button>
                         <Button
-                            bgGradient="linear(to-l, brand.blue.500, brand.purple.500)"
+                            //bgGradient="linear(to-l, brand.blue.500, brand.purple.500)"
                             onClick={() => store.setIsStarted(true)}
                             rightIcon={<BsPlayFill />}
                             mt="2"
+                            size="sm"
                             width="100%"
-                            color="white"
+                            //color="white"
+                            variant="brandGradient"
                         >
-                            Visualize
+                                Visualize
                         </Button>
+                        
                         
                         
                     </Panel>
