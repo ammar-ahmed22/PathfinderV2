@@ -30,6 +30,10 @@ import CustomDivider from "./components/CustomDivider";
 import LegendCell from "./components/LegendCell";
 import type { LegendCellProps } from "./@types/components/LegendCell";
 
+// Utils
+import { createRandomObstacles } from "./utils/grid";
+
+// Store
 import { StoreContext } from "./Store";
 import { StoreContextType } from "./@types/Store";
 
@@ -43,26 +47,7 @@ export const App: React.FC = () => {
 
     useEffect(() => {
         if (addRandObs) {
-            for (let row = 0; row < store.nodes.length; row++) {
-                for (let col = 0; col < store.nodes[row].length; col++) {
-                    const { index } = store.nodes[row][col];
-                    if (
-                        store.startIdx &&
-                        store.targetIdx &&
-                        !(
-                            store.startIdx.equals(index) ||
-                            store.targetIdx.equals(index)
-                        )
-                    ) {
-                        store.updateNodeByIndex(index, (prevNode) => {
-                            const obs: boolean = Math.random() < 0.25;
-                            prevNode.obstacle = obs;
-                            prevNode.type = obs ? "obstacle" : "base";
-                            return prevNode;
-                        });
-                    }
-                }
-            }
+            createRandomObstacles(store, 0.25);
             setAddRandObs(false);
         }
     }, [addRandObs]);

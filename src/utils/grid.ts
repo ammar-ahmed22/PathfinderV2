@@ -86,3 +86,26 @@ export const animate = async (
         await sleep(delay);
     }
 };
+
+export const createRandomObstacles = (store: StoreContextType, percentCoverage: number) => {
+    for (let row = 0; row < store.nodes.length; row++) {
+        for (let col = 0; col < store.nodes[row].length; col++) {
+            const { index } = store.nodes[row][col];
+            if (
+                store.startIdx &&
+                store.targetIdx &&
+                !(
+                    store.startIdx.equals(index) ||
+                    store.targetIdx.equals(index)
+                )
+            ) {
+                store.updateNodeByIndex(index, (prevNode) => {
+                    const obs: boolean = Math.random() < percentCoverage;
+                    prevNode.obstacle = obs;
+                    prevNode.type = obs ? "obstacle" : "base";
+                    return prevNode;
+                });
+            }
+        }
+    }
+}
