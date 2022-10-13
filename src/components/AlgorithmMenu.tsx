@@ -23,8 +23,8 @@ const AlgorithmMenu: React.FC = () => {
 
     const algorithmMenuNames: Record<string, string> = {
         astar: "A* Search",
-        djikstra: "Djikstra's Algorithm",
-        greedy: "Greedy Best First Search",
+        djikstra: "Djikstra's",
+        greedy: "Greedy Best First",
     };
 
     const handleChange = (val: string | string[]) => {
@@ -33,15 +33,10 @@ const AlgorithmMenu: React.FC = () => {
         }
     };
 
-    const filterAlgorithms = (algoNames: string[], selectedAlgo: string) => {
-        return algoNames.filter((algoName) => algoName !== selectedAlgo);
-    };
-
     return (
-        <Menu>
-            <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
-                {store.selectedAlgorithm &&
-                    algorithmMenuNames[store.selectedAlgorithm]}
+        <Menu matchWidth >
+            <MenuButton as={Button} rightIcon={<ChevronDownIcon />} variant="brandPurple" size="sm" >
+                    Select Algorithm
             </MenuButton>
             <MenuList>
                 <MenuOptionGroup
@@ -50,10 +45,7 @@ const AlgorithmMenu: React.FC = () => {
                     type="radio"
                     onChange={handleChange}
                 >
-                    {filterAlgorithms(
-                        Object.keys(algorithmMenuNames),
-                        store.selectedAlgorithm
-                    ).map((algoName) => {
+                    {Object.keys(algorithmMenuNames).map((algoName) => {
                         return (
                             <MenuItemOption value={algoName}>
                                 {algorithmMenuNames[algoName]}

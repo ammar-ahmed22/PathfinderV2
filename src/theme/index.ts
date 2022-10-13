@@ -70,6 +70,26 @@ const components = {
             },
         },
     },
+    Button: {
+        variants: {
+            brandPurple: {
+                bg: "brand.purple.500",
+                // bgGradient: "linear(to-l, brand.blue.500, brand.purple.500)",
+                color: "white",
+                _hover: {
+                    // bgGradient: "linear(to-l, brand.purple.500, brand.purple.500)"
+                    bg: "brand.purple.600"
+                }
+            },
+            brandGradient: {
+                bgGradient: "linear(to-r, brand.purple.500, brand.blue.500)",
+                color: "white",
+                _hover: {
+                    bgGradient: 'linear(to-r, brand.purple.600, brand.blue.600)'
+                }
+            }
+        }
+    }
 };
 
 export default extendTheme({ colors, styles, config, shadows, components });

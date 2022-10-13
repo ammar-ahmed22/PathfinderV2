@@ -4,8 +4,6 @@ import {
     Text,
     Heading,
     HStack,
-    UnorderedList,
-    ListItem,
     Icon,
     Button,
     Link,
@@ -16,7 +14,9 @@ import customTheme from "./theme";
 
 // Icons
 import { SiTypescript, SiReact, SiChakraui } from "react-icons/si";
-import { FaInfoCircle, FaTerminal } from "react-icons/fa";
+import { FaTerminal } from "react-icons/fa";
+import { BsPlayFill } from "react-icons/bs"
+import { RepeatIcon } from "@chakra-ui/icons"
 
 // Components
 import ColorModeSwitcher from "./components/ColorModeSwitcher";
@@ -26,9 +26,11 @@ import Grid from "./components/Grid";
 import Logo from "./components/Logo";
 import AlgorithmMenu from "./components/AlgorithmMenu";
 import SpeedMenu from "./components/SpeedMenu";
+import CustomDivider from "./components/CustomDivider";
 
 import { StoreContext } from "./Store";
 import { StoreContextType } from "./@types/Store";
+
 
 export const App: React.FC = () => {
     const store = useContext(StoreContext) as StoreContextType;
@@ -97,9 +99,10 @@ export const App: React.FC = () => {
                             bgGradient:
                                 "linear(to-tr, brand.blue.500, brand.purple.500)",
                             color: "white",
+                            position: "relative"
                         }}
                     >
-                        <HStack justify="center" align="center">
+                        <HStack justify="center" align="center" mt="2" >
                             <Logo h="8" />
                             <Heading as="h1" size="lg">
                                 Pathfinder
@@ -136,10 +139,11 @@ export const App: React.FC = () => {
                             >
                                 <Icon as={SiChakraui} />
                             </Link>{" "}
+                            <ColorModeSwitcher position="absolute" top="0" left="0" mt="2" ml="2" />
                         </Text>
                     </Panel>
 
-                    <Panel>
+                    {/* <Panel>
                         <HStack>
                             <Heading as="h2" size="md" variant="gradient">
                                 What is this?
@@ -164,42 +168,70 @@ export const App: React.FC = () => {
                             <ListItem>Djikstra's</ListItem>
                             <ListItem>Greedy Best First Search</ListItem>
                         </UnorderedList>
-                    </Panel>
+                    </Panel> */}
 
-                    <Panel>
-                        <HStack>
+                    <Panel styles={{ position: "relative" }}>
+                        <HStack >
                             <Heading as="h2" size="md" variant="gradient">
                                 Controls{" "}
                             </Heading>
                             <Icon as={FaTerminal} color="brand.blue.500" />
                         </HStack>
-                        <ColorModeSwitcher />
+    
+                        <Heading my="1" as="h4" size="sm" variant="gradient"  >Visualization</Heading>
+                        <HStack my="2">
+                            <AlgorithmMenu />
+                            <SpeedMenu />
+                        </HStack>
+
+                        <Heading my="1" as="h4" size="sm" variant="gradient"  >Walls</Heading>
+                        <HStack my="2" >
+                            <Button
+                                onClick={() => {
+                                    store.resetObstacles();
+                                }}
+                                
+                                variant="brandPurple"
+                                size="sm"
+                            >
+                                Erase
+                            </Button>
+                            <Button 
+                                onClick={() => setAddRandObs(true)}
+                                
+                                variant="brandPurple"
+                                size="sm"
+                            >
+                                Random
+                            </Button>
+                            
+                        </HStack>
+
+                        <CustomDivider my="2" />
+
                         <Button
-                            colorScheme="brand.blue"
+                                onClick={() => {
+                                    store.resetNodes();
+                                    store.setIsStarted(false);
+                                }}
+                                
+                                variant="brandPurple"
+                                rightIcon={<RepeatIcon />}
+                                size="sm"
+                                w="100%"
+                        >
+                                Reset
+                        </Button>
+                        <Button
                             onClick={() => store.setIsStarted(true)}
+                            rightIcon={<BsPlayFill />}
+                            mt="2"
+                            size="sm"
+                            width="100%"
+                            variant="brandGradient"
                         >
-                            Start
-                        </Button>
-                        <AlgorithmMenu />
-                        <SpeedMenu />
-                        <Button onClick={() => setAddRandObs(true)}>
-                            Add Random Obstacles
-                        </Button>
-                        <Button
-                            onClick={() => {
-                                store.resetNodes();
-                                store.setIsStarted(false);
-                            }}
-                        >
-                            Reset
-                        </Button>
-                        <Button
-                            onClick={() => {
-                                store.resetObstacles();
-                            }}
-                        >
-                            Erase Obstacles
-                        </Button>
+                                Visualize
+                        </Button> 
                     </Panel>
                 </SideBar>
 
