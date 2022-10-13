@@ -2,17 +2,22 @@ import React, { useContext } from "react";
 import { Box, Icon, keyframes, useColorModeValue } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 
-import { StoreContext } from "../Store";
-import { StoreContextType } from "../@types/Store";
-
+// Icons
 import { FaMapMarkerAlt, FaCrosshairs } from "react-icons/fa";
 
-import Vec2 from "../helpers/Vec2";
-
+// Utils
 import { borderRadii, createAnimation } from "../utils/cell";
 import { getChakraCSSVar } from "../utils/colors";
 
+// Helpers
+import Vec2 from "../helpers/Vec2";
+
+// Types
 import { CellProps } from "../@types/components/Cell";
+
+// Store
+import { StoreContext } from "../Store";
+import { StoreContextType } from "../@types/Store";
 
 const Cell: React.FC<CellProps> = ({ node, corner }) => {
     const borderSize = 1;

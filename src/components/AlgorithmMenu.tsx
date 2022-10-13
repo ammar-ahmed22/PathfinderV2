@@ -3,15 +3,19 @@ import {
     Menu,
     MenuButton,
     MenuList,
-    MenuItem,
     Button,
     MenuOptionGroup,
     MenuItemOption,
 } from "@chakra-ui/react";
-import { ChevronDownIcon } from "@chakra-ui/icons";
-import { StoreContext } from "../Store";
 
+// Icons
+import { ChevronDownIcon } from "@chakra-ui/icons";
+
+// Utils
 import { isAlgorithm } from "../utils/types";
+
+// Store
+import { StoreContext } from "../Store";
 import { StoreContextType } from "../@types/Store";
 
 const AlgorithmMenu: React.FC = () => {

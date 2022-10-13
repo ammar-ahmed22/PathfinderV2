@@ -1,18 +1,19 @@
-import React, { useRef, useEffect, useContext, useState } from "react";
-
+import React, { useRef, useEffect, useContext } from "react";
 import { HStack } from "@chakra-ui/react";
+
+// Components
 import Panel from "./Panel";
 import Cell from "./Cell";
 
+// Utils
 import { isCorner, animate } from "../utils/grid";
-import { sleep } from "../utils/async";
 
+// Store
 import { StoreContext } from "../Store";
 import { StoreContextType } from "../@types/Store";
 
+// Helpers
 import Vec2 from "../helpers/Vec2";
-import Node from "../helpers/Node";
-import { AStar, Djikstra } from "../@types/helpers/Node";
 import { solvers } from "../helpers/algorithms";
 
 const Grid: React.FC = () => {
