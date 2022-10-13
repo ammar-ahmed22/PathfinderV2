@@ -21,6 +21,7 @@ const ColorModeSwitcher: React.FC<ColorModeSwitcherProps> = (props) => {
                 size="sm"
                 onChange={() => toggleColorMode()}
                 isChecked={colorMode === "dark"}
+                colorScheme="brand.purple"
             />
             <Text>🌙</Text>
         </HStack>
