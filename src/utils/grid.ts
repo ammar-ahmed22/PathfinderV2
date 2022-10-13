@@ -87,17 +87,17 @@ export const animate = async (
     }
 };
 
-export const createRandomObstacles = (store: StoreContextType, percentCoverage: number) => {
+export const createRandomObstacles = (
+    store: StoreContextType,
+    percentCoverage: number
+) => {
     for (let row = 0; row < store.nodes.length; row++) {
         for (let col = 0; col < store.nodes[row].length; col++) {
             const { index } = store.nodes[row][col];
             if (
                 store.startIdx &&
                 store.targetIdx &&
-                !(
-                    store.startIdx.equals(index) ||
-                    store.targetIdx.equals(index)
-                )
+                !(store.startIdx.equals(index) || store.targetIdx.equals(index))
             ) {
                 store.updateNodeByIndex(index, (prevNode) => {
                     const obs: boolean = Math.random() < percentCoverage;
@@ -108,4 +108,4 @@ export const createRandomObstacles = (store: StoreContextType, percentCoverage: 
             }
         }
     }
-}
+};
