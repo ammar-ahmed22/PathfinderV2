@@ -10,6 +10,8 @@ import {
     getChakraCSSVar,
     getCSSVarValue,
 } from "./colors";
+import { generateMaze } from "./divisionMaze";
+import { MazeGenerator } from "./maze";
 
 import type { CornerType } from "../@types/components/Cell";
 
@@ -109,3 +111,32 @@ export const createRandomObstacles = (
         }
     }
 };
+
+export const createMaze = (store: StoreContextType) => {
+    if (store.gridDim && store.startIdx && store.targetIdx){
+        const m = new MazeGenerator(store.gridDim);
+        let gridMaze : boolean[][] = m.generate();
+        if (gridMaze[store.startIdx.y][store.startIdx.x]){
+            // start is obstacle
+        }
+
+        if (gridMaze[store.targetIdx.y][store.targetIdx.x]){
+            // target is obstacle
+        }
+        
+        for (let row = 0; row < gridMaze.length; row++){
+            for (let col = 0; col < gridMaze[row].length; col++){
+                const index = new Vec2(col, row);
+                const obs : boolean = gridMaze[row][col];
+                if (obs){
+                    store.updateNodeByIndex(index, (prevNode) => {
+                        prevNode.obstacle = obs;
+                        prevNode.type = "obstacle";
+                        return prevNode
+                    })
+                }
+            }
+        }
+    }
+
+} 

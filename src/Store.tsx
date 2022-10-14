@@ -141,10 +141,14 @@ const StoreProvider: React.FC<StoreProviderProps> = ({ children }) => {
             const height = Math.round(rect.height) - 2 * cellSize;
             const width = Math.round(rect.width) - 2 * cellSize;
 
+            const tentativeRows = Math.floor(width / cellSize);
+            const tentativeCols = Math.floor(height / cellSize);
+
+
             setGridDim(
                 new Vec2(
-                    Math.floor(width / cellSize),
-                    Math.floor(height / cellSize)
+                    tentativeRows % 2 === 0 ? tentativeRows - 1 : tentativeRows,
+                    tentativeCols % 2 === 0 ? tentativeCols - 1 : tentativeCols
                 )
             );
         },

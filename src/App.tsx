@@ -36,7 +36,7 @@ import LegendCell from "./components/LegendCell";
 import type { LegendCellProps } from "./@types/components/LegendCell";
 
 // Utils
-import { createRandomObstacles } from "./utils/grid";
+import { createRandomObstacles, createMaze } from "./utils/grid";
 
 // Store
 import { StoreContext } from "./Store";
@@ -225,6 +225,13 @@ export const App: React.FC = () => {
                                 size="sm"
                             >
                                 Random
+                            </Button>
+                            <Button
+                                onClick={() => createMaze(store)}
+                                variant="brandPurple"
+                                size="sm"
+                            >
+                                Maze
                             </Button>
                         </HStack>
 
