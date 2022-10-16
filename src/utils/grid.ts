@@ -10,6 +10,8 @@ import {
     getChakraCSSVar,
     getCSSVarValue,
 } from "./colors";
+import { generateMaze } from "./divisionMaze";
+import { MazeGenerator } from "./maze";
 
 import type { CornerType } from "../@types/components/Cell";
 

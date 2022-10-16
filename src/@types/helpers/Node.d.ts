@@ -7,6 +7,10 @@ export type NodeType =
     | "obstacle"
     | "current";
 
+export interface getNeighboursOpts{
+    allowDiagonals?: boolean
+}
+
 export interface AStar {
     heuristic: number;
     cost: number;
