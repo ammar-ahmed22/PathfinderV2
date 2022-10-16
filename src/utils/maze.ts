@@ -149,7 +149,8 @@ export class MazeGenerator{
         const idx : Vec2 = nodeType === "start" ? store.startIdx : store.targetIdx;
         const nodeToMove = store.nodes[idx.y][idx.x];
         let hasMoved = false;
-        const neighbours = nodeToMove.getNeighbours(store.nodes);
+        const neighbours = nodeToMove.getNeighbours(store.nodes, { allowDiagonals: true });
+        console.log({ moving: nodeType, nLength: neighbours.length });
         for (let i = 0; i < neighbours.length; i++){
             const n = neighbours[i];
             const { index: nIndex } = n;
@@ -159,7 +160,7 @@ export class MazeGenerator{
                     hasMoved = true;
                 } else {
                     store.setTargetIdx(nIndex);
-                    hasMoved = false;
+                    hasMoved = true;
                 }
                 break;
             }
@@ -173,14 +174,21 @@ export class MazeGenerator{
       const s = store.startIdx;
       const t = store.targetIdx;
 
+      let sHasMoved = false;
+      let tHasMoved = false;
+
       if (this.grid[s.y][s.x]){
         this.shiftStartTarget(store, "start");
-      } else if (this.grid[t.y][t.x]){
+        sHasMoved = true;
+      } 
+      
+      if (this.grid[t.y][t.x]){
         this.shiftStartTarget(store, "target");
-      } else {
-        store.updateNodeTypeByIndex(s, "start");
-        store.updateNodeTypeByIndex(t, "target");
+        tHasMoved = true;
       }
+
+      if (!sHasMoved) store.updateNodeTypeByIndex(store.startIdx, "start");
+      if (!tHasMoved) store.updateNodeTypeByIndex(store.targetIdx, "target");
       
     }
   }
