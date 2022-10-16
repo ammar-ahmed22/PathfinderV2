@@ -1,4 +1,6 @@
+import { StoreContextType } from "../@types/Store";
 import Vec2 from "../helpers/Vec2";
+import { sleep } from "./async";
 
 // All references to grid are mutating
 
@@ -109,9 +111,107 @@ export class MazeGenerator{
     }
   }
 
+  private updateNodes = (store: StoreContextType) => {
+    for (let row = 0; row < this.grid.length; row++){
+      for (let col = 0; col < this.grid[row].length; col++){
+        const obs: boolean = this.grid[row][col];
+        const idx = new Vec2(col, row);
+        
+        store.updateNodeByIndex(idx, (prevNode) => {
+          prevNode.type = obs ? "obstacle" : "base";
+          prevNode.obstacle = obs;
+          return prevNode;
+        })
+
+      }
+    }
+  }
+
+  private updateNodesAsync = async (store: StoreContextType, delay: number = 10) => {
+    for (let row = 0; row < this.grid.length; row++){
+      for (let col = 0; col < this.grid[row].length; col++){
+        const obs: boolean = this.grid[row][col];
+        const idx = new Vec2(col, row);
+        
+        store.updateNodeByIndex(idx, (prevNode) => {
+          prevNode.type = obs ? "obstacle" : "base";
+          prevNode.obstacle = obs;
+          return prevNode;
+        })
+
+      }
+      await sleep(delay);
+    }
+  }
+
+  private shiftStartTarget = (store: StoreContextType,  nodeType: "start" | "target") => {
+    if (store.startIdx && store.targetIdx && !!store.nodes.length){
+        const idx : Vec2 = nodeType === "start" ? store.startIdx : store.targetIdx;
+        const nodeToMove = store.nodes[idx.y][idx.x];
+        let hasMoved = false;
+        const neighbours = nodeToMove.getNeighbours(store.nodes);
+        for (let i = 0; i < neighbours.length; i++){
+            const n = neighbours[i];
+            const { index: nIndex } = n;
+            if (!this.grid[nIndex.y][nIndex.x]){
+                if (nodeType === "start"){
+                    store.setStartIdx(nIndex);
+                    hasMoved = true;
+                } else {
+                    store.setTargetIdx(nIndex);
+                    hasMoved = false;
+                }
+                break;
+            }
+        }
+    }
+    
+}
+
+  private placeStartTarget = (store: StoreContextType) => {
+    if (store.startIdx && store.targetIdx && !!store.nodes.length){
+      const s = store.startIdx;
+      const t = store.targetIdx;
+
+      if (this.grid[s.y][s.x]){
+        this.shiftStartTarget(store, "start");
+      } else if (this.grid[t.y][t.x]){
+        this.shiftStartTarget(store, "target");
+      } else {
+        store.updateNodeTypeByIndex(s, "start");
+        store.updateNodeTypeByIndex(t, "target");
+      }
+      
+    }
+  }
+
+  public animatedGeneration = async (store: StoreContextType) => {
+    if (!!store.nodes.length){
+      // before generation
+      await this.updateNodesAsync(store);
+
+      while(!!this.stack.length){
+        const curr = this.stack.pop() as Vec2;
+        const neighbours = this.getNeighbours(curr);
+        if (!!neighbours.length){
+          this.stack.push(curr);
+          const chosen = neighbours[this.randIndex(neighbours.length)];
+          this.removeWall(curr, chosen);
+          this.updateNodes(store);
+          await sleep(0);
+          this.visited.push(chosen);
+          this.stack.push(chosen);
+        }
+      }
+      // after generation
+      this.placeStartTarget(store);
+
+    }
+  }
+
   public generate = () : boolean[][] => {
     while(!!this.stack.length){
-      this.log();
+      //this.log();
       const curr = this.stack.pop() as Vec2;
       const neighbours = this.getNeighbours(curr);
       if (!!neighbours.length){

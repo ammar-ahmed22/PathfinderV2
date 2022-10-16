@@ -36,7 +36,8 @@ import LegendCell from "./components/LegendCell";
 import type { LegendCellProps } from "./@types/components/LegendCell";
 
 // Utils
-import { createRandomObstacles, createMaze } from "./utils/grid";
+import { createRandomObstacles} from "./utils/grid";
+import { MazeGenerator } from "./utils/maze";
 
 // Store
 import { StoreContext } from "./Store";
@@ -78,6 +79,13 @@ export const App: React.FC = () => {
             window.removeEventListener("keyup", handleKeyUp);
         };
     }, []);
+
+    const generateMaze = async () => {
+        if (store.gridDim){
+            const generator = new MazeGenerator(store.gridDim);
+            await generator.animatedGeneration(store);
+        }
+    }
 
     const legendCellMapping: Omit<LegendCellProps, "size">[] = [
         {
@@ -227,7 +235,7 @@ export const App: React.FC = () => {
                                 Random
                             </Button>
                             <Button
-                                onClick={() => createMaze(store)}
+                                onClick={() => generateMaze()}
                                 variant="brandPurple"
                                 size="sm"
                             >
