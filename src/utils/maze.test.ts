@@ -8,17 +8,22 @@ import { MazeGenerator } from "./maze";
 // })
 
 test("testing if array with row, col can check if value is included", () => {
-  const testArr : number[][] = [[0, 0], [1, 1], [3, 4], [2, 2]];
+    const testArr: number[][] = [
+        [0, 0],
+        [1, 1],
+        [3, 4],
+        [2, 2],
+    ];
 
-  console.log(testArr.includes([3, 4]));
-  expect(testArr.includes([3,4])).toBe(true);
-  expect(testArr.includes([1,2])).toBe(false);
-})
+    console.log(testArr.includes([3, 4]));
+    expect(testArr.includes([3, 4])).toBe(true);
+    expect(testArr.includes([1, 2])).toBe(false);
+});
 
 test("testing generate maze", () => {
-  const m = new MazeGenerator(new Vec2(15, 15));
-  //m.log();
-  m.generate();
-  m.log();
-  expect(true).toBe(true);
-})
+    const m = new MazeGenerator(new Vec2(15, 15));
+    //m.log();
+    m.generate();
+    m.log();
+    expect(true).toBe(true);
+});

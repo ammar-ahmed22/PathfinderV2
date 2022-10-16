@@ -1,5 +1,9 @@
 import Vec2 from "./Vec2";
-import { NodeType, AlgorithmParams, getNeighboursOpts } from "../@types/helpers/Node";
+import {
+    NodeType,
+    AlgorithmParams,
+    getNeighboursOpts,
+} from "../@types/helpers/Node";
 
 export default class Node<A extends AlgorithmParams> {
     public prev: Node<A> | undefined;
@@ -12,7 +16,10 @@ export default class Node<A extends AlgorithmParams> {
         public params: A
     ) {}
 
-    public getNeighbours = (nodes: Node<A>[][], opts?: getNeighboursOpts): Node<A>[] => {
+    public getNeighbours = (
+        nodes: Node<A>[][],
+        opts?: getNeighboursOpts
+    ): Node<A>[] => {
         const res: Node<A>[] = [];
         const col = this.index.x;
         const row = this.index.y;
@@ -40,26 +47,24 @@ export default class Node<A extends AlgorithmParams> {
             res.push(nodes[row][col + 1]);
         }
 
-        if (opts?.allowDiagonals){
+        if (opts?.allowDiagonals) {
             // bottom right
-            if ((row < rows - 1) && (col < cols - 1)){
-                res.push(nodes[row + 1][col + 1])
+            if (row < rows - 1 && col < cols - 1) {
+                res.push(nodes[row + 1][col + 1]);
             }
             // bottom left
-            if ((row < rows - 1) && (col !== 0)){
-                res.push(nodes[row + 1][col - 1])
+            if (row < rows - 1 && col !== 0) {
+                res.push(nodes[row + 1][col - 1]);
             }
 
             // top left
-            if ((row !== 0) && (col !== 0)){
-                res.push(nodes[row - 1][col - 1])
+            if (row !== 0 && col !== 0) {
+                res.push(nodes[row - 1][col - 1]);
             }
             // top right
-            if ((row !== 0) && (col < cols - 1)){
-                
-                res.push(nodes[row - 1][col + 1])
+            if (row !== 0 && col < cols - 1) {
+                res.push(nodes[row - 1][col + 1]);
             }
-            
         }
 
         return res.filter((node) => !node.obstacle);

@@ -7,8 +7,8 @@ export type NodeType =
     | "obstacle"
     | "current";
 
-export interface getNeighboursOpts{
-    allowDiagonals?: boolean
+export interface getNeighboursOpts {
+    allowDiagonals?: boolean;
 }
 
 export interface AStar {
