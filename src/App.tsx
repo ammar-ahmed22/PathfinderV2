@@ -7,7 +7,15 @@ import {
     Button,
     Link,
     useBreakpointValue,
-    SimpleGrid
+    SimpleGrid,
+    useMediaQuery,
+    Modal,
+    ModalOverlay,
+    ModalHeader,
+    ModalBody,
+    ModalContent,
+    ModalFooter,
+    Box,
 } from "@chakra-ui/react";
 
 // Icons
@@ -18,7 +26,7 @@ import {
     FaMapMarkerAlt,
     FaCrosshairs,
 } from "react-icons/fa";
-import { BsPlayFill } from "react-icons/bs";
+import { BsPlayFill, BsFillExclamationCircleFill } from "react-icons/bs";
 import { RepeatIcon } from "@chakra-ui/icons";
 
 // Components
@@ -113,8 +121,33 @@ export const App: React.FC = () => {
         lg: "5vmin"
     })
 
-    return (
+    const [isSmallerThan48em] = useMediaQuery("(max-width: 48em)")
+
+    if (isSmallerThan48em) {
+        return (
+                <Modal isOpen={true} onClose={() => {}} isCentered size={{ base: "xs", md: "sm" }} >
+                    <ModalOverlay backdropFilter="blur(10px)"/>
+                    <ModalContent bgGradient="linear(to-tr, brand.blue.500, brand.purple.500)" color="white" >
+                    <ModalHeader  >Larger Viewport Required </ModalHeader>
+            
+                    <ModalBody>
+                        <Text mb="2" >
+                            Please open this page on a device with a larger screen or increase your viewport size. 
+                            Due to the nature of this application, smaller viewports are not supported.
+                        </Text>
+                        <Text mb="2">Sneakpeek:</Text>
+                        <Text>
+                            [Videos of the app]
+                        </Text>
+                    </ModalBody>
+                    <ModalFooter />
+                    </ModalContent>
+                </Modal>
+        )
+    } else {
+        return (
             <HStack spacing="5" padding="5">
+                
                 <SideBar width="25vw">
                     <Panel
                         bg=""
@@ -297,4 +330,6 @@ export const App: React.FC = () => {
                 <Grid />
             </HStack>
     );
+    }
+    
 };
