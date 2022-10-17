@@ -35,7 +35,7 @@ const SpeedMenu: React.FC = () => {
                 variant="brandPurple"
                 size="sm"
             >
-                Select Speed
+                Speed
             </MenuButton>
             <MenuList>
                 <MenuOptionGroup

@@ -1,16 +1,14 @@
 import React, { useContext, useEffect, useState } from "react";
 import {
-    ChakraProvider,
     Text,
     Heading,
     HStack,
     Icon,
     Button,
     Link,
+    useBreakpointValue,
+    SimpleGrid
 } from "@chakra-ui/react";
-
-// Theme
-import customTheme from "./theme";
 
 // Icons
 import { SiTypescript, SiReact, SiChakraui } from "react-icons/si";
@@ -110,8 +108,12 @@ export const App: React.FC = () => {
         },
     ];
 
+    const legendCellSize = useBreakpointValue({
+        base: "3vmin",
+        lg: "5vmin"
+    })
+
     return (
-        <ChakraProvider theme={customTheme}>
             <HStack spacing="5" padding="5">
                 <SideBar width="25vw">
                     <Panel
@@ -209,10 +211,11 @@ export const App: React.FC = () => {
                         <Heading my="1" as="h4" size="sm" variant="gradient">
                             Visualization
                         </Heading>
-                        <HStack my="2">
+                        
+                        <SimpleGrid my="2" columns={{ base: 1, lg: 2 }} spacing={2} >
                             <AlgorithmMenu />
                             <SpeedMenu />
-                        </HStack>
+                        </SimpleGrid>
 
                         <Heading my="1" as="h4" size="sm" variant="gradient">
                             Walls
@@ -277,22 +280,21 @@ export const App: React.FC = () => {
                             <Icon as={FaClipboardList} color="brand.blue.500" />
                         </HStack>
 
-                        <HStack my="2" width="100%" justify="space-between">
-                            {legendCellMapping.map((legendCellProps) => {
+                        <SimpleGrid my="2" width="100%" columns={{ base: 3, lg: 5 }} spacing="2">
+                            {legendCellSize && legendCellMapping.map((legendCellProps) => {
                                 return (
                                     <LegendCell
-                                        size="5vmin"
+                                        size={legendCellSize}
                                         borderWidth="1px"
                                         {...legendCellProps}
                                     />
                                 );
                             })}
-                        </HStack>
+                        </SimpleGrid>
                     </Panel>
                 </SideBar>
 
                 <Grid />
             </HStack>
-        </ChakraProvider>
     );
 };

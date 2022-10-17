@@ -45,7 +45,7 @@ const AlgorithmMenu: React.FC = () => {
                 variant="brandPurple"
                 size="sm"
             >
-                Select Algorithm
+                Algorithm
             </MenuButton>
             <MenuList>
                 <MenuOptionGroup
