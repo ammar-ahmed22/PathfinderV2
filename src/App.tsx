@@ -26,7 +26,7 @@ import {
     FaMapMarkerAlt,
     FaCrosshairs,
 } from "react-icons/fa";
-import { BsPlayFill, BsFillExclamationCircleFill } from "react-icons/bs";
+import { BsPlayFill } from "react-icons/bs";
 import { RepeatIcon } from "@chakra-ui/icons";
 
 // Components
@@ -40,6 +40,9 @@ import SpeedMenu from "./components/SpeedMenu";
 import CustomDivider from "./components/CustomDivider";
 import LegendCell from "./components/LegendCell";
 import type { LegendCellProps } from "./@types/components/LegendCell";
+import Video from "./components/Video";
+
+import Sneakpeek from "./assets/videos/SneakpeekPathfinder.mp4";
 
 // Utils
 import { createRandomObstacles } from "./utils/grid";
@@ -121,9 +124,15 @@ export const App: React.FC = () => {
         lg: "5vmin"
     })
 
-    const [isSmallerThan48em] = useMediaQuery("(max-width: 48em)")
+    const [isSmallerThan48em] = useMediaQuery("(max-width: 48em)");
+    const [hIsSmallerThan30em] = useMediaQuery("(max-height: 30em)");
 
-    if (isSmallerThan48em) {
+    // testing
+    useEffect(() => {
+        console.log({ isSmallerThan48em, hIsSmallerThan30em });
+    }, [isSmallerThan48em, hIsSmallerThan30em])
+
+    if (isSmallerThan48em || hIsSmallerThan30em) {
         return (
                 <Modal isOpen={true} onClose={() => {}} isCentered size={{ base: "xs", md: "sm" }} >
                     <ModalOverlay backdropFilter="blur(10px)"/>
@@ -136,9 +145,7 @@ export const App: React.FC = () => {
                             Due to the nature of this application, smaller viewports are not supported.
                         </Text>
                         <Text mb="2">Sneakpeek:</Text>
-                        <Text>
-                            [Videos of the app]
-                        </Text>
+                        <Video src={`${Sneakpeek}#t=0.1`} />
                     </ModalBody>
                     <ModalFooter />
                     </ModalContent>
