@@ -55,6 +55,7 @@ import { StoreContextType } from "./@types/Store";
 export const App: React.FC = () => {
     const store = useContext(StoreContext) as StoreContextType;
     const [addRandObs, setAddRandObs] = useState<boolean>(false);
+    const [showModal, setShowModal] = useState<boolean>(false);
 
     useEffect(() => {
         store.setCellSize(30);
@@ -127,12 +128,15 @@ export const App: React.FC = () => {
     const [isSmallerThan48em] = useMediaQuery("(max-width: 48em)");
     const [hIsSmallerThan30em] = useMediaQuery("(max-height: 30em)");
 
-    // testing
     useEffect(() => {
-        console.log({ isSmallerThan48em, hIsSmallerThan30em });
+        if (isSmallerThan48em || hIsSmallerThan30em){
+            setShowModal(true);
+        } else {
+            setShowModal(false);
+        }
     }, [isSmallerThan48em, hIsSmallerThan30em])
 
-    if (isSmallerThan48em || hIsSmallerThan30em) {
+    if (showModal) {
         return (
                 <Modal isOpen={true} onClose={() => {}} isCentered size={{ base: "xs", md: "sm" }} >
                     <ModalOverlay backdropFilter="blur(10px)"/>
