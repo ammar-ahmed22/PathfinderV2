@@ -51,12 +51,12 @@ const shadows = {
 };
 
 const breakpoints = {
-    sm: '30em',
-    md: '48em',
-    lg: '70em',
-    xl: '80em',
-    '2xl': '96em',
-}
+    sm: "30em",
+    md: "48em",
+    lg: "70em",
+    xl: "80em",
+    "2xl": "96em",
+};
 
 const components = {
     Heading: {
@@ -101,4 +101,11 @@ const components = {
     },
 };
 
-export default extendTheme({ colors, styles, config, shadows, components, breakpoints });
+export default extendTheme({
+    colors,
+    styles,
+    config,
+    shadows,
+    components,
+    breakpoints,
+});

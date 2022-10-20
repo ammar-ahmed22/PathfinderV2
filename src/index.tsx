@@ -14,7 +14,7 @@ const root = ReactDOM.createRoot(container);
 
 root.render(
     <React.StrictMode>
-        <StoreProvider >
+        <StoreProvider>
             <ChakraProvider theme={customTheme}>
                 <ColorModeScript />
                 <App />
