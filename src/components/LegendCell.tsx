@@ -27,7 +27,7 @@ const LegendCell: React.FC<LegendCellProps> = ({
                 justifyContent="center"
                 alignItems="center"
             >
-                {icon && <Icon as={icon} color={borderColor} />}
+                {icon && <Icon as={icon} w={`calc(${size} / 2)`} h={`calc(${size} / 2)`} color={borderColor} />}
             </Box>
             <Text fontSize="sm" fontWeight="semibold">
                 {cellName}

@@ -1,16 +1,22 @@
 import React, { useContext, useEffect, useState } from "react";
 import {
-    ChakraProvider,
     Text,
     Heading,
     HStack,
     Icon,
     Button,
     Link,
+    useBreakpointValue,
+    SimpleGrid,
+    useMediaQuery,
+    Modal,
+    ModalOverlay,
+    ModalHeader,
+    ModalBody,
+    ModalContent,
+    ModalFooter,
+    Box,
 } from "@chakra-ui/react";
-
-// Theme
-import customTheme from "./theme";
 
 // Icons
 import { SiTypescript, SiReact, SiChakraui } from "react-icons/si";
@@ -34,6 +40,9 @@ import SpeedMenu from "./components/SpeedMenu";
 import CustomDivider from "./components/CustomDivider";
 import LegendCell from "./components/LegendCell";
 import type { LegendCellProps } from "./@types/components/LegendCell";
+import Video from "./components/Video";
+
+import Sneakpeek from "./assets/videos/SneakpeekPathfinder.mp4";
 
 // Utils
 import { createRandomObstacles } from "./utils/grid";
@@ -46,6 +55,7 @@ import { StoreContextType } from "./@types/Store";
 export const App: React.FC = () => {
     const store = useContext(StoreContext) as StoreContextType;
     const [addRandObs, setAddRandObs] = useState<boolean>(false);
+    const [showModal, setShowModal] = useState<boolean>(false);
 
     useEffect(() => {
         store.setCellSize(30);
@@ -110,9 +120,45 @@ export const App: React.FC = () => {
         },
     ];
 
-    return (
-        <ChakraProvider theme={customTheme}>
+    const legendCellSize = useBreakpointValue({
+        base: "3vmin",
+        lg: "5vmin"
+    })
+
+    const [isSmallerThan48em] = useMediaQuery("(max-width: 48em)");
+    const [hIsSmallerThan30em] = useMediaQuery("(max-height: 30em)");
+
+    useEffect(() => {
+        if (isSmallerThan48em || hIsSmallerThan30em){
+            setShowModal(true);
+        } else {
+            setShowModal(false);
+        }
+    }, [isSmallerThan48em, hIsSmallerThan30em])
+
+    if (showModal) {
+        return (
+                <Modal isOpen={true} onClose={() => {}} isCentered size={{ base: "xs", md: "sm" }} >
+                    <ModalOverlay backdropFilter="blur(10px)"/>
+                    <ModalContent bgGradient="linear(to-tr, brand.blue.500, brand.purple.500)" color="white" >
+                    <ModalHeader  >Larger Viewport Required </ModalHeader>
+            
+                    <ModalBody>
+                        <Text mb="2" >
+                            Please open this page on a device with a larger screen or increase your viewport size. 
+                            Due to the nature of this application, smaller viewports are not supported.
+                        </Text>
+                        <Text mb="2">Sneakpeek:</Text>
+                        <Video src={`${Sneakpeek}#t=0.1`} />
+                    </ModalBody>
+                    <ModalFooter />
+                    </ModalContent>
+                </Modal>
+        )
+    } else {
+        return (
             <HStack spacing="5" padding="5">
+                
                 <SideBar width="25vw">
                     <Panel
                         bg=""
@@ -209,10 +255,11 @@ export const App: React.FC = () => {
                         <Heading my="1" as="h4" size="sm" variant="gradient">
                             Visualization
                         </Heading>
-                        <HStack my="2">
+                        
+                        <SimpleGrid my="2" columns={{ base: 1, lg: 2 }} spacing={2} >
                             <AlgorithmMenu />
                             <SpeedMenu />
-                        </HStack>
+                        </SimpleGrid>
 
                         <Heading my="1" as="h4" size="sm" variant="gradient">
                             Walls
@@ -277,22 +324,23 @@ export const App: React.FC = () => {
                             <Icon as={FaClipboardList} color="brand.blue.500" />
                         </HStack>
 
-                        <HStack my="2" width="100%" justify="space-between">
-                            {legendCellMapping.map((legendCellProps) => {
+                        <SimpleGrid my="2" width="100%" columns={{ base: 3, lg: 5 }} spacing="2">
+                            {legendCellSize && legendCellMapping.map((legendCellProps) => {
                                 return (
                                     <LegendCell
-                                        size="5vmin"
+                                        size={legendCellSize}
                                         borderWidth="1px"
                                         {...legendCellProps}
                                     />
                                 );
                             })}
-                        </HStack>
+                        </SimpleGrid>
                     </Panel>
                 </SideBar>
 
                 <Grid />
             </HStack>
-        </ChakraProvider>
     );
+    }
+    
 };

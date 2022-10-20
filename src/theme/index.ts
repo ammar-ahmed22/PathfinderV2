@@ -50,6 +50,14 @@ const shadows = {
     panel: "rgba(0, 0, 0, 0.1) 0px 4px 12px",
 };
 
+const breakpoints = {
+    sm: '30em',
+    md: '48em',
+    lg: '70em',
+    xl: '80em',
+    '2xl': '96em',
+}
+
 const components = {
     Heading: {
         variants: {
@@ -93,4 +101,4 @@ const components = {
     },
 };
 
-export default extendTheme({ colors, styles, config, shadows, components });
+export default extendTheme({ colors, styles, config, shadows, components, breakpoints });
