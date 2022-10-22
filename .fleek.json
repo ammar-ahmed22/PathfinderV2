@@ -1,0 +1,15 @@
+{
+  "site": {
+    "id": "60ae4875-d7b2-4b73-855e-d0036f7f0cc9",
+    "team": "ce0c514a-b2c1-457f-838e-590928b8ef9d",
+    "platform": "ipfs",
+    "source": "github",
+    "name": "still-king-4762"
+  },
+  "build": {
+    "baseDir": "",
+    "publicDir": "build",
+    "command": "yarn && yarn build",
+    "rootDir": ""
+  }
+}
