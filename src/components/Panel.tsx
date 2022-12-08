@@ -1,5 +1,16 @@
 import * as React from "react";
-import { Box, useColorModeValue } from "@chakra-ui/react";
+import { 
+    Box, 
+    useColorModeValue,
+    Accordion,
+    AccordionButton,
+    AccordionIcon,
+    AccordionPanel,
+    AccordionItem,
+    HStack,
+    Icon,
+    Heading
+} from "@chakra-ui/react";
 import { PanelProps } from "../@types/components/Panel";
 
 const Panel: React.FC<PanelProps> = ({
@@ -9,9 +20,67 @@ const Panel: React.FC<PanelProps> = ({
     height,
     styles,
     customRef,
+    accordion,
+    heading,
+    headingIcon
 }) => {
     const defaultBg = useColorModeValue("white", "gray.700");
     const color = useColorModeValue("gray.800", "white");
+
+    if (accordion){
+        return (
+            <Accordion 
+            allowToggle 
+            w={width ? width : "100%"}
+            h={height ? height : "auto"}
+            bg={bg ? bg : defaultBg}
+            padding="5"
+            color={color}
+            shadow="panel"
+            borderRadius="xl"
+            ref={customRef}
+            {...styles}
+            >
+                <AccordionItem
+                    border="none"
+                >
+                    
+                    <AccordionButton
+                        p='0'
+                        _hover={{
+                            cursor: "pointer"
+                        }}
+                    >
+                        <HStack flex="1">
+                            <Heading as="h2" size="md" variant="gradient" >
+                                { heading ?? "ERR"}
+                            </Heading>
+                            <Icon as={headingIcon} color="brand.blue.500" />
+                        </HStack>
+                        <AccordionIcon color="brand.blue.500" />
+                    </AccordionButton>
+
+                    <AccordionPanel
+                        // w={width ? width : "100%"}
+                        // h={height ? height : "auto"}
+                        // bg={bg ? bg : defaultBg}
+                        // padding="5"
+                        // color={color}
+                        // shadow="panel"
+                        // borderRadius="xl"
+                        // ref={customRef}
+                        // {...styles}
+                        p="0"
+                    >
+                        {
+                            children
+                        }
+                    </AccordionPanel>
+                </AccordionItem>
+
+            </Accordion>
+        )
+    }
 
     return (
         <Box
@@ -24,7 +93,15 @@ const Panel: React.FC<PanelProps> = ({
             borderRadius="xl"
             ref={customRef}
             {...styles}
-        >
+        >   
+            { heading && (
+                <HStack>
+                    <Heading as="h2" size="md" variant="gradient" >
+                        { heading ?? "ERR"}
+                    </Heading>
+                    <Icon as={headingIcon} color="brand.blue.500" />
+                </HStack>
+            )}
             {children}
         </Box>
     );

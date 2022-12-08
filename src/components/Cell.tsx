@@ -129,7 +129,7 @@ const Cell: React.FC<CellProps> = ({ node, corner }) => {
                     justifyContent="center"
                     alignItems="center"
                     bg={
-                        store.isStarted
+                        store.status.started
                             ? node.type === "start"
                                 ? "path.start"
                                 : "path.end"
@@ -143,7 +143,7 @@ const Cell: React.FC<CellProps> = ({ node, corner }) => {
                                 : FaCrosshairs
                         }
                         color={
-                            store.isStarted ? "white" : styleProps.borderColor
+                            store.status.started ? "white" : styleProps.borderColor
                         }
                     />
                 </Box>

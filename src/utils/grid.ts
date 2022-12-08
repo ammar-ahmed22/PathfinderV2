@@ -10,8 +10,7 @@ import {
     getChakraCSSVar,
     getCSSVarValue,
 } from "./colors";
-import { generateMaze } from "./divisionMaze";
-import { MazeGenerator } from "./maze";
+
 
 import type { CornerType } from "../@types/components/Cell";
 
@@ -78,6 +77,7 @@ export const animate = async (
             !nodeToAnimate.index.equals(store.startIdx) &&
             !nodeToAnimate.index.equals(store.targetIdx)
         )
+            // eslint-disable-next-line
             store.updateNodeByIndex(nodeToAnimate.index, (prevNode) => {
                 prevNode.type = "path";
                 prevNode.bg = gradient[i] as string;
@@ -87,6 +87,8 @@ export const animate = async (
         i++;
         await sleep(delay);
     }
+
+    store.setFinished(true);
 };
 
 export const createRandomObstacles = (

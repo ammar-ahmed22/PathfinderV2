@@ -62,11 +62,20 @@ const components = {
     Heading: {
         variants: {
             gradient: {
-                bgGradient: "linear(to-l, brand.blue.500, brand.purple.500)",
+                bgGradient: "linear(to-tr, brand.purple.500, brand.blue.500)",
                 bgClip: "text",
                 fontWeight: "black",
             },
         },
+    },
+    Text: {
+        variants: {
+            gradient: {
+                bgGradient: "linear(to-tr, brand.purple.500, brand.blue.500)",
+                bgClip: "text",
+                fontWeight: "black",
+            },
+        }
     },
     Link: {
         variants: {
@@ -87,7 +96,11 @@ const components = {
                 _hover: {
                     // bgGradient: "linear(to-l, brand.purple.500, brand.purple.500)"
                     bg: "brand.purple.600",
+                    // _disabled: {}
                 },
+                _disabled: {
+                    pointerEvents: "none"
+                }
             },
             brandGradient: {
                 bgGradient: "linear(to-r, brand.purple.500, brand.blue.500)",
@@ -96,6 +109,9 @@ const components = {
                     bgGradient:
                         "linear(to-r, brand.purple.600, brand.blue.600)",
                 },
+                _disabled: {
+                    pointerEvents: "none"
+                }
             },
         },
     },

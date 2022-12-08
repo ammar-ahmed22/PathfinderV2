@@ -15,7 +15,6 @@ import {
     ModalBody,
     ModalContent,
     ModalFooter,
-    Box,
 } from "@chakra-ui/react";
 
 // Icons
@@ -25,6 +24,7 @@ import {
     FaClipboardList,
     FaMapMarkerAlt,
     FaCrosshairs,
+    FaRoute,
 } from "react-icons/fa";
 import { BsPlayFill } from "react-icons/bs";
 import { RepeatIcon } from "@chakra-ui/icons";
@@ -35,7 +35,7 @@ import SideBar from "./components/SideBar";
 import Panel from "./components/Panel";
 import Grid from "./components/Grid";
 import Logo from "./components/Logo";
-import AlgorithmMenu from "./components/AlgorithmMenu";
+import AlgorithmMenu, { algorithmMenuNames } from "./components/AlgorithmMenu";
 import SpeedMenu from "./components/SpeedMenu";
 import CustomDivider from "./components/CustomDivider";
 import LegendCell from "./components/LegendCell";
@@ -56,9 +56,11 @@ export const App: React.FC = () => {
     const store = useContext(StoreContext) as StoreContextType;
     const [addRandObs, setAddRandObs] = useState<boolean>(false);
     const [showModal, setShowModal] = useState<boolean>(false);
+    const [mazeGenerating, setMazeGenerating] = useState<boolean>(false);
 
     useEffect(() => {
         store.setCellSize(30);
+        // eslint-disable-next-line
     }, []);
 
     useEffect(() => {
@@ -66,6 +68,7 @@ export const App: React.FC = () => {
             createRandomObstacles(store, 0.25);
             setAddRandObs(false);
         }
+        // eslint-disable-next-line
     }, [addRandObs]);
 
     useEffect(() => {
@@ -88,6 +91,7 @@ export const App: React.FC = () => {
             window.removeEventListener("keydown", handleKeyDown);
             window.removeEventListener("keyup", handleKeyUp);
         };
+        // eslint-disable-next-line
     }, []);
 
     const generateMaze = async () => {
@@ -226,40 +230,8 @@ export const App: React.FC = () => {
                         </Text>
                     </Panel>
 
-                    {/* <Panel>
-                        <HStack>
-                            <Heading as="h2" size="md" variant="gradient">
-                                What is this?
-                            </Heading>
-                            <Icon as={FaInfoCircle} color="brand.blue.500" />
-                        </HStack>
-                        <Text fontSize="sm">
-                            This is a{" "}
-                            <Text
-                                as="span"
-                                color="brand.purple"
-                                fontWeight="bold"
-                            >
-                                pathfinding algorithm visualization
-                            </Text>{" "}
-                            tool I created as an interactive and engaging way to
-                            learn more about algorithms. You can visualize the
-                            following algorithms (more coming soon):
-                        </Text>
-                        <UnorderedList fontSize="sm" pl="4" pt="2">
-                            <ListItem>A*</ListItem>
-                            <ListItem>Djikstra's</ListItem>
-                            <ListItem>Greedy Best First Search</ListItem>
-                        </UnorderedList>
-                    </Panel> */}
-
-                    <Panel styles={{ position: "relative" }}>
-                        <HStack>
-                            <Heading as="h2" size="md" variant="gradient">
-                                Controls{" "}
-                            </Heading>
-                            <Icon as={FaTerminal} color="brand.blue.500" />
-                        </HStack>
+                    <Panel heading="Controls" headingIcon={FaTerminal}>
+                        
 
                         <Heading my="1" as="h4" size="sm" variant="gradient">
                             Visualization
@@ -295,7 +267,17 @@ export const App: React.FC = () => {
                                 Random
                             </Button>
                             <Button
-                                onClick={() => generateMaze()}
+                                onClick={ async () => {
+                                    setMazeGenerating(true);
+                                    store.addOutput("Generating maze")
+                                    const start = performance.now();
+                                    await generateMaze();
+                                    const end = performance.now();
+                                    const elapsed = end - start;
+                                    const elapsedParsed = elapsed >= 1000 ? (elapsed / 1000).toFixed(2) + "s" : elapsed.toFixed(2) + "ms";
+                                    store.addOutput("Maze generated in: " + elapsedParsed);
+                                    setMazeGenerating(false);
+                                }}
                                 variant="brandPurple"
                                 size="sm"
                             >
@@ -308,8 +290,11 @@ export const App: React.FC = () => {
                         <Button
                             onClick={() => {
                                 store.resetNodes();
-                                store.setIsStarted(false);
+                                store.setStarted(false);
+                                store.setFinished(false);
+                                store.resetOutput();
                             }}
+                            isDisabled={mazeGenerating || !store.status.finished}
                             variant="brandPurple"
                             rightIcon={<RepeatIcon />}
                             size="sm"
@@ -318,24 +303,28 @@ export const App: React.FC = () => {
                             Reset
                         </Button>
                         <Button
-                            onClick={() => store.setIsStarted(true)}
+                            onClick={() => {
+                                store.setStarted(true);
+                                const output = `Started: ${algorithmMenuNames[store.selectedAlgorithm]}`;
+                                store.addOutput(output);
+                            }}
                             rightIcon={<BsPlayFill />}
                             mt="2"
                             size="sm"
                             width="100%"
                             variant="brandGradient"
+                            isDisabled={mazeGenerating || (store.status.started || store.status.finished)}
                         >
                             Visualize
                         </Button>
                     </Panel>
 
-                    <Panel>
-                        <HStack>
-                            <Heading as="h2" size="md" variant="gradient">
-                                Legend{" "}
-                            </Heading>
-                            <Icon as={FaClipboardList} color="brand.blue.500" />
-                        </HStack>
+                    <Panel 
+                        accordion 
+                        heading="Legend"
+                        headingIcon={FaClipboardList}
+                    >
+                        
 
                         <SimpleGrid
                             my="2"
@@ -354,6 +343,21 @@ export const App: React.FC = () => {
                                     );
                                 })}
                         </SimpleGrid>
+                    </Panel>
+                    <Panel
+                        accordion
+                        heading="Output"
+                        headingIcon={FaRoute}
+                    >
+                        {
+                            store.output.map( (out, idx) => {
+                                return (
+                                    <Text fontSize="sm"  mt={idx === 0 ? 2 : 0} > 
+                                        <Text variant="gradient" as="span" fontWeight="bold" >[{idx + 1}]</Text> {out}
+                                    </Text>
+                                )
+                            })
+                        }
                     </Panel>
                 </SideBar>
 

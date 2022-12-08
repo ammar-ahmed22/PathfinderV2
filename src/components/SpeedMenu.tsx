@@ -12,14 +12,16 @@ import { ChevronDownIcon } from "@chakra-ui/icons";
 import { StoreContext } from "../Store";
 import type { StoreContextType } from "../@types/Store";
 
+export const speedMenuNames: Record<string, string> = {
+    10: "Fast",
+    100: "Medium",
+    200: "Slow",
+};
+
 const SpeedMenu: React.FC = () => {
     const store = useContext(StoreContext) as StoreContextType;
 
-    const speedMenuNames: Record<string, string> = {
-        10: "Fast",
-        100: "Medium",
-        200: "Slow",
-    };
+    
 
     const handleChange = (val: string | string[]) => {
         if (typeof val === "string") {

@@ -1,4 +1,5 @@
 import * as React from "react";
+import { IconType } from "react-icons";
 
 export interface PanelProps {
     children: React.ReactNode;
@@ -7,4 +8,7 @@ export interface PanelProps {
     height?: string;
     styles?: Record<string, string | number | object>;
     customRef?: React.MutableRefObject;
+    accordion?: boolean,
+    heading?: string,
+    headingIcon?: IconType
 }

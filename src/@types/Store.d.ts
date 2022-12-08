@@ -33,6 +33,12 @@ export type StoreContextType = {
     resetObstacles: () => void;
     visualDelay: number;
     setVisualDelay: (val: number) => void;
+    status: { started: boolean, finished: boolean };
+    setStarted: (val: boolean) => void;
+    setFinished: (val: boolean) => void;
+    output: string[],
+    addOutput: (val: string) => void;
+    resetOutput: () => void;
 };
 
 export interface StoreProviderProps {

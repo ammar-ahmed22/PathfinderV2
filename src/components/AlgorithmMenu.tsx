@@ -18,18 +18,21 @@ import { isAlgorithm } from "../utils/types";
 import { StoreContext } from "../Store";
 import { StoreContextType } from "../@types/Store";
 
+export const algorithmMenuNames: Record<string, string> = {
+    astar: "A* Search",
+    djikstra: "Djikstra's",
+    greedy: "Greedy Best First",
+};
+
 const AlgorithmMenu: React.FC = () => {
     const store = useContext(StoreContext) as StoreContextType;
 
     useEffect(() => {
         store.setSelectedAlgorithm("astar");
+        // eslint-disable-next-line
     }, []);
 
-    const algorithmMenuNames: Record<string, string> = {
-        astar: "A* Search",
-        djikstra: "Djikstra's",
-        greedy: "Greedy Best First",
-    };
+    
 
     const handleChange = (val: string | string[]) => {
         if (typeof val === "string" && isAlgorithm(val)) {

@@ -163,6 +163,7 @@ export class MazeGenerator {
                         hasMoved = true;
                     } else {
                         store.setTargetIdx(nIndex);
+                        // eslint-disable-next-line
                         hasMoved = true;
                     }
                     break;

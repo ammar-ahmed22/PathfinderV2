@@ -27,6 +27,7 @@ const Grid: React.FC = () => {
             store.setStartIdx(new Vec2(5, halfHeight));
             store.setTargetIdx(new Vec2(store.gridDim.x - 5, halfHeight));
         }
+        // eslint-disable-next-line
     }, [store.gridDim]);
 
     // Settings initial grid dimensions
@@ -35,6 +36,7 @@ const Grid: React.FC = () => {
             const { current } = gridRef;
             store.updateGridDimensions(current, store.cellSize);
         }
+        // eslint-disable-next-line
     }, [gridRef, store.cellSize]);
 
     // Creating nodes after dimensions set
@@ -42,6 +44,7 @@ const Grid: React.FC = () => {
         if (store.gridDim && store.cellSize) {
             store.createNodes();
         }
+        // eslint-disable-next-line
     }, [store.gridDim, store.cellSize]);
 
     // Resize event
@@ -55,7 +58,8 @@ const Grid: React.FC = () => {
 
         window.addEventListener("resize", resizeEventListener);
 
-        return () => window.removeEventListener("resize", resizeEventListener);
+        // return () => window.removeEventListener("resize", resizeEventListener);
+        // eslint-disable-next-line
     }, []);
 
     useEffect(() => {
@@ -63,7 +67,7 @@ const Grid: React.FC = () => {
             store.nodes &&
             store.startIdx &&
             store.targetIdx &&
-            store.isStarted
+            store.status.started
         ) {
             const solver = solvers[store.selectedAlgorithm];
             solver.initialize({
@@ -71,13 +75,19 @@ const Grid: React.FC = () => {
                 start: store.startIdx,
                 target: store.targetIdx,
             });
+            const start = performance.now();
             const path = solver.solve();
+            const end = performance.now();
+
+            const output = `Path found in: ${(end - start).toFixed(2)}ms`;
+            store.addOutput(output);
 
             console.log({ path, searched: solver.searched });
             if (path) animate(store, path, solver.searched, store.visualDelay);
             if (path === undefined) window.alert("No path found!");
         }
-    }, [store.isStarted]);
+        // eslint-disable-next-line
+    }, [store.status.started]);
 
     return (
         <Panel
