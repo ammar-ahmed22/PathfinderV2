@@ -63,7 +63,6 @@ export class DjikstraSolver extends Solver<Djikstra> {
       current = this.searching.pop() as Node<Djikstra>;
 
       if (current.index.equals(this.target)) {
-        console.log("DJIKSTRA DONE");
         return this.getOptimalPath(current);
       }
 

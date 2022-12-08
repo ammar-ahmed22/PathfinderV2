@@ -152,7 +152,6 @@ export class MazeGenerator {
       const neighbours = nodeToMove.getNeighbours(store.nodes, {
         allowDiagonals: true,
       });
-      console.log({ moving: nodeType, nLength: neighbours.length });
       for (let i = 0; i < neighbours.length; i++) {
         const n = neighbours[i];
         const { index: nIndex } = n;
@@ -235,6 +234,7 @@ export class MazeGenerator {
   };
 
   public log = (clear: boolean = false) => {
+    // eslint-disable-next-line
     let mazeString = "";
     this.grid.forEach((row) => {
       let rowString = "";
@@ -245,7 +245,6 @@ export class MazeGenerator {
       mazeString += rowString;
     });
 
-    console.log(mazeString);
     if (clear) {
       console.clear();
     }

@@ -188,7 +188,7 @@ export const App: React.FC = () => {
               </Heading>
             </HStack>
             <Text fontSize="xs" mb="1">
-              Made with 🧠 by Ammar
+              Made with 🧠 by <Link href="https://ammarahmed.ca" isExternal borderBottomColor="white" >Ammar</Link>
             </Text>
             <Text fontSize="xs">
               Built with{" "}

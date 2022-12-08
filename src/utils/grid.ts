@@ -65,7 +65,6 @@ export const animate = async (
     endColor,
     output: "hex",
   });
-  console.log({ gradient });
   let i = 0;
   while (!!path.length) {
     const nodeToAnimate = path.pop();

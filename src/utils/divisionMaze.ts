@@ -109,7 +109,7 @@ const addVWall = (grid: boolean[][], minY: number, maxY: number, x: number) => {
   let hole = Math.floor(randomNumber(minY, maxY) / 2) * 2 + 1;
 
   for (var i = minY; i <= maxY; i++) {
-    if (i == hole) grid[i][x] = false;
+    if (i === hole) grid[i][x] = false;
     else grid[i][x] = true;
   }
 };
@@ -119,6 +119,7 @@ const randomNumber = (min: number, max: number) => {
 };
 
 export const displayMaze = (grid: boolean[][]) => {
+  // eslint-disable-next-line
   let mazeString = "";
   grid.forEach((row) => {
     let rowString = "";
@@ -129,5 +130,4 @@ export const displayMaze = (grid: boolean[][]) => {
     mazeString += rowString;
   });
 
-  console.log(mazeString);
 };

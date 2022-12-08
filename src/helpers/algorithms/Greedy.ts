@@ -58,7 +58,6 @@ export class GreedySolver extends Solver<Greedy> {
       current = this.searching.pop() as Node<Greedy>;
 
       if (current.index.equals(this.target)) {
-        console.log("GREEDY DONE");
         return this.getOptimalPath(current);
       }
 

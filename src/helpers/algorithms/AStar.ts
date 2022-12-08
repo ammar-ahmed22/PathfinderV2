@@ -67,7 +67,6 @@ export class AStarSolver extends Solver<AStar> {
       current = this.searching.pop() as Node<AStar>;
 
       if (current.index.equals(this.target)) {
-        console.log("A STAR DONE");
         return this.getOptimalPath(current);
       }
 
