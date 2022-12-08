@@ -75,7 +75,7 @@ const components = {
                 bgClip: "text",
                 fontWeight: "black",
             },
-        }
+        },
     },
     Link: {
         variants: {
@@ -99,8 +99,8 @@ const components = {
                     // _disabled: {}
                 },
                 _disabled: {
-                    pointerEvents: "none"
-                }
+                    pointerEvents: "none",
+                },
             },
             brandGradient: {
                 bgGradient: "linear(to-r, brand.purple.500, brand.blue.500)",
@@ -110,8 +110,8 @@ const components = {
                         "linear(to-r, brand.purple.600, brand.blue.600)",
                 },
                 _disabled: {
-                    pointerEvents: "none"
-                }
+                    pointerEvents: "none",
+                },
             },
         },
     },

@@ -1,6 +1,6 @@
 import * as React from "react";
-import { 
-    Box, 
+import {
+    Box,
     useColorModeValue,
     Accordion,
     AccordionButton,
@@ -9,7 +9,7 @@ import {
     AccordionItem,
     HStack,
     Icon,
-    Heading
+    Heading,
 } from "@chakra-ui/react";
 import { PanelProps } from "../@types/components/Panel";
 
@@ -22,38 +22,35 @@ const Panel: React.FC<PanelProps> = ({
     customRef,
     accordion,
     heading,
-    headingIcon
+    headingIcon,
 }) => {
     const defaultBg = useColorModeValue("white", "gray.700");
     const color = useColorModeValue("gray.800", "white");
 
-    if (accordion){
+    if (accordion) {
         return (
-            <Accordion 
-            allowToggle 
-            w={width ? width : "100%"}
-            h={height ? height : "auto"}
-            bg={bg ? bg : defaultBg}
-            padding="5"
-            color={color}
-            shadow="panel"
-            borderRadius="xl"
-            ref={customRef}
-            {...styles}
+            <Accordion
+                allowToggle
+                w={width ? width : "100%"}
+                h={height ? height : "auto"}
+                bg={bg ? bg : defaultBg}
+                padding="5"
+                color={color}
+                shadow="panel"
+                borderRadius="xl"
+                ref={customRef}
+                {...styles}
             >
-                <AccordionItem
-                    border="none"
-                >
-                    
+                <AccordionItem border="none">
                     <AccordionButton
-                        p='0'
+                        p="0"
                         _hover={{
-                            cursor: "pointer"
+                            cursor: "pointer",
                         }}
                     >
                         <HStack flex="1">
-                            <Heading as="h2" size="md" variant="gradient" >
-                                { heading ?? "ERR"}
+                            <Heading as="h2" size="md" variant="gradient">
+                                {heading ?? "ERR"}
                             </Heading>
                             <Icon as={headingIcon} color="brand.blue.500" />
                         </HStack>
@@ -72,14 +69,11 @@ const Panel: React.FC<PanelProps> = ({
                         // {...styles}
                         p="0"
                     >
-                        {
-                            children
-                        }
+                        {children}
                     </AccordionPanel>
                 </AccordionItem>
-
             </Accordion>
-        )
+        );
     }
 
     return (
@@ -93,11 +87,11 @@ const Panel: React.FC<PanelProps> = ({
             borderRadius="xl"
             ref={customRef}
             {...styles}
-        >   
-            { heading && (
+        >
+            {heading && (
                 <HStack>
-                    <Heading as="h2" size="md" variant="gradient" >
-                        { heading ?? "ERR"}
+                    <Heading as="h2" size="md" variant="gradient">
+                        {heading ?? "ERR"}
                     </Heading>
                     <Icon as={headingIcon} color="brand.blue.500" />
                 </HStack>

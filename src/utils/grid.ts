@@ -11,7 +11,6 @@ import {
     getCSSVarValue,
 } from "./colors";
 
-
 import type { CornerType } from "../@types/components/Cell";
 
 export const isCorner = (

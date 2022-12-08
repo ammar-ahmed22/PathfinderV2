@@ -32,8 +32,6 @@ const AlgorithmMenu: React.FC = () => {
         // eslint-disable-next-line
     }, []);
 
-    
-
     const handleChange = (val: string | string[]) => {
         if (typeof val === "string" && isAlgorithm(val)) {
             store.setSelectedAlgorithm(val);
