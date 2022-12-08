@@ -278,7 +278,7 @@ export const App: React.FC = () => {
                                     const end = performance.now();
                                     const elapsed = end - start;
                                     const elapsedParsed = elapsed >= 1000 ? (elapsed / 1000).toFixed(2) + "s" : elapsed.toFixed(2) + "ms";
-                                    
+
                                     store.addOutput("Maze generated in: " + elapsedParsed);
                                     setMazeGenerating(false);
                                 }}
@@ -353,6 +353,7 @@ export const App: React.FC = () => {
                         accordion
                         heading="Output"
                         headingIcon={FaRoute}
+                        accordionDefaultOpen
                     >
                         {
                             store.output.map( (out, idx) => {

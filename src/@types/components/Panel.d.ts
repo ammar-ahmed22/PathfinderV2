@@ -10,5 +10,6 @@ export interface PanelProps {
     customRef?: React.MutableRefObject;
     accordion?: boolean,
     heading?: string,
-    headingIcon?: IconType
+    headingIcon?: IconType,
+    accordionDefaultOpen?: boolean
 }

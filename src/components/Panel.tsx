@@ -22,7 +22,8 @@ const Panel: React.FC<PanelProps> = ({
     customRef,
     accordion,
     heading,
-    headingIcon
+    headingIcon,
+    accordionDefaultOpen
 }) => {
     const defaultBg = useColorModeValue("white", "gray.700");
     const color = useColorModeValue("gray.800", "white");
@@ -30,7 +31,8 @@ const Panel: React.FC<PanelProps> = ({
     if (accordion){
         return (
             <Accordion 
-            allowToggle 
+            allowToggle
+            defaultIndex={accordionDefaultOpen ? [0] : undefined}
             w={width ? width : "100%"}
             h={height ? height : "auto"}
             bg={bg ? bg : defaultBg}
@@ -61,15 +63,6 @@ const Panel: React.FC<PanelProps> = ({
                     </AccordionButton>
 
                     <AccordionPanel
-                        // w={width ? width : "100%"}
-                        // h={height ? height : "auto"}
-                        // bg={bg ? bg : defaultBg}
-                        // padding="5"
-                        // color={color}
-                        // shadow="panel"
-                        // borderRadius="xl"
-                        // ref={customRef}
-                        // {...styles}
                         p="0"
                     >
                         {
