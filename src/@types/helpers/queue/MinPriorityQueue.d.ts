@@ -1,4 +1,4 @@
 export interface QueueNode<T> {
-    key: number;
-    value: T;
+  key: number;
+  value: T;
 }

@@ -4,22 +4,20 @@ import MinPriorityQueue from "../queue/MinPriorityQueue";
 import { AlgorithmParams, Generic } from "../../@types/helpers/Node";
 
 export interface SolverParams {
-    nodes: Node<Generic>[][];
-    start: Vec2;
-    target: Vec2;
+  nodes: Node<Generic>[][];
+  start: Vec2;
+  target: Vec2;
 }
 
 export abstract class Solver<A extends AlgorithmParams> {
-    public nodes: Node<A>[][] = [];
-    public start: Vec2 = new Vec2();
-    public target: Vec2 = new Vec2();
+  public nodes: Node<A>[][] = [];
+  public start: Vec2 = new Vec2();
+  public target: Vec2 = new Vec2();
 
-    public searching: MinPriorityQueue<Node<A>> = new MinPriorityQueue<
-        Node<A>
-    >();
-    public searched: Node<A>[] = [];
+  public searching: MinPriorityQueue<Node<A>> = new MinPriorityQueue<Node<A>>();
+  public searched: Node<A>[] = [];
 
-    abstract initialize(params: SolverParams): void;
-    abstract solve(): Node<A>[] | undefined;
-    abstract getOptimalPath(current: Node<A>): Node<A>[];
+  abstract initialize(params: SolverParams): void;
+  abstract solve(): Node<A>[] | undefined;
+  abstract getOptimalPath(current: Node<A>): Node<A>[];
 }

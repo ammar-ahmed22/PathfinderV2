@@ -1,28 +1,28 @@
 export type NodeType =
-    | "base"
-    | "start"
-    | "target"
-    | "path"
-    | "visited"
-    | "obstacle"
-    | "current";
+  | "base"
+  | "start"
+  | "target"
+  | "path"
+  | "visited"
+  | "obstacle"
+  | "current";
 
 export interface getNeighboursOpts {
-    allowDiagonals?: boolean;
+  allowDiagonals?: boolean;
 }
 
 export interface AStar {
-    heuristic: number;
-    cost: number;
-    func: number;
+  heuristic: number;
+  cost: number;
+  func: number;
 }
 
 export interface Djikstra {
-    cost: number;
+  cost: number;
 }
 
 export interface Greedy {
-    heuristic: number;
+  heuristic: number;
 }
 
 export interface Generic {}
