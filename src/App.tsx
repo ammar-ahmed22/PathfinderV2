@@ -256,6 +256,7 @@ export const App: React.FC = () => {
                                 }}
                                 variant="brandPurple"
                                 size="sm"
+                                isDisabled={store.status.started}
                             >
                                 Erase
                             </Button>
@@ -263,6 +264,7 @@ export const App: React.FC = () => {
                                 onClick={() => setAddRandObs(true)}
                                 variant="brandPurple"
                                 size="sm"
+                                isDisabled={store.status.started}
                             >
                                 Random
                             </Button>
@@ -270,16 +272,19 @@ export const App: React.FC = () => {
                                 onClick={ async () => {
                                     setMazeGenerating(true);
                                     store.addOutput("Generating maze")
+
                                     const start = performance.now();
                                     await generateMaze();
                                     const end = performance.now();
                                     const elapsed = end - start;
                                     const elapsedParsed = elapsed >= 1000 ? (elapsed / 1000).toFixed(2) + "s" : elapsed.toFixed(2) + "ms";
+                                    
                                     store.addOutput("Maze generated in: " + elapsedParsed);
                                     setMazeGenerating(false);
                                 }}
                                 variant="brandPurple"
                                 size="sm"
+                                isDisabled={store.status.started}
                             >
                                 Maze
                             </Button>
