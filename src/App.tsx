@@ -231,8 +231,6 @@ export const App: React.FC = () => {
                     </Panel>
 
                     <Panel heading="Controls" headingIcon={FaTerminal}>
-                        
-
                         <Heading my="1" as="h4" size="sm" variant="gradient">
                             Visualization
                         </Heading>
@@ -269,17 +267,22 @@ export const App: React.FC = () => {
                                 Random
                             </Button>
                             <Button
-                                onClick={ async () => {
+                                onClick={async () => {
                                     setMazeGenerating(true);
-                                    store.addOutput("Generating maze")
+                                    store.addOutput("Generating maze");
 
                                     const start = performance.now();
                                     await generateMaze();
                                     const end = performance.now();
                                     const elapsed = end - start;
-                                    const elapsedParsed = elapsed >= 1000 ? (elapsed / 1000).toFixed(2) + "s" : elapsed.toFixed(2) + "ms";
+                                    const elapsedParsed =
+                                        elapsed >= 1000
+                                            ? (elapsed / 1000).toFixed(2) + "s"
+                                            : elapsed.toFixed(2) + "ms";
 
-                                    store.addOutput("Maze generated in: " + elapsedParsed);
+                                    store.addOutput(
+                                        "Maze generated in: " + elapsedParsed
+                                    );
                                     setMazeGenerating(false);
                                 }}
                                 variant="brandPurple"
@@ -299,7 +302,9 @@ export const App: React.FC = () => {
                                 store.setFinished(false);
                                 store.resetOutput();
                             }}
-                            isDisabled={mazeGenerating || !store.status.finished}
+                            isDisabled={
+                                mazeGenerating || !store.status.finished
+                            }
                             variant="brandPurple"
                             rightIcon={<RepeatIcon />}
                             size="sm"
@@ -310,7 +315,9 @@ export const App: React.FC = () => {
                         <Button
                             onClick={() => {
                                 store.setStarted(true);
-                                const output = `Started: ${algorithmMenuNames[store.selectedAlgorithm]}`;
+                                const output = `Started: ${
+                                    algorithmMenuNames[store.selectedAlgorithm]
+                                }`;
                                 store.addOutput(output);
                             }}
                             rightIcon={<BsPlayFill />}
@@ -318,19 +325,21 @@ export const App: React.FC = () => {
                             size="sm"
                             width="100%"
                             variant="brandGradient"
-                            isDisabled={mazeGenerating || (store.status.started || store.status.finished)}
+                            isDisabled={
+                                mazeGenerating ||
+                                store.status.started ||
+                                store.status.finished
+                            }
                         >
                             Visualize
                         </Button>
                     </Panel>
 
-                    <Panel 
-                        accordion 
+                    <Panel
+                        accordion
                         heading="Legend"
                         headingIcon={FaClipboardList}
                     >
-                        
-
                         <SimpleGrid
                             my="2"
                             width="100%"

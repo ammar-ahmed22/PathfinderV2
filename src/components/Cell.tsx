@@ -143,7 +143,9 @@ const Cell: React.FC<CellProps> = ({ node, corner }) => {
                                 : FaCrosshairs
                         }
                         color={
-                            store.status.started ? "white" : styleProps.borderColor
+                            store.status.started
+                                ? "white"
+                                : styleProps.borderColor
                         }
                     />
                 </Box>

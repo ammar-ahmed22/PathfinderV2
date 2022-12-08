@@ -21,8 +21,6 @@ export const speedMenuNames: Record<string, string> = {
 const SpeedMenu: React.FC = () => {
     const store = useContext(StoreContext) as StoreContextType;
 
-    
-
     const handleChange = (val: string | string[]) => {
         if (typeof val === "string") {
             store.setVisualDelay(parseInt(val));

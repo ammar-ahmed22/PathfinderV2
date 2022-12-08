@@ -33,10 +33,10 @@ export type StoreContextType = {
     resetObstacles: () => void;
     visualDelay: number;
     setVisualDelay: (val: number) => void;
-    status: { started: boolean, finished: boolean };
+    status: { started: boolean; finished: boolean };
     setStarted: (val: boolean) => void;
     setFinished: (val: boolean) => void;
-    output: string[],
+    output: string[];
     addOutput: (val: string) => void;
     resetOutput: () => void;
 };

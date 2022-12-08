@@ -19,27 +19,33 @@ const StoreProvider: React.FC<StoreProviderProps> = ({ children }) => {
         useState<Algorithm>("astar");
     const [shiftPressed, setShiftPressed] = useState<boolean>(false);
     const [visualDelay, setVisualDelay] = useState<number>(10);
-    const [status, setStatus] = useState<{started: boolean, finished: boolean}>({
+    const [status, setStatus] = useState<{
+        started: boolean;
+        finished: boolean;
+    }>({
         started: false,
         finished: false,
-    })
+    });
     const [output, setOutput] = useState<string[]>([]);
-    const [startTime, setStartTime] = useState<number>(0)
+    const [startTime, setStartTime] = useState<number>(0);
 
     useEffect(() => {
-        if (status.started && !status.finished){
+        if (status.started && !status.finished) {
             setStartTime(performance.now());
         }
 
-        if (status.started && status.finished && startTime !== 0){
+        if (status.started && status.finished && startTime !== 0) {
             const end = performance.now();
             const elapsed = end - startTime;
-            const elapsedParsed = elapsed >= 1000 ? (elapsed / 1000).toFixed(2) + "s" : elapsed.toFixed(2) + "ms";
-            setOutput(prev => [...prev, `Visualized in: ${elapsedParsed}`]);
+            const elapsedParsed =
+                elapsed >= 1000
+                    ? (elapsed / 1000).toFixed(2) + "s"
+                    : elapsed.toFixed(2) + "ms";
+            setOutput((prev) => [...prev, `Visualized in: ${elapsedParsed}`]);
             setStartTime(0);
         }
         // eslint-disable-next-line
-    }, [status])
+    }, [status]);
 
     const createNodes = () => {
         if (!gridDim) {
@@ -200,11 +206,13 @@ const StoreProvider: React.FC<StoreProviderProps> = ({ children }) => {
         visualDelay,
         setVisualDelay: (val: number) => setVisualDelay(val),
         status,
-        setStarted: (val: boolean) => setStatus(prevStatus => ({ ...prevStatus, started: val })),
-        setFinished: (val: boolean) => setStatus(prevStatus => ({ ...prevStatus, finished: val })),
+        setStarted: (val: boolean) =>
+            setStatus((prevStatus) => ({ ...prevStatus, started: val })),
+        setFinished: (val: boolean) =>
+            setStatus((prevStatus) => ({ ...prevStatus, finished: val })),
         output,
-        addOutput: (val: string) => setOutput(prev => [...prev, val]),
-        resetOutput: () => setOutput([])
+        addOutput: (val: string) => setOutput((prev) => [...prev, val]),
+        resetOutput: () => setOutput([]),
     };
 
     return (
