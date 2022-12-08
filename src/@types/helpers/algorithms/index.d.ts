@@ -4,9 +4,9 @@ import { GreedySolver } from "../../../helpers/algorithms/Greedy";
 import { Node } from "../../../helpers/Node";
 
 export type Solvers = {
-    astar: AStarSolver;
-    djikstra: DjikstraSolver;
-    greedy: GreedySolver;
+  astar: AStarSolver;
+  djikstra: DjikstraSolver;
+  greedy: GreedySolver;
 };
 
 export type Algorithm = keyof Solvers;

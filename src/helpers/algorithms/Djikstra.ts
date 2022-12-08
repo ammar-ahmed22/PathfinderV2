@@ -4,90 +4,87 @@ import Node from "../Node";
 import MinPriorityQueue from "../queue/MinPriorityQueue";
 
 export class DjikstraSolver extends Solver<Djikstra> {
-    public initialize = ({ nodes, start, target }: SolverParams): void => {
-        this.nodes = [];
-        for (let row = 0; row < nodes.length; row++) {
-            const tempRow: Node<Djikstra>[] = [];
-            for (let col = 0; col < nodes[row].length; col++) {
-                const node = nodes[row][col];
-                const djikstraNode = new Node<Djikstra>(
-                    node.index,
-                    node.size,
-                    node.type,
-                    node.obstacle,
-                    {
-                        cost: Infinity,
-                    }
-                );
+  public initialize = ({ nodes, start, target }: SolverParams): void => {
+    this.nodes = [];
+    for (let row = 0; row < nodes.length; row++) {
+      const tempRow: Node<Djikstra>[] = [];
+      for (let col = 0; col < nodes[row].length; col++) {
+        const node = nodes[row][col];
+        const djikstraNode = new Node<Djikstra>(
+          node.index,
+          node.size,
+          node.type,
+          node.obstacle,
+          {
+            cost: Infinity,
+          }
+        );
 
-                tempRow.push(djikstraNode);
-            }
+        tempRow.push(djikstraNode);
+      }
 
-            this.nodes.push(tempRow);
+      this.nodes.push(tempRow);
+    }
+
+    this.start = start;
+    this.target = target;
+
+    this.searching = new MinPriorityQueue<Node<Djikstra>>();
+    this.searched = [];
+
+    const startNode: Node<Djikstra> = this.nodes[start.y][start.x];
+    startNode.params.cost = 0;
+    this.searching.insert(startNode, startNode.params.cost);
+  };
+
+  public getOptimalPath = (current: Node<Djikstra>): Node<Djikstra>[] => {
+    const res: Node<Djikstra>[] = [];
+
+    let temp = current;
+    while (temp.prev) {
+      res.push(temp.prev);
+
+      temp = temp.prev;
+    }
+
+    return res;
+  };
+
+  public solve = () => {
+    if (this.nodes.length === 0 || this.searching.isEmpty()) {
+      throw new Error(
+        "the initialize() method must be called prior to using solve()"
+      );
+    }
+
+    let current: Node<Djikstra>;
+
+    while (!this.searching.isEmpty()) {
+      current = this.searching.pop() as Node<Djikstra>;
+
+      if (current.index.equals(this.target)) {
+        console.log("DJIKSTRA DONE");
+        return this.getOptimalPath(current);
+      }
+
+      this.searched.push(current);
+
+      const neighbours = current.getNeighbours(this.nodes);
+
+      for (let i = 0; i < neighbours.length; i++) {
+        const n = neighbours[i];
+
+        const tenativeCost = current.params.cost + 1;
+        if (tenativeCost < n.params.cost && current.params.cost !== Infinity) {
+          n.params.cost = tenativeCost;
+          n.prev = current;
+
+          if (!this.searching.includes(n))
+            this.searching.insert(n, n.params.cost);
         }
+      }
+    }
 
-        this.start = start;
-        this.target = target;
-
-        this.searching = new MinPriorityQueue<Node<Djikstra>>();
-        this.searched = [];
-
-        const startNode: Node<Djikstra> = this.nodes[start.y][start.x];
-        startNode.params.cost = 0;
-        this.searching.insert(startNode, startNode.params.cost);
-    };
-
-    public getOptimalPath = (current: Node<Djikstra>): Node<Djikstra>[] => {
-        const res: Node<Djikstra>[] = [];
-
-        let temp = current;
-        while (temp.prev) {
-            res.push(temp.prev);
-
-            temp = temp.prev;
-        }
-
-        return res;
-    };
-
-    public solve = () => {
-        if (this.nodes.length === 0 || this.searching.isEmpty()) {
-            throw new Error(
-                "the initialize() method must be called prior to using solve()"
-            );
-        }
-
-        let current: Node<Djikstra>;
-
-        while (!this.searching.isEmpty()) {
-            current = this.searching.pop() as Node<Djikstra>;
-
-            if (current.index.equals(this.target)) {
-                console.log("DJIKSTRA DONE");
-                return this.getOptimalPath(current);
-            }
-
-            this.searched.push(current);
-
-            const neighbours = current.getNeighbours(this.nodes);
-
-            for (let i = 0; i < neighbours.length; i++) {
-                const n = neighbours[i];
-
-                const tenativeCost = current.params.cost + 1;
-                if (
-                    tenativeCost < n.params.cost &&
-                    current.params.cost !== Infinity
-                ) {
-                    n.params.cost = tenativeCost;
-                    n.prev = current;
-
-                    if (!this.searching.includes(n))
-                        this.searching.insert(n, n.params.cost);
-                }
-            }
-        }
-
-        return undefined;
-    };
+    return undefined;
+  };
 }
