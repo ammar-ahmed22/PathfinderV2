@@ -8,8 +8,8 @@ export interface PanelProps {
     height?: string;
     styles?: Record<string, string | number | object>;
     customRef?: React.MutableRefObject;
-    accordion?: boolean,
-    heading?: string,
-    headingIcon?: IconType,
-    accordionDefaultOpen?: boolean
+    accordion?: boolean;
+    heading?: string;
+    headingIcon?: IconType;
+    accordionDefaultOpen?: boolean;
 }

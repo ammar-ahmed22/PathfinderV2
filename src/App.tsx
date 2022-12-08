@@ -364,15 +364,20 @@ export const App: React.FC = () => {
                         headingIcon={FaRoute}
                         accordionDefaultOpen
                     >
-                        {
-                            store.output.map( (out, idx) => {
-                                return (
-                                    <Text fontSize="sm"  mt={idx === 0 ? 2 : 0} > 
-                                        <Text variant="gradient" as="span" fontWeight="bold" >[{idx + 1}]</Text> {out}
-                                    </Text>
-                                )
-                            })
-                        }
+                        {store.output.map((out, idx) => {
+                            return (
+                                <Text fontSize="sm" mt={idx === 0 ? 2 : 0}>
+                                    <Text
+                                        variant="gradient"
+                                        as="span"
+                                        fontWeight="bold"
+                                    >
+                                        [{idx + 1}]
+                                    </Text>{" "}
+                                    {out}
+                                </Text>
+                            );
+                        })}
                     </Panel>
                 </SideBar>
 
