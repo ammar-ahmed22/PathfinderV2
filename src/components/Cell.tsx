@@ -113,6 +113,7 @@ const Cell: React.FC<CellProps> = ({ node, corner }) => {
         }
       }}
       cursor={isStartTarget ? "grab" : "pointer"}
+      className={`${node.type}-cell`}
     >
       {isStartTarget && (
         <Box

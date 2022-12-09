@@ -12,4 +12,5 @@ export interface PanelProps {
   heading?: string;
   headingIcon?: IconType;
   accordionDefaultOpen?: boolean;
+  id?: string;
 }

@@ -34,6 +34,7 @@ const SpeedMenu: React.FC = () => {
         rightIcon={<ChevronDownIcon />}
         variant="brandPurple"
         size="sm"
+        className="speed-menu"
       >
         Speed
       </MenuButton>
@@ -46,7 +47,7 @@ const SpeedMenu: React.FC = () => {
         >
           {Object.keys(speedMenuNames).map((speed) => {
             return (
-              <MenuItemOption value={speed}>
+              <MenuItemOption value={speed} key={speed}>
                 {speedMenuNames[speed]}
               </MenuItemOption>
             );

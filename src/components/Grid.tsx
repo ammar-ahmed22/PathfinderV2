@@ -82,11 +82,10 @@ const Grid: React.FC = () => {
       const output = `Path found in: ${(end - start).toFixed(2)}ms`;
       store.addOutput(output);
 
-      
       if (path) animate(store, path, solver.searched, store.visualDelay);
       if (path === undefined) {
         store.setFinished(true);
-        store.addOutput("No path found!")
+        store.addOutput("No path found!");
       }
     }
     // eslint-disable-next-line
@@ -103,6 +102,7 @@ const Grid: React.FC = () => {
         alignItems: "center",
         flexDirection: "column",
       }}
+      id="grid"
     >
       {store.nodes &&
         !!store.nodes.length &&

@@ -7,6 +7,7 @@ import * as serviceWorker from "./serviceWorker";
 import customTheme from "./theme";
 
 import StoreProvider from "./Store";
+import Tour from "./Tour";
 
 const container = document.getElementById("root");
 if (!container) throw new Error("Failed to find the root element");
@@ -16,8 +17,12 @@ root.render(
   <React.StrictMode>
     <StoreProvider>
       <ChakraProvider theme={customTheme}>
-        <ColorModeScript />
-        <App />
+        <ColorModeScript
+          initialColorMode={customTheme.config.initialColorMode}
+        />
+        <Tour>
+          <App />
+        </Tour>
       </ChakraProvider>
     </StoreProvider>
   </React.StrictMode>

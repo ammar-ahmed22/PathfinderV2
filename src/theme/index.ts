@@ -35,6 +35,8 @@ const colors = {
 
 const config = {
   cssVarPrefix: "pf",
+  initialColorMode: "system",
+  useSystemColorMode: true,
 };
 
 const styles = {

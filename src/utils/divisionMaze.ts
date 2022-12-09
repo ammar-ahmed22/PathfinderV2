@@ -129,5 +129,4 @@ export const displayMaze = (grid: boolean[][]) => {
     rowString += "\n";
     mazeString += rowString;
   });
-
 };
