@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Box, Icon, keyframes, useColorModeValue } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 
@@ -55,10 +55,12 @@ const Cell: React.FC<CellProps> = ({ node, corner }) => {
   };
 
   const store = useContext(StoreContext) as StoreContextType;
+  const [dragging, setDragging] = useState(false);
 
   const isStartTarget = node.type === "start" || node.type === "target";
 
   const handleDragStart = (ev: React.DragEvent<HTMLDivElement>) => {
+    setDragging(true);
     ev.dataTransfer.setData("draggedNode", JSON.stringify(node));
     ev.dataTransfer.dropEffect = "move";
   };
@@ -84,6 +86,7 @@ const Cell: React.FC<CellProps> = ({ node, corner }) => {
       prevNode.type = "base";
       return prevNode;
     });
+    setDragging(false);
   };
 
   return (
@@ -95,7 +98,7 @@ const Cell: React.FC<CellProps> = ({ node, corner }) => {
       onDragOver={handleDragOver}
       onDrop={handleDragDrop}
       onMouseOver={(e) => {
-        if (e.buttons === 1 && !isStartTarget) {
+        if (e.buttons === 1 && !isStartTarget && !dragging) {
           store.updateNodeByIndex(node.index, (prevNode) => {
             prevNode.obstacle = store.shiftPressed ? false : true;
             prevNode.type = store.shiftPressed ? "base" : "obstacle";
@@ -104,7 +107,7 @@ const Cell: React.FC<CellProps> = ({ node, corner }) => {
         }
       }}
       onMouseDown={() => {
-        if (!isStartTarget) {
+        if (!isStartTarget && !dragging) {
           store.updateNodeByIndex(node.index, (prevNode) => {
             prevNode.obstacle = store.shiftPressed ? false : true;
             prevNode.type = store.shiftPressed ? "base" : "obstacle";
@@ -113,6 +116,7 @@ const Cell: React.FC<CellProps> = ({ node, corner }) => {
         }
       }}
       cursor={isStartTarget ? "grab" : "pointer"}
+      className={`${node.type}-cell`}
     >
       {isStartTarget && (
         <Box

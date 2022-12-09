@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useContext } from "react";
+import React, { useRef, useEffect, useContext, useState } from "react";
 import { HStack } from "@chakra-ui/react";
 
 // Components
@@ -19,6 +19,7 @@ import { solvers } from "../helpers/algorithms";
 const Grid: React.FC = () => {
   const gridRef = useRef<HTMLDivElement>();
   const store = useContext(StoreContext) as StoreContextType;
+  const [resizeTID, setResizeTID] = useState<NodeJS.Timeout | undefined>();
 
   // setting Target
   useEffect(() => {
@@ -50,15 +51,21 @@ const Grid: React.FC = () => {
   // Resize event
   useEffect(() => {
     const resizeEventListener = () => {
-      if (gridRef.current && store.cellSize) {
-        const { current } = gridRef;
-        store.updateGridDimensions(current, store.cellSize);
-      }
+      // Debounced resize event
+      clearTimeout(resizeTID);
+      const tid = setTimeout(() => {
+        console.log("resizing", gridRef.current, store.cellSize);
+        if (gridRef.current && store.cellSize) {
+          const { current } = gridRef;
+          store.updateGridDimensions(current, store.cellSize);
+        }
+      }, 100);
+      setResizeTID(tid);
     };
 
     window.addEventListener("resize", resizeEventListener);
 
-    // return () => window.removeEventListener("resize", resizeEventListener);
+    return () => window.removeEventListener("resize", resizeEventListener);
     // eslint-disable-next-line
   }, []);
 
@@ -82,9 +89,11 @@ const Grid: React.FC = () => {
       const output = `Path found in: ${(end - start).toFixed(2)}ms`;
       store.addOutput(output);
 
-      console.log({ path, searched: solver.searched });
       if (path) animate(store, path, solver.searched, store.visualDelay);
-      if (path === undefined) window.alert("No path found!");
+      if (path === undefined) {
+        store.setFinished(true);
+        store.addOutput("No path found!");
+      }
     }
     // eslint-disable-next-line
   }, [store.status.started]);
@@ -100,6 +109,7 @@ const Grid: React.FC = () => {
         alignItems: "center",
         flexDirection: "column",
       }}
+      id="grid"
     >
       {store.nodes &&
         !!store.nodes.length &&

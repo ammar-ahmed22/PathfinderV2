@@ -7,6 +7,7 @@ import * as serviceWorker from "./serviceWorker";
 import customTheme from "./theme";
 
 import StoreProvider from "./Store";
+import Tour from "./tour";
 
 const container = document.getElementById("root");
 if (!container) throw new Error("Failed to find the root element");
@@ -16,8 +17,12 @@ root.render(
   <React.StrictMode>
     <StoreProvider>
       <ChakraProvider theme={customTheme}>
-        <ColorModeScript />
-        <App />
+        <ColorModeScript
+          initialColorMode={customTheme.config.initialColorMode}
+        />
+        <Tour>
+          <App />
+        </Tour>
       </ChakraProvider>
     </StoreProvider>
   </React.StrictMode>
@@ -31,4 +36,4 @@ serviceWorker.register();
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals(console.log);
+reportWebVitals();

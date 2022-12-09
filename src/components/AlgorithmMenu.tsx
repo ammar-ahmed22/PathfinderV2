@@ -45,6 +45,7 @@ const AlgorithmMenu: React.FC = () => {
         rightIcon={<ChevronDownIcon />}
         variant="brandPurple"
         size="sm"
+        className="algorithm-menu"
       >
         Algorithm
       </MenuButton>
@@ -57,7 +58,7 @@ const AlgorithmMenu: React.FC = () => {
         >
           {Object.keys(algorithmMenuNames).map((algoName) => {
             return (
-              <MenuItemOption value={algoName}>
+              <MenuItemOption value={algoName} key={algoName}>
                 {algorithmMenuNames[algoName]}
               </MenuItemOption>
             );

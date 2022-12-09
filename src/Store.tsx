@@ -9,7 +9,7 @@ import type { Algorithm } from "./@types/helpers/algorithms";
 export const StoreContext = createContext<StoreContextType | null>(null);
 
 const StoreProvider: React.FC<StoreProviderProps> = ({ children }) => {
-  const [cellSize, setCellSize] = useState<number | undefined>();
+  const [cellSize, setCellSize] = useState<number | undefined>(30);
   const [gridDim, setGridDim] = useState<Vec2 | undefined>();
   const [nodes, setNodes] = useState<Node<AlgorithmParams>[][]>([]);
   const [startIdx, setStartIdx] = useState<Vec2 | undefined>();
@@ -90,7 +90,7 @@ const StoreProvider: React.FC<StoreProviderProps> = ({ children }) => {
     if (nodes && !!nodes.length) {
       setNodes((prevNodes) => {
         const copy = [...prevNodes];
-        copy[index.y][index.x].type = type;
+        if (copy[index.y][index.x]) copy[index.y][index.x].type = type;
         return copy;
       });
     }

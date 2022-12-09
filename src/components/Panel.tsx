@@ -24,6 +24,7 @@ const Panel: React.FC<PanelProps> = ({
   heading,
   headingIcon,
   accordionDefaultOpen,
+  id,
 }) => {
   const defaultBg = useColorModeValue("white", "gray.700");
   const color = useColorModeValue("gray.800", "white");
@@ -41,6 +42,7 @@ const Panel: React.FC<PanelProps> = ({
         shadow="panel"
         borderRadius="xl"
         ref={customRef}
+        id={id}
         {...styles}
       >
         <AccordionItem border="none">
@@ -75,6 +77,7 @@ const Panel: React.FC<PanelProps> = ({
       shadow="panel"
       borderRadius="xl"
       ref={customRef}
+      id={id}
       {...styles}
     >
       {heading && (

@@ -15,7 +15,9 @@ import {
   ModalBody,
   ModalContent,
   ModalFooter,
+  IconButton,
 } from "@chakra-ui/react";
+import { useTour } from "@reactour/tour";
 
 // Icons
 import { SiTypescript, SiReact, SiChakraui } from "react-icons/si";
@@ -25,6 +27,8 @@ import {
   FaMapMarkerAlt,
   FaCrosshairs,
   FaRoute,
+  FaQuestionCircle,
+  FaGithub,
 } from "react-icons/fa";
 import { BsPlayFill } from "react-icons/bs";
 import { RepeatIcon } from "@chakra-ui/icons";
@@ -57,8 +61,14 @@ export const App: React.FC = () => {
   const [addRandObs, setAddRandObs] = useState<boolean>(false);
   const [showModal, setShowModal] = useState<boolean>(false);
   const [mazeGenerating, setMazeGenerating] = useState<boolean>(false);
+  const { setIsOpen, setCurrentStep } = useTour();
 
   useEffect(() => {
+    if (!localStorage.getItem("reactour-opened")) {
+      setIsOpen(true);
+      localStorage.setItem("reactour-opened", "true");
+    }
+
     store.setCellSize(30);
     // eslint-disable-next-line
   }, []);
@@ -180,6 +190,7 @@ export const App: React.FC = () => {
               color: "white",
               position: "relative",
             }}
+            id="info-panel"
           >
             <HStack justify="center" align="center" mt="2">
               <Logo h="8" />
@@ -188,7 +199,15 @@ export const App: React.FC = () => {
               </Heading>
             </HStack>
             <Text fontSize="xs" mb="1">
-              Made with 🧠 by Ammar
+              Made with 🧠 by{" "}
+              <Link
+                href="https://ammarahmed.ca"
+                isExternal
+                borderBottomColor="white"
+                id="ammar"
+              >
+                Ammar
+              </Link>
             </Text>
             <Text fontSize="xs">
               Built with{" "}
@@ -218,17 +237,50 @@ export const App: React.FC = () => {
               >
                 <Icon as={SiChakraui} />
               </Link>{" "}
-              <ColorModeSwitcher
-                position="absolute"
-                top="0"
-                left="0"
-                mt="2"
-                ml="2"
-              />
             </Text>
+            <ColorModeSwitcher
+              position="absolute"
+              top="0"
+              left="0"
+              mt="2"
+              ml="2"
+            />
+            <IconButton
+              icon={<FaQuestionCircle />}
+              id="help"
+              variant="ghost"
+              aria-label="tutorial"
+              pos="absolute"
+              top="0"
+              right="0"
+              borderRadius="xl"
+              colorScheme="white"
+              onClick={() => {
+                setCurrentStep(0);
+                setIsOpen(true);
+              }}
+            />
+            <IconButton
+              icon={<FaGithub />}
+              as={Link}
+              href="https://github.com/ammar-ahmed22/PathfinderV2"
+              isExternal
+              aria-label="github link"
+              variant="ghost"
+              pos="absolute"
+              bottom="0"
+              right="0"
+              borderRadius="xl"
+              colorScheme="white"
+              id="github"
+            />
           </Panel>
 
-          <Panel heading="Controls" headingIcon={FaTerminal}>
+          <Panel
+            heading="Controls"
+            headingIcon={FaTerminal}
+            id="controls-panel"
+          >
             <Heading my="1" as="h4" size="sm" variant="gradient">
               Visualization
             </Heading>
@@ -249,6 +301,7 @@ export const App: React.FC = () => {
                 variant="brandPurple"
                 size="sm"
                 isDisabled={store.status.started}
+                id="erase-walls"
               >
                 Erase
               </Button>
@@ -257,6 +310,7 @@ export const App: React.FC = () => {
                 variant="brandPurple"
                 size="sm"
                 isDisabled={store.status.started}
+                id="random-walls"
               >
                 Random
               </Button>
@@ -280,6 +334,7 @@ export const App: React.FC = () => {
                 variant="brandPurple"
                 size="sm"
                 isDisabled={store.status.started}
+                id="maze-walls"
               >
                 Maze
               </Button>
@@ -299,6 +354,7 @@ export const App: React.FC = () => {
               rightIcon={<RepeatIcon />}
               size="sm"
               w="100%"
+              id="reset"
             >
               Reset
             </Button>
@@ -318,12 +374,18 @@ export const App: React.FC = () => {
               isDisabled={
                 mazeGenerating || store.status.started || store.status.finished
               }
+              id="visualize"
             >
               Visualize
             </Button>
           </Panel>
 
-          <Panel accordion heading="Legend" headingIcon={FaClipboardList}>
+          <Panel
+            accordion
+            heading="Legend"
+            headingIcon={FaClipboardList}
+            id="legend-panel"
+          >
             <SimpleGrid
               my="2"
               width="100%"
@@ -331,11 +393,12 @@ export const App: React.FC = () => {
               spacing="2"
             >
               {legendCellSize &&
-                legendCellMapping.map((legendCellProps) => {
+                legendCellMapping.map((legendCellProps, idx) => {
                   return (
                     <LegendCell
                       size={legendCellSize}
                       borderWidth="1px"
+                      key={`legend-cell-${idx}`}
                       {...legendCellProps}
                     />
                   );
@@ -347,10 +410,15 @@ export const App: React.FC = () => {
             heading="Output"
             headingIcon={FaRoute}
             accordionDefaultOpen
+            id="output-panel"
           >
             {store.output.map((out, idx) => {
               return (
-                <Text fontSize="sm" mt={idx === 0 ? 2 : 0}>
+                <Text
+                  fontSize="sm"
+                  mt={idx === 0 ? 2 : 0}
+                  key={`output-${idx}`}
+                >
                   <Text variant="gradient" as="span" fontWeight="bold">
                     [{idx + 1}]
                   </Text>{" "}
