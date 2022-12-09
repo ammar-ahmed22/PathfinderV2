@@ -1,9 +1,6 @@
 import React from "react";
 import { TourProvider } from "@reactour/tour";
-import {
-  useToken,
-  useColorModeValue,
-} from "@chakra-ui/react";
+import { useToken, useColorModeValue } from "@chakra-ui/react";
 import { steps } from "./steps";
 
 interface TourProps {

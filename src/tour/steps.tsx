@@ -1,10 +1,5 @@
 import { StepType } from "@reactour/tour";
-import {
-  Box,
-  Text,
-  Flex,
-  Button,
-} from "@chakra-ui/react";
+import { Box, Text, Flex, Button } from "@chakra-ui/react";
 
 export const steps: StepType[] = [
   {
@@ -53,10 +48,10 @@ export const steps: StepType[] = [
         </Text>
         <Text>
           Pathfinding algorithms explore routes between nodes (locations)
-          through traversing neighbours based on some defined logic. They
-          start at one node and explore until the destination is reached. Once
-          the destination has been reached, they can find a path between the
-          start and destination (target) nodes based on some defined logic.
+          through traversing neighbours based on some defined logic. They start
+          at one node and explore until the destination is reached. Once the
+          destination has been reached, they can find a path between the start
+          and destination (target) nodes based on some defined logic.
         </Text>
       </Box>
     ),
@@ -70,10 +65,10 @@ export const steps: StepType[] = [
           What does this do?
         </Text>
         <Text>
-          As computers are very fast, in order to see how an algorithm works,
-          we have to slow it down to visualize it. This website visualizes
-          various pathfinding algorithms looking to find a path between a
-          start and target node in the face of random or user-set obstacles.
+          As computers are very fast, in order to see how an algorithm works, we
+          have to slow it down to visualize it. This website visualizes various
+          pathfinding algorithms looking to find a path between a start and
+          target node in the face of random or user-set obstacles.
         </Text>
       </Box>
     ),
@@ -91,8 +86,8 @@ export const steps: StepType[] = [
         <Text>
           Explores all the nodes and keeps track of the distances to each,
           choosing the shortest path at each step until it reaches the
-          destination. This ensures that the final path it finds is the
-          shortest possible.
+          destination. This ensures that the final path it finds is the shortest
+          possible.
         </Text>
         <Text fontWeight="bold" mb="2">
           Shortest path guaranteed
@@ -192,8 +187,7 @@ export const steps: StepType[] = [
   },
   {
     selector: "#maze-walls",
-    content:
-      "This will generate a maze of walls using recursive backtracking.",
+    content: "This will generate a maze of walls using recursive backtracking.",
   },
   {
     selector: ".algorithm-menu",

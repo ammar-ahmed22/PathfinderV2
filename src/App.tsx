@@ -414,7 +414,11 @@ export const App: React.FC = () => {
           >
             {store.output.map((out, idx) => {
               return (
-                <Text fontSize="sm" mt={idx === 0 ? 2 : 0} key={`output-${idx}`}>
+                <Text
+                  fontSize="sm"
+                  mt={idx === 0 ? 2 : 0}
+                  key={`output-${idx}`}
+                >
                   <Text variant="gradient" as="span" fontWeight="bold">
                     [{idx + 1}]
                   </Text>{" "}
