@@ -3,6 +3,8 @@ export default class Vec2 {
 
   public equals = (v: Vec2): boolean => this.x === v.x && this.y === v.y;
 
+  public area = () : number => this.x * this.y;
+
   static Distance = (a: Vec2, b: Vec2): number =>
     Math.sqrt(Math.pow(b.x - a.x, 2) + Math.pow(b.y - a.y, 2));
 
