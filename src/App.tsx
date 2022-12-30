@@ -150,6 +150,11 @@ export const App: React.FC = () => {
     }
   }, [isSmallerThan48em, hIsSmallerThan30em]);
 
+  useEffect(() => {
+    if (showModal) setIsOpen(false);
+    // eslint-disable-next-line
+  }, [showModal])
+
   if (showModal) {
     return (
       <Modal
