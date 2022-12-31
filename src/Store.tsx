@@ -179,16 +179,13 @@ const StoreProvider: React.FC<StoreProviderProps> = ({ children }) => {
       let tentativeCols = Math.floor(width / cellSize);
       const rows = makeEven(tentativeRows);
       const cols = makeEven(tentativeCols);
-      console.log({ height, width });
-      console.log("area:", rows * cols);
 
       if ((rows * cols ) > maxArea){
         const newCellSize = Math.floor(Math.sqrt((height * width) / maxArea));
-        // height = Math.round(rect.height) - 2 * cellSize;
-        // width = Math.round(rect.width) - 2 * cellSize;
+
         tentativeRows = Math.floor(height / newCellSize);
         tentativeCols = Math.floor(width / newCellSize);
-        console.log("too big, orig:", cellSize, "updated:", newCellSize, "updated area:", makeEven(tentativeCols) * makeEven(tentativeRows));
+        
         setCellSize(newCellSize);
       }
 
