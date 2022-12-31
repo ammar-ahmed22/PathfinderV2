@@ -86,10 +86,19 @@ const StoreProvider: React.FC<StoreProviderProps> = ({ children }) => {
     });
   };
 
-  const updateNodeTypeByIndex = (index: Vec2, type: NodeType) => {
+  const updateNodeTypeByIndex = (index: Vec2, type: NodeType, unique: boolean = false) => {
     if (nodes && !!nodes.length) {
       setNodes((prevNodes) => {
         const copy = [...prevNodes];
+        if (unique){
+          copy.forEach((row, rIdx) => {
+            row.forEach( (node, cIdx) => {
+              if (node.type === type){
+                copy[rIdx][cIdx].type = "base";
+              }
+            })
+          })
+        }
         if (copy[index.y][index.x]) copy[index.y][index.x].type = type;
         return copy;
       });
@@ -144,33 +153,49 @@ const StoreProvider: React.FC<StoreProviderProps> = ({ children }) => {
   };
 
   useEffect(() => {
-    if (startIdx) updateNodeTypeByIndex(startIdx, "start");
+    if (startIdx) updateNodeTypeByIndex(startIdx, "start", true);
     // eslint-disable-next-line
   }, [startIdx]);
 
   useEffect(() => {
-    if (targetIdx) updateNodeTypeByIndex(targetIdx, "target");
+    if (targetIdx) updateNodeTypeByIndex(targetIdx, "target", true);
     // eslint-disable-next-line
   }, [targetIdx]);
+
+  const makeEven = (val: number) => val % 2 === 0 ? val - 1 : val;
 
   const state: StoreContextType = {
     cellSize,
     setCellSize: (val: number) => setCellSize(val),
     gridDim,
     setGridDim: (v: Vec2) => setGridDim(v),
-    updateGridDimensions: (gridElem: HTMLDivElement, cellSize: number) => {
+    updateGridDimensions: (gridElem: HTMLDivElement, cellSize: number, maxArea: number = 700) => {
       const rect = gridElem.getBoundingClientRect();
 
-      const height = Math.round(rect.height) - 2 * cellSize;
-      const width = Math.round(rect.width) - 2 * cellSize;
+      let height = Math.round(rect.height) - 2 * cellSize;
+      let width = Math.round(rect.width) - 2 * cellSize;
 
-      const tentativeRows = Math.floor(width / cellSize);
-      const tentativeCols = Math.floor(height / cellSize);
+      let tentativeRows = Math.floor(height / cellSize);
+      let tentativeCols = Math.floor(width / cellSize);
+      const rows = makeEven(tentativeRows);
+      const cols = makeEven(tentativeCols);
+      console.log({ height, width });
+      console.log("area:", rows * cols);
+
+      if ((rows * cols ) > maxArea){
+        const newCellSize = Math.floor(Math.sqrt((height * width) / maxArea));
+        // height = Math.round(rect.height) - 2 * cellSize;
+        // width = Math.round(rect.width) - 2 * cellSize;
+        tentativeRows = Math.floor(height / newCellSize);
+        tentativeCols = Math.floor(width / newCellSize);
+        console.log("too big, orig:", cellSize, "updated:", newCellSize, "updated area:", makeEven(tentativeCols) * makeEven(tentativeRows));
+        setCellSize(newCellSize);
+      }
 
       setGridDim(
         new Vec2(
-          tentativeRows % 2 === 0 ? tentativeRows - 1 : tentativeRows,
-          tentativeCols % 2 === 0 ? tentativeCols - 1 : tentativeCols
+          makeEven(tentativeCols),
+          makeEven(tentativeRows)
         )
       );
     },
@@ -183,11 +208,11 @@ const StoreProvider: React.FC<StoreProviderProps> = ({ children }) => {
     targetIdx,
     setStartIdx: (idx: Vec2) => {
       setStartIdx(idx);
-      updateNodeTypeByIndex(idx, "start");
+      updateNodeTypeByIndex(idx, "start", true);
     },
     setTargetIdx: (idx: Vec2) => {
       setTargetIdx(idx);
-      updateNodeTypeByIndex(idx, "target");
+      updateNodeTypeByIndex(idx, "target", true);
     },
     isStarted,
     setIsStarted: (val: boolean) => setIsStarted(val),

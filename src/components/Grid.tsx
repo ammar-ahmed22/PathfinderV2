@@ -98,6 +98,10 @@ const Grid: React.FC = () => {
     // eslint-disable-next-line
   }, [store.status.started]);
 
+  useEffect(() => {
+    console.log("cellSize:", store.cellSize);
+  }, [store.cellSize])
+
   return (
     <Panel
       height="calc(100vh - var(--pf-space-5) * 2)"
