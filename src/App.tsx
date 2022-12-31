@@ -68,8 +68,6 @@ export const App: React.FC = () => {
       setIsOpen(true);
       localStorage.setItem("reactour-opened", "true");
     }
-
-    store.setCellSize(30);
     // eslint-disable-next-line
   }, []);
 

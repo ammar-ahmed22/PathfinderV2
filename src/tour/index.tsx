@@ -36,7 +36,6 @@ const Tour: React.FC<TourProps> = ({ children }) => {
           marginTop: "1rem",
         }),
         dot: (base, state) => {
-          console.log(base, state);
           return {
             ...base,
             background: state?.current ? brandPurple500 : base.background,

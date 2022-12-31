@@ -54,7 +54,6 @@ const Grid: React.FC = () => {
       // Debounced resize event
       clearTimeout(resizeTID);
       const tid = setTimeout(() => {
-        console.log("resizing", gridRef.current, store.cellSize);
         if (gridRef.current && store.cellSize) {
           const { current } = gridRef;
           store.updateGridDimensions(current, store.cellSize);
